@@ -1,0 +1,234 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * port_scale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-31 11:31+0000\n"
+"PO-Revision-Date: 2017-03-31 11:31+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.ship_view_form
+msgid "<span class=\"o_stat_text\">Scales</span>"
+msgstr "<span class=\"o_stat_text\">Scales</span>"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_atraque
+msgid "Atraque"
+msgstr "Atraque"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_calado_llegada
+msgid "Calado llegada"
+msgstr "Calado llegada"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_ship_callsign
+msgid "Callsign"
+msgstr "Callsign"
+
+#. module: port_scale
+#: model:ir.ui.menu,name:port_scale.port_management_configuration_menu
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_ship_consignatario
+msgid "Consignatario"
+msgstr "Consignatario"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_dock_create_uid
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_create_uid
+#: model:ir.model.fields,field_description:port_scale.field_ship_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_dock_create_date
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_create_date
+#: model:ir.model.fields,field_description:port_scale.field_ship_create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_dock_display_name
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_display_name
+#: model:ir.model.fields,field_description:port_scale.field_ship_display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_dock
+msgid "Dock"
+msgstr "Muelle"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_estado_atraque
+msgid "Estado atraque"
+msgstr "Estado atraque"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_eta
+msgid "Eta"
+msgstr "Eta"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_ship_flag
+msgid "Flag"
+msgstr "Bandera"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_fondeo_previo
+msgid "Fondeo previo"
+msgstr "Fondeo previo"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_gt
+msgid "Gt"
+msgstr "Gt"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_dock_id
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_id
+#: model:ir.model.fields,field_description:port_scale.field_ship_id
+msgid "ID"
+msgstr "ID"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_ship_imo
+msgid "IMO"
+msgstr "IMO"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_dock___last_update
+#: model:ir.model.fields,field_description:port_scale.field_port_scale___last_update
+#: model:ir.model.fields,field_description:port_scale.field_ship___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_dock_write_uid
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_write_uid
+#: model:ir.model.fields,field_description:port_scale.field_ship_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_dock_write_date
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_write_date
+#: model:ir.model.fields,field_description:port_scale.field_ship_write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_ship_mmsi
+msgid "MMSI"
+msgstr "MMSI"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_dock_name
+#: model:ir.model.fields,field_description:port_scale.field_ship_name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_name
+msgid "Nº escala"
+msgstr "Nº escala"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_observaciones
+msgid "Observaciones"
+msgstr "Observaciones"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_operation
+msgid "Operation"
+msgstr "Operación"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_origin
+msgid "Origin"
+msgstr "Origen"
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_scale_action
+#: model:ir.ui.menu,name:port_scale.port_scale
+msgid "Port scale"
+msgstr "Escalas"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_scale_state
+msgid "Scale state"
+msgstr "Estado escala"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_ship_scales
+msgid "Scales"
+msgstr "Escalas"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_ship_scales_count
+msgid "Scales count"
+msgstr "Scales count"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_ship
+msgid "Ship"
+msgstr "Buque"
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.ship_action
+#: model:ir.ui.menu,name:port_scale.ship_menu
+msgid "Ships"
+msgstr "Buques"
+
+#. module: port_scale
+#: model:ir.ui.menu,name:port_scale.port_managament_submenu
+#: model:ir.ui.menu,name:port_scale.port_management_menu
+msgid "Traffic management"
+msgstr "Gestión de tráfico"
+
+#. module: port_scale
+#: selection:port.scale,operation:0
+msgid "disembarkation"
+msgstr "Desembarque"
+
+#. module: port_scale
+#: selection:port.scale,operation:0
+msgid "embarkation"
+msgstr "Embarque"
+
+#. module: port_scale
+#: model:ir.model,name:port_scale.model_port_dock
+msgid "port.dock"
+msgstr "port.dock"
+
+#. module: port_scale
+#: model:ir.model,name:port_scale.model_port_scale
+msgid "port.scale"
+msgstr "port.scale"
+
+#. module: port_scale
+#: selection:port.scale,operation:0
+msgid "scraps"
+msgstr "Residuos"
+
+#. module: port_scale
+#: model:ir.model,name:port_scale.model_ship
+msgid "ship"
+msgstr "Buque"
+
+#. module: port_scale
+#: selection:port.scale,operation:0
+msgid "transfer"
+msgstr "Transbordo"

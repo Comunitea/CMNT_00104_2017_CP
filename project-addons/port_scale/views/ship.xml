@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2017 Comunitea
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+    <data>
+
+        <record id="ship_view_tree" model="ir.ui.view">
+            <field name="name">ship.tree</field>
+            <field name="model">ship</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="consignatario"/>
+                    <field name="flag"/>
+                    <field name="imo"/>
+                    <field name="mmsi"/>
+                    <field name="callsign"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ship_view_form" model="ir.ui.view">
+            <field name="name">ship.form</field>
+            <field name="model">ship</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object"
+                                class="oe_stat_button"
+                                id="scales_button"
+                                icon="fa-pencil-square-o"
+                                name="open_ship_scales">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value"><field name="scales_count"/></span>
+                                    <span class="o_stat_text">Scales</span>
+                                </div>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="consignatario"/>
+                                <field name="flag"/>
+                            </group>
+                            <group>
+                                <field name="imo"/>
+                                <field name="mmsi"/>
+                                <field name="callsign"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="ship_view_search" model="ir.ui.view">
+            <field name="name">ship.search</field>
+            <field name="model">ship</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="consignatario"/>
+                    <field name="flag"/>
+                    <field name="imo"/>
+                    <field name="mmsi"/>
+                    <field name="callsign"/>
+               </search>
+            </field>
+        </record>
+
+        <record id="ship_action" model="ir.actions.act_window">
+            <field name="name">Ships</field>
+            <field name="res_model">ship</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="ship_view_tree"/>
+            <field name="search_view_id" ref="ship_view_search"/>
+        </record>
+
+        <menuitem name="Ships" parent="port_managament_submenu" action="ship_action" id="ship_menu"/>
+
+    </data>
+</openerp>

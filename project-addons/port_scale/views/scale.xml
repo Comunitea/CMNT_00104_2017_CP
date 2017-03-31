@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2017 Comunitea
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+    <data>
+
+        <record id="port_scale_view_tree" model="ir.ui.view">
+            <field name="name">port.scale.tree</field>
+            <field name="model">port.scale</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="ship"/>
+                    <field name="gt"/>
+                    <field name="origin"/>
+                    <field name="operation"/>
+                    <field name="calado_llegada"/>
+                    <field name="dock"/>
+                    <field name="eta"/>
+                    <field name="scale_state"/>
+                    <field name="fondeo_previo"/>
+                    <field name="estado_atraque"/>
+                    <field name="atraque"/>
+                    <field name="observaciones"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="port_scale_view_form" model="ir.ui.view">
+            <field name="name">port.scale.form</field>
+            <field name="model">port.scale</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="ship"/>
+                                <field name="name"/>
+                                <field name="gt"/>
+                                <field name="origin"/>
+                                <field name="operation"/>
+                                <field name="calado_llegada"/>
+                            </group>
+                            <group>
+                                <field name="dock"/>
+                                <field name="eta"/>
+                                <field name="scale_state"/>
+                                <field name="fondeo_previo"/>
+                                <field name="estado_atraque"/>
+                                <field name="atraque"/>
+                                <field name="observaciones"/>
+                            </group>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="port_scale_view_search" model="ir.ui.view">
+            <field name="name">port.scale.search</field>
+            <field name="model">port.scale</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search>
+                   <field name="ship"/>
+                   <field name="name"/>
+                   <field name="dock"/>
+               </search>
+            </field>
+        </record>
+
+        <record id="port_scale_action" model="ir.actions.act_window">
+            <field name="name">Port scale</field>
+            <field name="res_model">port.scale</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="port_scale_view_tree"/>
+            <field name="search_view_id" ref="port_scale_view_search"/>
+        </record>
+
+        <record id="port_dock_action" model="ir.actions.act_window">
+            <field name="name">Port Docks</field>
+            <field name="res_model">port.dock</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Traffic management"
+            id="port_management_menu"/>
+
+        <menuitem name="Configuration"
+            id="port_management_configuration_menu" parent="port_management_menu" sequence="5" groups="base.group_system"/>
+
+        <menuitem name="Traffic management"
+            id="port_managament_submenu" parent="port_management_menu" sequence="1"/>
+
+        <menuitem name="Port docks" parent="port_management_configuration_menu" action="port_dock_action" id="port_dock_menu"/>
+
+        <menuitem name="Port scale" parent="port_managament_submenu" action="port_scale_action" id="port_scale"/>
+
+    </data>
+</openerp>
