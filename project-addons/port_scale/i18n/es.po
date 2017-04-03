@@ -41,7 +41,7 @@ msgid "Configuration"
 msgstr "Configuración"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_ship_consignatario
+#: model:ir.model.fields,field_description:port_scale.field_ship_partner_id
 msgid "Consignatario"
 msgstr "Consignatario"
 

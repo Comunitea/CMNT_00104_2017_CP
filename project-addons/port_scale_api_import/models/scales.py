@@ -46,7 +46,7 @@ class PortScale(models.Model):
                                scale_element.findtext('DESCRIPCION')))
                 continue
             ship_vals = {
-                'consignatario': scale_element.findtext('CONSIGNATARIO'),
+
                 'name': scale_element.findtext('BUQUE'),
             }
             scale_vals = {
@@ -55,6 +55,12 @@ class PortScale(models.Model):
                 'eta': scale_element.findtext('ETA'),
                 'origin': scale_element.findtext('PUERTO_ANTERIOR'),
             }
+
+            partner = self.env['res.partner'].search(
+                [('name', '=', scale_element.findtext('CONSIGNATARIO'))])
+            if partner:
+                ship_vals['partner_id'] = partner.id
+
             if scale_element.findtext('IMO'):
                 ship_vals['imo'] = scale_element.findtext('IMO')
 
@@ -78,7 +84,20 @@ class PortScale(models.Model):
             if scale_element.findtext('OPERACION'):
                 scale_vals['operation'] = scale_element.findtext('OPERACION')
 
-            created_ship = self.env['ship'].search([('name', '=', ship_vals['name'])])
+            created_ship = False
+            if ship_vals.get('imo', False):
+                created_ship = self.env['ship'].search(
+                    [('imo', '=', ship_vals['imo'])])
+            if not created_ship and ship_vals.get('imo', False):
+                created_ship = self.env['ship'].search(
+                    [('mmsi', '=', ship_vals['mmsi'])])
+
+            if not created_ship and ship_vals.get('flag', False) and \
+                    ship_vals.get('callsign', False):
+                created_ship = self.env['ship'].search(
+                    [('flag', '=', ship_vals['flag']),
+                     ('callsign', '=', ship_vals['callsign'])])
+
             if created_ship:
                 created_ship.write(ship_vals)
             else:

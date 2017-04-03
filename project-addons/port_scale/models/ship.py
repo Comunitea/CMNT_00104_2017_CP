@@ -10,7 +10,7 @@ class Ship(models.Model):
     _name = 'ship'
 
     name = fields.Char(required=True)
-    consignatario = fields.Char()
+    partner_id = fields.Many2one('res.partner', 'Consignatario')
     flag = fields.Char()
     imo = fields.Char('IMO')
     mmsi = fields.Char('MMSI')

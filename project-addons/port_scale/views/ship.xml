@@ -12,7 +12,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
-                    <field name="consignatario"/>
+                    <field name="partner_id"/>
                     <field name="flag"/>
                     <field name="imo"/>
                     <field name="mmsi"/>
@@ -43,7 +43,7 @@
                         <group>
                             <group>
                                 <field name="name"/>
-                                <field name="consignatario"/>
+                                <field name="partner_id"/>
                                 <field name="flag"/>
                             </group>
                             <group>
@@ -64,7 +64,7 @@
             <field name="arch" type="xml">
                 <search>
                     <field name="name"/>
-                    <field name="consignatario"/>
+                    <field name="partner_id"/>
                     <field name="flag"/>
                     <field name="imo"/>
                     <field name="mmsi"/>
