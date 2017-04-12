@@ -16,7 +16,7 @@ class Pricelist(models.Model):
 
     @api.multi
     def _compute_price_rule(self, products_qty_partner, date=False, uom_id=False):
-
+        import ipdb; ipdb.set_trace()
 
         if self._context.get('gt', False):
             results = self._compute_price_rule_with_gt(products_qty_partner, date=False, uom_id=False)
@@ -35,10 +35,7 @@ class Pricelist(models.Model):
             :param datetime date: validity date
             :param ID uom_id: intermediate unit of measure
         """
-        import ipdb; ipdb.set_trace()
-
         self.ensure_one()
-
         gt = self._context['gt']
         zone = self._context['zone']
         if not gt:
@@ -80,6 +77,8 @@ class Pricelist(models.Model):
             prod_ids = [product.id for product in products]
             prod_tmpl_ids = [product.product_tmpl_id.id for product in products]
 
+        gt = self._context['gt']
+        zone = self._context['zone']
         # Load all rules
         self._cr.execute(
             'SELECT item.id '
