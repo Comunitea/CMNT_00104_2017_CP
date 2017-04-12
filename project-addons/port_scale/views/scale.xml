@@ -16,14 +16,28 @@
                     <field name="gt"/>
                     <field name="origin"/>
                     <field name="operation"/>
-                    <field name="calado_llegada"/>
+                    <field name="draft"/>
                     <field name="dock"/>
                     <field name="eta"/>
                     <field name="scale_state"/>
                     <field name="fondeo_previo"/>
-                    <field name="estado_atraque"/>
-                    <field name="atraque"/>
+                    <field name="docking_state"/>
+                    <field name="docking"/>
                     <field name="observaciones"/>
+                    <field name="docking_start_time" invisible="1"/>
+                    <field name="docking_end_time" invisible="1"/>
+                    <field name="anchor_start_time" invisible="1"/>
+                    <field name="anchor_end_time" invisible="1"/>
+                    <button name="start_docking" type="object" icon="fa-anchor"
+                        attrs="{'invisible': [('docking_start_time', '!=', False)]}"/>
+                    <button name="end_docking" type="object" icon="fa-anchor"
+                        attrs="{'invisible': ['|', ('docking_start_time', '=', False), ('docking_end_time', '!=', False)]}"/>
+                    <button name="start_anchor" type="object" icon="fa-anchor"
+                        attrs="{'invisible': [('anchor_start_time', '!=', False)]}"/>
+                    <button name="end_anchor" type="object" icon="fa-anchor"
+                        attrs="{'invisible': ['|', ('anchor_start_time', '=', False), ('anchor_end_time', '!=', False)]}"/>
+                    <button name="anchor_without_coast_pilot" type="object" icon="fa-anchor"
+                        attrs="{'invisible': [('anchor_start_time', '!=', False)]}"/>
                 </tree>
             </field>
         </record>
@@ -34,6 +48,21 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button name="start_docking" type="object" string="Start docking"
+                            attrs="{'invisible': [('docking_start_time', '!=', False)]}"/>
+                        <button name="end_docking" type="object" string="End docking"
+                            attrs="{'invisible': ['|', ('docking_start_time', '=', False), ('docking_end_time', '!=', False)]}"/>
+                        <button name="start_anchor" type="object" string="Start anchor"
+                            attrs="{'invisible': [('anchor_start_time', '!=', False)]}"/>
+                        <button name="end_anchor" type="object" string="End anchor"
+                            attrs="{'invisible': ['|', ('anchor_start_time', '=', False), ('anchor_end_time', '!=', False)]}"/>
+                        <button name="anchor_without_coast_pilot" type="object" string="Anchor without coast pilot"
+                            attrs="{'invisible': [('anchor_start_time', '!=', False)]}"/>
+                        <button name="%(port_scale.scale_quality_action)d" type="action" string="Open quality question" />
+                        <field name="state" widget="statusbar" nolabel="1"
+                            statusbar_visible="input,anchoring,departure"/>
+                    </header>
                     <sheet>
                         <group>
                             <group>
@@ -42,16 +71,24 @@
                                 <field name="gt"/>
                                 <field name="origin"/>
                                 <field name="operation"/>
-                                <field name="calado_llegada"/>
+                                <field name="draft"/>
+                                <field name="norays"/>
+                                <field name="tug_number"/>
                             </group>
                             <group>
                                 <field name="dock"/>
                                 <field name="eta"/>
                                 <field name="scale_state"/>
                                 <field name="fondeo_previo"/>
-                                <field name="estado_atraque"/>
-                                <field name="atraque"/>
+                                <field name="docking_state"/>
+                                <field name="docking"/>
                                 <field name="observaciones"/>
+                                <field name="docking_start_time"/>
+                                <field name="docking_end_time"/>
+                                <field name="anchor_start_time"/>
+                                <field name="anchor_end_time"/>
+                                <field name="quality_signature" widget="image"/>
+                                <field name="quality_service_satisfaction"/>
                             </group>
                         </group>
                     </sheet>
@@ -73,15 +110,6 @@
             </field>
         </record>
 
-        <record id="port_scale_action" model="ir.actions.act_window">
-            <field name="name">Port scale</field>
-            <field name="res_model">port.scale</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="port_scale_view_tree"/>
-            <field name="search_view_id" ref="port_scale_view_search"/>
-        </record>
-
         <record id="port_dock_action" model="ir.actions.act_window">
             <field name="name">Port Docks</field>
             <field name="res_model">port.dock</field>
@@ -100,7 +128,47 @@
 
         <menuitem name="Port docks" parent="port_management_configuration_menu" action="port_dock_action" id="port_dock_menu"/>
 
-        <menuitem name="Port scale" parent="port_managament_submenu" action="port_scale_action" id="port_scale"/>
+        <record id="port_scale_input_action" model="ir.actions.act_window">
+            <field name="name">Input</field>
+            <field name="res_model">port.scale</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="port_scale_view_tree"/>
+            <field name="search_view_id" ref="port_scale_view_search"/>
+            <field name="domain">[('state', '=', 'input')]</field>
+        </record>
+        <menuitem name="Inputs" parent="port_managament_submenu" action="port_scale_input_action" id="port_scale_input" sequence="1"/>
 
+        <record id="port_scale_anchoring_action" model="ir.actions.act_window">
+            <field name="name">Anchoring</field>
+            <field name="res_model">port.scale</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="port_scale_view_tree"/>
+            <field name="search_view_id" ref="port_scale_view_search"/>
+            <field name="domain">[('state', '=', 'anchoring')]</field>
+        </record>
+        <menuitem name="Anchoring" parent="port_managament_submenu" action="port_scale_anchoring_action" id="port_scale_anchoring" sequence="2"/>
+
+        <record id="port_scale_departure_action" model="ir.actions.act_window">
+            <field name="name">Departure</field>
+            <field name="res_model">port.scale</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="port_scale_view_tree"/>
+            <field name="search_view_id" ref="port_scale_view_search"/>
+            <field name="domain">[('state', '=', 'departure')]</field>
+        </record>
+        <menuitem name="Departures" parent="port_managament_submenu" action="port_scale_departure_action" id="port_scale_departure" sequence="3"/>
+
+
+        <record id="port_scale_action" model="ir.actions.act_window">
+            <field name="name">Scales</field>
+            <field name="res_model">port.scale</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="port_scale_view_tree"/>
+            <field name="search_view_id" ref="port_scale_view_search"/>
+        </record>
     </data>
 </openerp>

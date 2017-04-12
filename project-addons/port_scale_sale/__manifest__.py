@@ -2,9 +2,9 @@
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
-    'name': 'Port scale',
-    'summary': 'Manage port scales',
-    'version': '10.0.1.0.0',
+    'name': 'Port scale sales',
+    'summary': '',
+    'version': '8.0.1.0.0',
     'category': 'Uncategorized',
     'website': 'comunitea.com',
     'author': 'Comunitea',
@@ -13,12 +13,11 @@
     'installable': True,
     'depends': [
         'base',
-        'web_digital_sign'
+        'port_scale',
+        'sale'
     ],
     'data': [
-        'views/scale.xml',
-        'views/ship.xml',
-        'wizard/scale_quality.xml',
-        'security/ir.model.access.csv'
+        'data/product.xml',
+        'views/sale.xml'
     ],
 }

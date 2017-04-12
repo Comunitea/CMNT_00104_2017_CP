@@ -21,13 +21,13 @@ msgid "<span class=\"o_stat_text\">Scales</span>"
 msgstr "<span class=\"o_stat_text\">Scales</span>"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_atraque
-msgid "Atraque"
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_docking
+msgid "Docking"
 msgstr "Atraque"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_calado_llegada
-msgid "Calado llegada"
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_draft
+msgid "Draft"
 msgstr "Calado llegada"
 
 #. module: port_scale
@@ -72,8 +72,8 @@ msgid "Dock"
 msgstr "Muelle"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_estado_atraque
-msgid "Estado atraque"
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_docking_state
+msgid "Docking state"
 msgstr "Estado atraque"
 
 #. module: port_scale

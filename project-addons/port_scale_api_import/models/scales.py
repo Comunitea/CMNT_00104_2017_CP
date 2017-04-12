@@ -46,7 +46,6 @@ class PortScale(models.Model):
                                scale_element.findtext('DESCRIPCION')))
                 continue
             ship_vals = {
-
                 'name': scale_element.findtext('BUQUE'),
             }
             scale_vals = {
@@ -73,7 +72,7 @@ class PortScale(models.Model):
                 ship_vals['callsign'] = scale_element.findtext('CALLSIGN')
 
             if scale_element.findtext('CALADO_LLEGADA'):
-                scale_vals['calado_llegada'] = scale_element.findtext(
+                scale_vals['draft'] = scale_element.findtext(
                     'CALADO_LLEGADA')
             if scale_element.findtext('ESTADO_ATRAQUE'):
                 scale_vals['scale_state'] = scale_element.findtext(
@@ -88,7 +87,7 @@ class PortScale(models.Model):
             if ship_vals.get('imo', False):
                 created_ship = self.env['ship'].search(
                     [('imo', '=', ship_vals['imo'])])
-            if not created_ship and ship_vals.get('imo', False):
+            if not created_ship and ship_vals.get('mmsi', False):
                 created_ship = self.env['ship'].search(
                     [('mmsi', '=', ship_vals['mmsi'])])
 
@@ -111,6 +110,8 @@ class PortScale(models.Model):
                     created_dock = self.env['port.dock'].create(
                         {'name': scale_element.findtext('MUELLE')})
                 scale_vals['dock'] = created_dock.id
+            if scale_element.findtext('NORAYS'):
+                scale_vals['norays'] = scale_element.findtext('NORAYS')
 
             created_scale = self.env['port.scale'].search(
                 [('name', '=', scale_vals['name'])])

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2017 Comunitea
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+    <data>
+
+        <record id="scale_quality_form" model="ir.ui.view">
+            <field name="name">scale.quality.wizard.form</field>
+            <field name="model">scale.quality.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="eta"/>
+                        </group>
+                    </group>
+                    <group>
+                        <separator string="Ship information" colspan="2"/>
+                        <group>
+                            <field name="ship_name"/>
+                            <field name="gt"/>
+                        </group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="flag"/>
+                            <field name="draft"/>
+                        </group>
+                    </group>
+                    <group>
+                        <separator string="pilotage" colspan="2"/>
+                        <group>
+                            <field name="norays"/>
+                        </group>
+                        <group>
+                            <field name="tug_number"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="service_satisfaction" widget="priority"/>
+                        <field name="signature" widget="signature"/>
+                        <field name="scale_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="confirm" string="Confirm" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Scale quality"
+            res_model="scale.quality.wizard"
+            view_id="scale_quality_form"
+            view_mode="form"
+            target="new"
+            id="scale_quality_action"/>
+
+    </data>
+</openerp>
