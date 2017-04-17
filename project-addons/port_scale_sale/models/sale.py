@@ -2,7 +2,7 @@
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields
 
 
 class SaleOrder(models.Model):
@@ -10,7 +10,6 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     scale = fields.Many2one('port.scale')
-    ship = fields.Many2one('ship')
 
     def impute_fault(self):
         new_line_vals = {
@@ -32,3 +31,8 @@ class SaleOrder(models.Model):
         new_line_vals.update(value)
         new_line_vals['price_unit'] = self.amount_untaxed
         new_line = self.env['sale.order.line'].create(new_line_vals)
+
+    def _prepare_invoice(self):
+        res = super(SaleOrder, self)._prepare_invoice()
+        res['scale'] = self.scale.id
+        return res

@@ -12,9 +12,23 @@
             <field name="arch" type="xml">
                 <form>
                     <group>
-                        <field name="scale"/>
-                        <field name="tug_number"/>
-                        <field name="user_id"/>
+                        <group>
+                            <field name="type" invisible="True"/>
+                            <field name="scale" readonly="True"/>
+                            <field name="ship"/>
+                            <field name="docking_start_time"/>
+                            <field name="docking_end_time"/>
+                            <field name="docking"/>
+                            <field name="flag"/>
+                        </group>
+                        <group>
+                            <field name="gt"/>
+                            <field name="partner_id"/>
+                            <field name="user_id"/>
+                            <field name="tug_number"/>
+                            <field name="pricelist"/>
+                            <field name="fiscal_position"/>
+                        </group>
                     </group>
                     <footer>
                         <button name="create_order" string="Create order" type="object" class="oe_highlight"/>
@@ -25,14 +39,13 @@
             </field>
         </record>
 
-        <act_window name=""
+        <act_window name="Create sale order"
             res_model="port.scale.create.order"
-            src_model="port.scale"
-            view_id=""
+            view_id="port_scale_create_order_form"
             view_mode="form"
             target="new"
             key2=""
-            id=""/>
+            id="port_scale_create_order_action"/>
 
     </data>
 </openerp>

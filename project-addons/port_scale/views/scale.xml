@@ -28,7 +28,7 @@
                     <field name="docking_end_time" invisible="1"/>
                     <field name="anchor_start_time" invisible="1"/>
                     <field name="anchor_end_time" invisible="1"/>
-                    <button name="start_docking" type="object" icon="fa-anchor"
+                    <!--button name="start_docking" type="object" icon="fa-anchor"
                         attrs="{'invisible': [('docking_start_time', '!=', False)]}"/>
                     <button name="end_docking" type="object" icon="fa-anchor"
                         attrs="{'invisible': ['|', ('docking_start_time', '=', False), ('docking_end_time', '!=', False)]}"/>
@@ -37,7 +37,7 @@
                     <button name="end_anchor" type="object" icon="fa-anchor"
                         attrs="{'invisible': ['|', ('anchor_start_time', '=', False), ('anchor_end_time', '!=', False)]}"/>
                     <button name="anchor_without_coast_pilot" type="object" icon="fa-anchor"
-                        attrs="{'invisible': [('anchor_start_time', '!=', False)]}"/>
+                        attrs="{'invisible': [('anchor_start_time', '!=', False)]}"/-->
                 </tree>
             </field>
         </record>
@@ -50,15 +50,26 @@
                 <form>
                     <header>
                         <button name="start_docking" type="object" string="Start docking"
-                            attrs="{'invisible': [('docking_start_time', '!=', False)]}"/>
+                            attrs="{'invisible': ['|', ('state', 'not in', ('input', 'anchoring')), ('docking_start_time', '!=', False)]}"/>
                         <button name="end_docking" type="object" string="End docking"
-                            attrs="{'invisible': ['|', ('docking_start_time', '=', False), ('docking_end_time', '!=', False)]}"/>
+                            attrs="{'invisible': ['|', '|', ('state', 'not in', ('input', 'anchoring')), ('docking_start_time', '=', False), ('docking_end_time', '!=', False)]}"/>
                         <button name="start_anchor" type="object" string="Start anchor"
-                            attrs="{'invisible': [('anchor_start_time', '!=', False)]}"/>
+                            attrs="{'invisible': ['|', ('state', '!=', 'input'), ('anchor_start_time', '!=', False)]}"/>
                         <button name="end_anchor" type="object" string="End anchor"
-                            attrs="{'invisible': ['|', ('anchor_start_time', '=', False), ('anchor_end_time', '!=', False)]}"/>
+                            attrs="{'invisible': ['|', '|', ('state', '!=', 'input'), ('anchor_start_time', '=', False), ('anchor_end_time', '!=', False)]}"/>
                         <button name="anchor_without_coast_pilot" type="object" string="Anchor without coast pilot"
-                            attrs="{'invisible': [('anchor_start_time', '!=', False)]}"/>
+                            attrs="{'invisible': ['|', ('state', '!=', 'input'), ('anchor_start_time', '!=', False)]}"/>
+
+                        <button name="start_undocking" type="object" string="Start undocking"
+                            attrs="{'invisible': ['|', ('state', '!=', 'departure'), ('undocking_start_time', '!=', False)]}"/>
+                        <button name="end_undocking" type="object" string="End undocking"
+                            attrs="{'invisible': ['|', '|', ('state', '!=', 'departure'), ('undocking_start_time', '=', False), ('undocking_end_time', '!=', False)]}"/>
+                        <button name="start_change_docking" type="object" string="Start change docking"
+                            attrs="{'invisible': ['|', ('state', '!=', 'departure'), ('change_docking_start_time', '!=', False)]}"/>
+                        <button name="end_change_docking" type="object" string="End change docking"
+                            attrs="{'invisible': ['|', '|', ('state', '!=', 'departure'), ('change_docking_start_time', '=', False), ('change_docking_end_time', '!=', False)]}"/>
+
+
                         <button name="%(port_scale.scale_quality_action)d" type="action" string="Open quality question" />
                         <field name="state" widget="statusbar" nolabel="1"
                             statusbar_visible="input,anchoring,departure"/>
@@ -87,6 +98,10 @@
                                 <field name="docking_end_time"/>
                                 <field name="anchor_start_time"/>
                                 <field name="anchor_end_time"/>
+                                <field name="undocking_start_time"/>
+                                <field name="undocking_end_time"/>
+                                <field name="change_docking_start_time"/>
+                                <field name="change_docking_end_time"/>
                                 <field name="quality_signature" widget="image"/>
                                 <field name="quality_service_satisfaction"/>
                             </group>
@@ -160,6 +175,17 @@
             <field name="domain">[('state', '=', 'departure')]</field>
         </record>
         <menuitem name="Departures" parent="port_managament_submenu" action="port_scale_departure_action" id="port_scale_departure" sequence="3"/>
+
+        <record id="port_scale_done_action" model="ir.actions.act_window">
+            <field name="name">Done</field>
+            <field name="res_model">port.scale</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="port_scale_view_tree"/>
+            <field name="search_view_id" ref="port_scale_view_search"/>
+            <field name="domain">[('state', '=', 'done')]</field>
+        </record>
+        <menuitem name="Done" parent="port_managament_submenu" action="port_scale_done_action" id="port_scale_done" sequence="4"/>
 
 
         <record id="port_scale_action" model="ir.actions.act_window">

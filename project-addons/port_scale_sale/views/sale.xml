@@ -15,7 +15,6 @@
                 </header>
                 <field name="partner_id" position="after">
                     <field name="scale"/>
-                    <field name="ship"/>
                 </field>
             </field>
         </record>

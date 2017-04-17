@@ -18,6 +18,8 @@
     ],
     'data': [
         'data/product.xml',
-        'views/sale.xml'
+        'views/account_invoice.xml',
+        'views/sale.xml',
+        'wizard/port_scale_create_order.xml'
     ],
 }
