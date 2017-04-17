@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <openerp>
-    <data>
+    <data noupdate="1">
 
         <record id="product_fault" model="product.product">
             <field name="name">Fault</field>
@@ -15,5 +15,54 @@
             <field name="company_id" eval="False"/>
         </record>
 
+        <record id="product_docking" model="product.product">
+            <field name="name">docking</field>
+            <field name="default_code">docking</field>
+            <field name="active" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="type">service</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="product_undocking" model="product.product">
+            <field name="name">undocking</field>
+            <field name="default_code">undocking</field>
+            <field name="active" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="type">service</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="product_move" model="product.product">
+            <field name="name">move</field>
+            <field name="default_code">move</field>
+            <field name="active" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="type">service</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="product_in" model="product.product">
+            <field name="name">in</field>
+            <field name="default_code">in</field>
+            <field name="active" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="type">service</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="product_out" model="product.product">
+            <field name="name">out</field>
+            <field name="default_code">out</field>
+            <field name="active" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="type">service</field>
+            <field name="company_id" eval="False"/>
+        </record>
     </data>
 </openerp>
