@@ -16,8 +16,6 @@ class Pricelist(models.Model):
 
     @api.multi
     def _compute_price_rule(self, products_qty_partner, date=False, uom_id=False):
-        import ipdb; ipdb.set_trace()
-
         if self._context.get('gt', False):
             results = self._compute_price_rule_with_gt(products_qty_partner, date=False, uom_id=False)
         else:
