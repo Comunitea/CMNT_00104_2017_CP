@@ -16,13 +16,14 @@ class Pricelist(models.Model):
 
     @api.multi
     def _compute_price_rule(self, products_qty_partner, date=False, uom_id=False):
-        import ipdb; ipdb.set_trace()
 
         if self._context.get('gt', False):
             results = self._compute_price_rule_with_gt(products_qty_partner, date=False, uom_id=False)
         else:
             results = super(Pricelist, self)._compute_price_rule(products_qty_partner, date=False, uom_id=False)
         return results
+
+
 
     @api.multi
     def _compute_price_rule_with_gt(self, products_qty_partner, date=False, uom_id=False):
@@ -35,6 +36,13 @@ class Pricelist(models.Model):
             :param datetime date: validity date
             :param ID uom_id: intermediate unit of measure
         """
+        def zone_price(price, zone):
+            if zone == 'B':
+                price *= 2
+            if zone == 'C':
+                price *= 3
+            return price
+
         self.ensure_one()
         gt = self._context['gt']
         zone = self._context['zone']
@@ -77,8 +85,6 @@ class Pricelist(models.Model):
             prod_ids = [product.id for product in products]
             prod_tmpl_ids = [product.product_tmpl_id.id for product in products]
 
-        gt = self._context['gt']
-        zone = self._context['zone']
         # Load all rules
         self._cr.execute(
             'SELECT item.id '
@@ -93,9 +99,8 @@ class Pricelist(models.Model):
             'AND (item.date_end IS NULL OR item.date_end>=%s) '
             'AND (item.gt_min IS NULL OR item.gt_min<=%s) '
             'AND (item.gt_max IS NULL OR item.gt_max>=%s) '
-            'AND item.zone = %s '
             'ORDER BY item.applied_on, item.min_quantity desc, categ.parent_left desc',
-            (prod_tmpl_ids, prod_ids, categ_ids, self.id, date, date, gt, gt, zone))
+            (prod_tmpl_ids, prod_ids, categ_ids, self.id, date, date, gt, gt))
 
         item_ids = [x[0] for x in self._cr.fetchall()]
         items = self.env['product.pricelist.item'].browse(item_ids)
@@ -163,12 +168,17 @@ class Pricelist(models.Model):
                 if price is not False:
                     if rule.compute_price == 'fixed':
                         price = convert_to_price_uom(rule.fixed_price)
+                        price = zone_price(price, zone)
+
                     elif rule.compute_price == 'percentage':
                         price = (price - (price * (rule.percent_price / 100))) or 0.0
+                        price = zone_price(price, zone)
                     else:
                         # complete formula
                         price_limit = price
                         price = (price - (price * (rule.price_discount / 100))) or 0.0
+                        price = zone_price(price, zone)
+
                         if rule.price_round:
                             price = tools.float_round(price, precision_rounding=rule.price_round)
 
@@ -183,6 +193,7 @@ class Pricelist(models.Model):
                         if rule.price_max_margin:
                             price_max_margin = convert_to_price_uom(rule.price_max_margin)
                             price = min(price, price_limit + price_max_margin)
+
                     suitable_rule = rule
                 break
             # Final price conversion into pricelist currency
@@ -199,4 +210,3 @@ class PricelistItem(models.Model):
 
     gt_min = fields.Integer('from gt')
     gt_max = fields.Integer('to gt')
-    zone = fields.Selection([('A', 'A'), ('B', 'B')], 'Zona')
