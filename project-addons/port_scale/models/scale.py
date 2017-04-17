@@ -30,12 +30,16 @@ class PortScale(models.Model):
     dock = fields.Many2one('port.dock')
     state = fields.Selection(
         (('input', 'Input'), ('anchoring', 'Anchoring'),
-         ('departure', 'Departure')), default='input')
+         ('departure', 'Departure'), ('done', 'Done')), default='input')
 
     docking_start_time = fields.Datetime()
     docking_end_time = fields.Datetime()
     anchor_start_time = fields.Datetime()
     anchor_end_time = fields.Datetime()
+    undocking_start_time = fields.Datetime()
+    undocking_end_time = fields.Datetime()
+    change_docking_start_time = fields.Datetime()
+    change_docking_end_time = fields.Datetime()
     quality_signature = fields.Binary()
     quality_service_satisfaction = fields.Integer()
     norays = fields.Char()
@@ -47,7 +51,6 @@ class PortScale(models.Model):
     def end_docking(self):
         self.docking_end_time = datetime.now()
         self.state = 'departure'
-        #albaran
 
     def start_anchor(self):
         self.anchor_start_time = datetime.now()
@@ -55,7 +58,19 @@ class PortScale(models.Model):
     def end_anchor(self):
         self.anchor_end_time = datetime.now()
         self.state = 'anchoring'
-        #albaran
 
     def anchor_without_coast_pilot(self):
         self.state = 'anchoring'
+
+    def start_undocking(self):
+        self.undocking_start_time = datetime.now()
+
+    def end_undocking(self):
+        self.undocking_end_time = datetime.now()
+        self.state = 'done'
+
+    def start_change_docking(self):
+        self.change_docking_start_time = datetime.now()
+
+    def end_change_docking(self):
+        self.change_docking_end_time = datetime.now()

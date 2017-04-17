@@ -15,6 +15,120 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_scale_input_action
+#: selection:port.scale,state:0
+msgid "Input"
+msgstr "Entrada"
+
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_tug_number
+msgid "Tug number"
+msgstr "Número remolcadores"
+
+
+#. module: port_scale
+#: model:ir.ui.menu,name:port_scale.port_scale_input
+msgid "Inputs"
+msgstr "Entradas"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_partner_id
+msgid "Agent"
+msgstr "Agente"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_anchor_end_time
+msgid "Anchor end time"
+msgstr "Fecha fin fondeo"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_anchor_start_time
+msgid "Anchor start time"
+msgstr "Fecha inicio fondeo"
+
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_docking_end_time
+msgid "Docking end time"
+msgstr "Fecha fin atraque"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_docking_start_time
+msgid "Docking start time"
+msgstr "Fecha inicio atraque"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "End anchor"
+msgstr "Finalizar fondeo"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "Open quality question"
+msgstr "Abrir cuestionario de calidad"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "Start docking"
+msgstr "Iniciar atraque"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "End docking"
+msgstr "Finalizar atraque"
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_scale_departure_action
+#: selection:port.scale,state:0
+msgid "Departure"
+msgstr "Salida"
+
+#. module: port_scale
+#: model:ir.ui.menu,name:port_scale.port_scale_departure
+msgid "Departures"
+msgstr "Salidas"
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_dock_action
+msgid "Port Docks"
+msgstr "Muelles"
+
+#. module: port_scale
+#: model:ir.ui.menu,name:port_scale.port_dock_menu
+msgid "Port docks"
+msgstr "Muelles"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_quality_signature
+msgid "Quality signature"
+msgstr "Firma cuestionario de calidad"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_quality_service_satisfaction
+msgid "Quality service satisfaction"
+msgstr "Satisfacción con el servicio"
+
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "Start anchor"
+msgstr "Iniciar fondeo"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "Anchor without coast pilot"
+msgstr "Fondeo sin práctico"
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_scale_anchoring_action
+#: model:ir.ui.menu,name:port_scale.port_scale_anchoring
+#: selection:port.scale,state:0
+msgid "Anchoring"
+msgstr "Fondeo"
+
 #. module: port_scale
 #: model:ir.ui.view,arch_db:port_scale.ship_view_form
 msgid "<span class=\"o_stat_text\">Scales</span>"
