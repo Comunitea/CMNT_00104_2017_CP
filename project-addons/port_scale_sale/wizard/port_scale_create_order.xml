@@ -20,6 +20,7 @@
                             <field name="docking_end_time"/>
                             <field name="docking"/>
                             <field name="flag"/>
+                            <field name="zone"/>
                         </group>
                         <group>
                             <field name="gt"/>

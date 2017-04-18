@@ -16,11 +16,14 @@ class PortScaleCreateOrder(models.TransientModel):
     flag = fields.Char(related='scale.ship.flag', required=True)
     gt = fields.Integer(related='scale.gt', required=True)
     partner_id = fields.Many2one('res.partner',
-                                 related='scale.ship.partner_id', required=True)
+                                 related='scale.ship.partner_id',
+                                 required=True)
     tug_number = fields.Integer(related='scale.tug_number', required=True)
     user_id = fields.Many2one('res.users', 'Coast pilot', required=True)
     pricelist = fields.Many2one('product.pricelist', required=True)
     fiscal_position = fields.Many2one('account.fiscal.position')
+    zone = fields.Selection([('A', 'A'), ('B', 'B')], 'Zone', default = 'A',
+                            required=True)
     type = fields.Selection(
         (('docking', 'Docking'),
          ('undocking', 'Undocking'),
@@ -58,7 +61,8 @@ class PortScaleCreateOrder(models.TransientModel):
                     'product_uom_qty': 1,
                     'price_unit': 0.0,
                     'order_id': new_order.id,
-                    'product_uom': False
+                    'product_uom': False,
+                    'zone': self.zone
                 }
                 new_line = self.env['sale.order.line']
                 specs = new_line._onchange_spec()
