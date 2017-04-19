@@ -17,6 +17,7 @@
                     <field name="imo"/>
                     <field name="mmsi"/>
                     <field name="callsign"/>
+                    <field name="gt"/>
                 </tree>
             </field>
         </record>
@@ -45,6 +46,7 @@
                                 <field name="name"/>
                                 <field name="partner_id"/>
                                 <field name="flag"/>
+                                <field name="gt"/>
                             </group>
                             <group>
                                 <field name="imo"/>

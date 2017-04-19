@@ -9,7 +9,7 @@ class SaleOrder(models.Model):
 
     _inherit = 'sale.order'
 
-    scale = fields.Many2one('port.scale')
+    scale = fields.Many2one('port.scale', required=True)
 
     def impute_fault(self):
         new_line_vals = {

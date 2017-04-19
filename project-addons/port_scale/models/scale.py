@@ -13,7 +13,7 @@ class PortScale(models.Model):
 
     name = fields.Char('Nº escala')
     ship = fields.Many2one('ship', required=True)
-    gt = fields.Integer()
+    gt = fields.Integer("GT",related="ship.gt", readonly=True)
     origin = fields.Char()
     operation = fields.Selection(
         (('D', 'disembarkation'),
