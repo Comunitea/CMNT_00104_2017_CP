@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import models, fields, api
+from odoo import models, fields, api
+from odoo.addons.port_scale.models.tug_data import TUG_SELECTOR
 
 
 class PortScaleCreateOrder(models.TransientModel):
@@ -18,7 +19,7 @@ class PortScaleCreateOrder(models.TransientModel):
     partner_id = fields.Many2one('res.partner',
                                  related='scale.ship.partner_id',
                                  required=True)
-    tug_number = fields.Integer(related='scale.tug_number', required=True)
+    tug_number = fields.Selection(TUG_SELECTOR, related='scale.tug_number', required=True)
     user_id = fields.Many2one('res.users', 'Coast pilot', required=True)
     pricelist = fields.Many2one('product.pricelist', required=True)
     fiscal_position = fields.Many2one('account.fiscal.position')

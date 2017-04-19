@@ -2,7 +2,7 @@
 <!-- © 2017 Comunitea
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
+<odoo>
     <data>
 
         <record id="ship_view_tree" model="ir.ui.view">
@@ -85,4 +85,4 @@
         <menuitem name="Ships" parent="port_managament_submenu" action="ship_action" id="ship_menu"/>
 
     </data>
-</openerp>
+</odoo>

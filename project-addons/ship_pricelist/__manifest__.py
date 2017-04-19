@@ -14,6 +14,7 @@
     'depends': [
         'base',
         'port_scale',
+        'port_scale_sale',
         'sale'
     ],
     'data': [

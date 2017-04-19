@@ -4,6 +4,7 @@
 
 from odoo import models, fields
 from datetime import datetime
+from .tug_data import TUG_SELECTOR
 
 
 class PortScale(models.Model):
@@ -43,7 +44,7 @@ class PortScale(models.Model):
     quality_signature = fields.Binary()
     quality_service_satisfaction = fields.Integer()
     norays = fields.Char()
-    tug_number = fields.Integer()
+    tug_number = fields.Selection(TUG_SELECTOR)
 
     def start_docking(self):
         self.docking_start_time = datetime.now()

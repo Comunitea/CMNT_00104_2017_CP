@@ -2,7 +2,7 @@
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, exceptions, _
+from odoo import models, fields, api, exceptions, _
 #TODO REVISAR CON LO QUE SUBA JESUS PARA VER COMO SON LOS CAMPOS ZONE Y GT
 class SaleOrder(models.Model):
     _inherit = 'sale.order'

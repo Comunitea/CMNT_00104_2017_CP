@@ -2,7 +2,7 @@
 <!-- © 2017 Comunitea
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
+<odoo>
     <data>
         <record id="product_template_tree_view_ship_ops" model="ir.ui.view">
             <field name="name">product.template.tree.ship.ops</field>
@@ -96,4 +96,4 @@
             </field>
         </record>
     </data>
-</openerp>
+</odoo>
