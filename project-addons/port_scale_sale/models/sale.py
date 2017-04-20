@@ -2,7 +2,8 @@
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
+from odoo.exceptions import UserError
 from odoo.tools import float_is_zero
 
 
@@ -43,13 +44,18 @@ class SaleOrder(models.Model):
         grouped = True
         if self._context.get('group_invoices', False) == 'ship':
             inv_obj = self.env['account.invoice']
-            precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+            precision = self.env['decimal.precision'].precision_get(
+                'Product Unit of Measure')
             invoices = {}
             references = {}
             for order in self:
-                group_key = (order.partner_invoice_id.id, order.scale.ship.id, order.currency_id.id)
-                for line in order.order_line.sorted(key=lambda l: l.qty_to_invoice < 0):
-                    if float_is_zero(line.qty_to_invoice, precision_digits=precision):
+                group_key = (order.partner_invoice_id.id,
+                             order.scale.ship.id,
+                             order.currency_id.id)
+                for line in order.order_line.sorted(
+                        key=lambda l: l.qty_to_invoice < 0):
+                    if float_is_zero(line.qty_to_invoice,
+                                     precision_digits=precision):
                         continue
                     if group_key not in invoices:
                         inv_data = order._prepare_invoice()
@@ -58,15 +64,22 @@ class SaleOrder(models.Model):
                         invoices[group_key] = invoice
                     elif group_key in invoices:
                         vals = {}
-                        if order.name not in invoices[group_key].origin.split(', '):
-                            vals['origin'] = invoices[group_key].origin + ', ' + order.name
-                        if order.client_order_ref and order.client_order_ref not in invoices[group_key].name.split(', '):
-                            vals['name'] = invoices[group_key].name + ', ' + order.client_order_ref
+                        if order.name not in \
+                                invoices[group_key].origin.split(', '):
+                            vals['origin'] = invoices[group_key].origin + \
+                                ', ' + order.name
+                        if order.client_order_ref and \
+                                order.client_order_ref not in \
+                                invoices[group_key].name.split(', '):
+                            vals['name'] = invoices[group_key].name + \
+                                ', ' + order.client_order_ref
                         invoices[group_key].write(vals)
                     if line.qty_to_invoice > 0:
-                        line.invoice_line_create(invoices[group_key].id, line.qty_to_invoice)
+                        line.invoice_line_create(invoices[group_key].id,
+                                                 line.qty_to_invoice)
                     elif line.qty_to_invoice < 0 and final:
-                        line.invoice_line_create(invoices[group_key].id, line.qty_to_invoice)
+                        line.invoice_line_create(invoices[group_key].id,
+                                                 line.qty_to_invoice)
 
                 if references.get(invoices.get(group_key)):
                     if order not in references[invoices[group_key]]:
@@ -86,10 +99,12 @@ class SaleOrder(models.Model):
                 # Use additional field helper function (for account extensions)
                 for line in invoice.invoice_line_ids:
                     line._set_additional_fields(invoice)
-                # Necessary to force computation of taxes. In account_invoice, they are triggered
+                # Necessary to force computation of taxes. In account_invoice,
+                # they are triggered
                 # by onchanges, which are not triggered when doing a create.
                 invoice.compute_taxes()
-                invoice.message_post_with_view('mail.message_origin_link',
+                invoice.message_post_with_view(
+                    'mail.message_origin_link',
                     values={'self': invoice, 'origin': references[invoice]},
                     subtype_id=self.env.ref('mail.mt_note').id)
             return [inv.id for inv in invoices.values()]
