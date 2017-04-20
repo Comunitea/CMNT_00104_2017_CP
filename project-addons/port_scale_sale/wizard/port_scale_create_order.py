@@ -19,12 +19,13 @@ class PortScaleCreateOrder(models.TransientModel):
     partner_id = fields.Many2one('res.partner',
                                  related='scale.ship.partner_id',
                                  required=True)
-    tug_number = fields.Selection(TUG_SELECTOR, related='scale.tug_number', required=True)
+    tug_number = fields.Selection(TUG_SELECTOR, related='scale.tug_number',
+                                  required=True)
     user_id = fields.Many2one('res.users', 'Coast pilot', required=True)
     pricelist = fields.Many2one('product.pricelist', required=True)
     fiscal_position = fields.Many2one('account.fiscal.position')
-    zone = fields.Selection([('A', 'A'), ('B', 'B')], 'Zone', default = 'A',
-                            required=True)
+    zone = fields.Selection([('A', 'A'), ('B', 'B'), ('C', 'C')], 'Zone',
+                            default='A', required=True)
     type = fields.Selection(
         (('docking', 'Docking'),
          ('undocking', 'Undocking'),

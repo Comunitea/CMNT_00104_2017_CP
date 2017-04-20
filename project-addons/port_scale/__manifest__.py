@@ -16,9 +16,9 @@
         'web_digital_sign'
     ],
     'data': [
+        'wizard/scale_quality.xml',
         'views/scale.xml',
         'views/ship.xml',
-        'wizard/scale_quality.xml',
         'security/ir.model.access.csv'
     ],
 }

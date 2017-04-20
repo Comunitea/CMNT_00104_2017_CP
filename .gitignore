@@ -2,7 +2,7 @@ odoo_repos/
 odoo-repos/
 var/
 parts/
-lib/
+/lib/
 include/
 eggs/
 develop-eggs/
@@ -11,7 +11,7 @@ downloads/
 etc/
 bin/
 sandbox/
-src/
+/src/
 .installed.cfg
 .idea
 upgrade.py
