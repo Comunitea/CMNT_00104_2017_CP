@@ -46,7 +46,8 @@ class PortScaleCreateOrder(models.TransientModel):
             'pricelist_id': self.pricelist.id,
             'scale': self.scale.id,
             'user_id': self.user_id.id,
-            'fiscal_position_id': self.fiscal_position.id
+            'fiscal_position_id': self.fiscal_position.id,
+            'type': self.type,
         }
         new_order = self.env['sale.order'].create(order_vals)
         if self.type:

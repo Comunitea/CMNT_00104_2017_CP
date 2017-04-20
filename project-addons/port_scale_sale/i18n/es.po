@@ -15,6 +15,22 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+
+#. module: port_scale_sale
+#: selection:sale.advance.payment.inv,group_invoices:0
+msgid "By partner"
+msgstr "Por cliente"
+
+#. module: port_scale_sale
+#: selection:sale.advance.payment.inv,group_invoices:0
+msgid "By ship"
+msgstr "Por barco"
+
+#. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_advance_payment_inv_group_invoices
+msgid "Group invoices"
+msgstr "Agrupar facturas"
+
 #. module: port_scale_sale
 #: model:ir.ui.view,arch_db:port_scale_sale.port_scale_create_order_form
 msgid "Cancel"
