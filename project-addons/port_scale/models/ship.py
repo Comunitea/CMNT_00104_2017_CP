@@ -11,7 +11,7 @@ class Ship(models.Model):
 
     name = fields.Char(required=True)
     partner_id = fields.Many2one('res.partner', 'Consignatario')
-    flag = fields.Char()
+    country = fields.Many2one('res.country')
     imo = fields.Char('IMO')
     mmsi = fields.Char('MMSI')
     callsign = fields.Char()

@@ -39,7 +39,7 @@ msgstr "Cancelar"
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_user_id
 msgid "Coast pilot"
-msgstr "Coast pilot"
+msgstr "Práctico"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_partner_id
@@ -99,9 +99,9 @@ msgid "Fiscal position"
 msgstr "Posición fiscal"
 
 #. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_flag
-msgid "Flag"
-msgstr "Bandera"
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_country
+msgid "Country"
+msgstr "País"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_gt

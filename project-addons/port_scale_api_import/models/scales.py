@@ -67,7 +67,10 @@ class PortScale(models.Model):
                 ship_vals['mmsi'] = scale_element.findtext('MMSI')
 
             if scale_element.findtext('BANDERA'):
-                ship_vals['flag'] = scale_element.findtext('BANDERA')
+                country = self.env['res.country'].search(
+                    [('code', '=', scale_element.findtext('BANDERA'))])
+                if country:
+                    ship_vals['country'] = country.id
             if scale_element.findtext('CALLSIGN'):
                 ship_vals['callsign'] = scale_element.findtext('CALLSIGN')
 
@@ -94,10 +97,10 @@ class PortScale(models.Model):
                 created_ship = self.env['ship'].search(
                     [('mmsi', '=', ship_vals['mmsi'])])
 
-            if not created_ship and ship_vals.get('flag', False) and \
+            if not created_ship and ship_vals.get('country', False) and \
                     ship_vals.get('callsign', False):
                 created_ship = self.env['ship'].search(
-                    [('flag', '=', ship_vals['flag']),
+                    [('country', '=', ship_vals['country']),
                      ('callsign', '=', ship_vals['callsign'])])
 
             if created_ship:

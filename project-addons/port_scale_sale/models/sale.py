@@ -12,6 +12,9 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     scale = fields.Many2one('port.scale', required=True)
+    coast_pilot = fields.Many2one('res.users')
+    operation_start_time = fields.Datetime()
+    operation_end_time = fields.Datetime()
     type = fields.Selection(
         (('docking', 'Docking'),
          ('undocking', 'Undocking'),

@@ -16,7 +16,7 @@
             </div>
             <div class="row" style="margin-top:15px;">
                 <div class="col-xs-4"><strong>Bandera / Flag</strong></div>
-                <div class="col-xs-8"><span t-field="doc.scale.ship.flag" /></div>
+                <div class="col-xs-8"><span t-field="doc.scale.ship.country.name" /></div>
             </div>
             <div class="row" style="margin-top:15px;">
                 <div class="col-xs-4"><strong>Toneladas / G.T.</strong></div>

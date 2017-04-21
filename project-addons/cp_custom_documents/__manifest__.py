@@ -15,11 +15,13 @@
         'base',
         'account',
         'port_scale',
-        'port_scale_sale'
+        'port_scale_sale',
+        'report_xlsx'
     ],
     'data': [
         'views/report_saleorder.xml',
         'views/report_invoice.xml',
-        'views/iva_report.xml'
+        'views/iva_report.xml',
+        'sale_order_line_xlsx.xml'
     ],
 }

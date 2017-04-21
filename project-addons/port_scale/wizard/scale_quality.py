@@ -23,7 +23,8 @@ class ScaleQualityWizard(models.TransientModel):
     eta = fields.Datetime(related='scale_id.eta', readonly=True)
     ship_name = fields.Char('Name', related='scale_id.ship.name',
                             readonly=True)
-    flag = fields.Char(related='scale_id.ship.flag', readonly=True)
+    country = fields.Many2one('res.country',
+                              related='scale_id.ship.country', readonly=True)
     gt = fields.Integer(related='scale_id.gt', readonly=True)
     partner_id = fields.Many2one('res.partner', 'Agent',
                                  related='scale_id.ship.partner_id',

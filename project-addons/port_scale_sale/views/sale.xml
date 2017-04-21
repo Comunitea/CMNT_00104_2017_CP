@@ -15,6 +15,9 @@
                 </header>
                 <field name="partner_id" position="after">
                     <field name="scale"/>
+                    <field name="coast_pilot"/>
+                    <field name="operation_start_time"/>
+                    <field name="operation_end_time"/>
                 </field>
             </field>
         </record>
