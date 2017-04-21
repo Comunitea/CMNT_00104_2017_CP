@@ -15,6 +15,18 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_operation_end_time
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_operation_end_time
+msgid "Operation end time"
+msgstr "Fecha fin de operación"
+
+#. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_operation_start_time
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_operation_start_time
+msgid "Operation start time"
+msgstr "Fecha inicio de operación"
+
 
 #. module: port_scale_sale
 #: selection:sale.advance.payment.inv,group_invoices:0
@@ -38,6 +50,7 @@ msgstr "Cancelar"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_user_id
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_coast_pilot
 msgid "Coast pilot"
 msgstr "Práctico"
 
