@@ -4,7 +4,7 @@
 {
     'name': 'Port scale sales',
     'summary': '',
-    'version': '8.0.1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Uncategorized',
     'website': 'comunitea.com',
     'author': 'Comunitea',
@@ -18,8 +18,8 @@
     ],
     'data': [
         'data/product.xml',
-        'views/account_invoice.xml',
         'views/sale.xml',
-        'wizard/port_scale_create_order.xml'
+        'wizard/port_scale_create_order.xml',
+        'wizard/sale_make_invoice_view.xml'
     ],
 }

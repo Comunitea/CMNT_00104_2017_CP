@@ -196,9 +196,9 @@ msgid "Eta"
 msgstr "Eta"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_ship_flag
-msgid "Flag"
-msgstr "Bandera"
+#: model:ir.model.fields,field_description:port_scale.field_ship_country
+msgid "Country"
+msgstr "País"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_fondeo_previo

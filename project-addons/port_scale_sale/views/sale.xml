@@ -2,7 +2,7 @@
 <!-- © 2017 Comunitea
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
+<odoo>
     <data>
 
         <record id="view_order_form_port_scale" model="ir.ui.view">
@@ -15,9 +15,12 @@
                 </header>
                 <field name="partner_id" position="after">
                     <field name="scale"/>
+                    <field name="coast_pilot"/>
+                    <field name="operation_start_time"/>
+                    <field name="operation_end_time"/>
                 </field>
             </field>
         </record>
 
     </data>
-</openerp>
+</odoo>

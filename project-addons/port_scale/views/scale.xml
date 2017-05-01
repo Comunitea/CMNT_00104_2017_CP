@@ -2,7 +2,7 @@
 <!-- © 2017 Comunitea
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
+<odoo>
     <data>
 
         <record id="port_scale_view_tree" model="ir.ui.view">
@@ -197,4 +197,4 @@
             <field name="search_view_id" ref="port_scale_view_search"/>
         </record>
     </data>
-</openerp>
+</odoo>

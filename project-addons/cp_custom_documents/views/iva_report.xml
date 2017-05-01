@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2017 Comunitea
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <data>
+        <template id="report_exemption_iva_document">
+            <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+            <div class="page">
+                <p class="text-center">DECLARACIÓN A EFECTOS DE DOCUMENTAR LA AFECTACIÓN DE LOS BUQUES A NAVEGACIÓN MARÍTIMA INTERNACIONAL</p>
+                <p><span t-field="o.partner_id.name"/> Con domicilio en <span t-field="o.partner_id.street"/> en <span t-field="o.partner_id.city"/> y con N.I.F <span t-field="o.partner_id.vat"/></p>
+                <p>Como consignatario de los siguientes buques:</p>
+                <t t-foreach="o.ships" t-as="ship">
+                    <p t-field="ship.name"/>
+                </t>
+                <p style="margin-top: 55px;">Incluidos en la factura <span t-field="o.number"/></p>
+                <p>DECLARA QUE</p>
+                <p>De los datos obrantes en esta empresa Consignataria, el/los buque/s citado/s se encuentra/n afectado/s a la Navegación Marítima Internacional.</p>
+                <p>Lo que certifico a los efectos de documentar y acreditar la exención del IVA en los términos y actos que procedan según la legislación vigente en la materia.</p>
+                <p class="text-center"><span t-field="o.partner_id.city"/> a <span t-esc="time.strftime('%d de %B de %Y', time.strptime(o.date_invoice,'%Y-%m-%d'))"/></p>
+            </div>
+        </template>
+
+        <template id="report_exemption_iva_">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="cp_custom_documents.report_exemption_iva_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+        <report
+            id="report_exemption"
+            string="IVA exemption"
+            model="account.invoice"
+            report_type="qweb-pdf"
+            file="cp_custom_documents.report_exemption_iva_"
+            name="cp_custom_documents.report_exemption_iva_"
+        />
+
+
+        <record id="paperformat_iva" model="report.paperformat">
+            <field name="name">IVA paperformat</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">3</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="report_exemption" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="paperformat_iva"/>
+        </record>
+    </data>
+</odoo>

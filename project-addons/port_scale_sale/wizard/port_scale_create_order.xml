@@ -2,7 +2,7 @@
 <!-- © 2017 Comunitea
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
+<odoo>
     <data>
 
         <record id="port_scale_create_order_form" model="ir.ui.view">
@@ -16,10 +16,10 @@
                             <field name="type" invisible="True"/>
                             <field name="scale" readonly="True"/>
                             <field name="ship"/>
-                            <field name="docking_start_time"/>
-                            <field name="docking_end_time"/>
+                            <field name="operation_start_time"/>
+                            <field name="operation_end_time"/>
                             <field name="docking"/>
-                            <field name="flag"/>
+                            <field name="country"/>
                             <field name="zone"/>
                         </group>
                         <group>
@@ -49,4 +49,4 @@
             id="port_scale_create_order_action"/>
 
     </data>
-</openerp>
+</odoo>

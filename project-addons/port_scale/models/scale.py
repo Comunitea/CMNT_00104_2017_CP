@@ -4,6 +4,7 @@
 
 from odoo import models, fields
 from datetime import datetime
+from .tug_data import TUG_SELECTOR
 
 
 class PortScale(models.Model):
@@ -12,7 +13,7 @@ class PortScale(models.Model):
 
     name = fields.Char('Nº escala')
     ship = fields.Many2one('ship', required=True)
-    gt = fields.Integer()
+    gt = fields.Integer("GT",related="ship.gt", readonly=True)
     origin = fields.Char()
     operation = fields.Selection(
         (('D', 'disembarkation'),
@@ -43,7 +44,7 @@ class PortScale(models.Model):
     quality_signature = fields.Binary()
     quality_service_satisfaction = fields.Integer()
     norays = fields.Char()
-    tug_number = fields.Integer()
+    tug_number = fields.Selection(TUG_SELECTOR)
 
     def start_docking(self):
         self.docking_start_time = datetime.now()

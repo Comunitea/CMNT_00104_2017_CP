@@ -16,14 +16,43 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_operation_end_time
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_operation_end_time
+msgid "Operation end time"
+msgstr "Fecha fin de operación"
+
+#. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_operation_start_time
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_operation_start_time
+msgid "Operation start time"
+msgstr "Fecha inicio de operación"
+
+
+#. module: port_scale_sale
+#: selection:sale.advance.payment.inv,group_invoices:0
+msgid "By partner"
+msgstr "Por cliente"
+
+#. module: port_scale_sale
+#: selection:sale.advance.payment.inv,group_invoices:0
+msgid "By ship"
+msgstr "Por barco"
+
+#. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_advance_payment_inv_group_invoices
+msgid "Group invoices"
+msgstr "Agrupar facturas"
+
+#. module: port_scale_sale
 #: model:ir.ui.view,arch_db:port_scale_sale.port_scale_create_order_form
 msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_user_id
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_coast_pilot
 msgid "Coast pilot"
-msgstr "Coast pilot"
+msgstr "Práctico"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_partner_id
@@ -83,9 +112,9 @@ msgid "Fiscal position"
 msgstr "Posición fiscal"
 
 #. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_flag
-msgid "Flag"
-msgstr "Bandera"
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_country
+msgid "Country"
+msgstr "País"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_gt

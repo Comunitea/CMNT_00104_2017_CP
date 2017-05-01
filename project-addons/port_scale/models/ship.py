@@ -2,7 +2,7 @@
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api
+from odoo import models, fields, api
 
 
 class Ship(models.Model):
@@ -11,12 +11,13 @@ class Ship(models.Model):
 
     name = fields.Char(required=True)
     partner_id = fields.Many2one('res.partner', 'Consignatario')
-    flag = fields.Char()
+    country = fields.Many2one('res.country')
     imo = fields.Char('IMO')
     mmsi = fields.Char('MMSI')
     callsign = fields.Char()
     scales = fields.One2many('port.scale', 'ship')
     scales_count = fields.Integer(compute='_get_scales_count')
+    gt = fields.Integer("GT")
 
     @api.depends('scales')
     def _get_scales_count(self):

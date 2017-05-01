@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import models, fields, api
+from odoo import models, fields, api
+from ..models.tug_data import TUG_SELECTOR
 
 
 class ScaleQualityWizard(models.TransientModel):
@@ -22,14 +23,15 @@ class ScaleQualityWizard(models.TransientModel):
     eta = fields.Datetime(related='scale_id.eta', readonly=True)
     ship_name = fields.Char('Name', related='scale_id.ship.name',
                             readonly=True)
-    flag = fields.Char(related='scale_id.ship.flag', readonly=True)
+    country = fields.Many2one('res.country',
+                              related='scale_id.ship.country', readonly=True)
     gt = fields.Integer(related='scale_id.gt', readonly=True)
     partner_id = fields.Many2one('res.partner', 'Agent',
                                  related='scale_id.ship.partner_id',
                                  readonly=True)
     draft = fields.Float(related='scale_id.draft', readonly=True)
     norays = fields.Char(related='scale_id.norays', readonly=True)
-    tug_number = fields.Integer('Tugs', related='scale_id.tug_number',
+    tug_number = fields.Selection(TUG_SELECTOR, related='scale_id.tug_number',
                                 readonly=True)
 
     @api.model

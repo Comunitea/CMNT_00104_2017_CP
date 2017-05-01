@@ -2,7 +2,7 @@
 <!-- © 2017 Comunitea
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
+<odoo>
     <data noupdate="1">
 
         <record id="product_fault" model="product.product">
@@ -74,4 +74,4 @@
             <field name="company_id" eval="False"/>
         </record>
     </data>
-</openerp>
+</odoo>

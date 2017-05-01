@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import models, fields, api
+from odoo import models, fields, api
+from odoo.addons.port_scale.models.tug_data import TUG_SELECTOR
 
 
 class PortScaleCreateOrder(models.TransientModel):
@@ -10,20 +11,22 @@ class PortScaleCreateOrder(models.TransientModel):
 
     scale = fields.Many2one('port.scale')
     ship = fields.Many2one('ship', related='scale.ship', required=True)
-    docking_start_time = fields.Datetime(related='scale.docking_start_time')
-    docking_end_time = fields.Datetime(related='scale.docking_end_time')
+    operation_start_time = fields.Datetime()
+    operation_end_time = fields.Datetime()
     docking = fields.Char(related='scale.docking', required=True)
-    flag = fields.Char(related='scale.ship.flag', required=True)
+    country = fields.Many2one('res.country',
+                              related='scale.ship.country', required=True)
     gt = fields.Integer(related='scale.gt', required=True)
     partner_id = fields.Many2one('res.partner',
                                  related='scale.ship.partner_id',
                                  required=True)
-    tug_number = fields.Integer(related='scale.tug_number', required=True)
+    tug_number = fields.Selection(TUG_SELECTOR, related='scale.tug_number',
+                                  required=True)
     user_id = fields.Many2one('res.users', 'Coast pilot', required=True)
     pricelist = fields.Many2one('product.pricelist', required=True)
     fiscal_position = fields.Many2one('account.fiscal.position')
-    zone = fields.Selection([('A', 'A'), ('B', 'B')], 'Zone', default = 'A',
-                            required=True)
+    zone = fields.Selection([('A', 'A'), ('B', 'B'), ('C', 'C')], 'Zone',
+                            default='A', required=True)
     type = fields.Selection(
         (('docking', 'Docking'),
          ('undocking', 'Undocking'),
@@ -36,6 +39,8 @@ class PortScaleCreateOrder(models.TransientModel):
         res['scale'] = self.env['port.scale'].browse(
             self._context.get('active_id', False)).id
         res['type'] = self._context.get('sale_type', False)
+        res['operation_start_time'] = self._context.get('start_time', False)
+        res['operation_end_time'] = self._context.get('end_time', False)
         return res
 
     @api.multi
@@ -44,8 +49,11 @@ class PortScaleCreateOrder(models.TransientModel):
             'partner_id': self.partner_id.id,
             'pricelist_id': self.pricelist.id,
             'scale': self.scale.id,
-            'user_id': self.user_id.id,
-            'fiscal_position_id': self.fiscal_position.id
+            'coast_pilot': self.user_id.id,
+            'fiscal_position_id': self.fiscal_position.id,
+            'type': self.type,
+            'operation_start_time': self.operation_start_time,
+            'operation_end_time': self.operation_end_time,
         }
         new_order = self.env['sale.order'].create(order_vals)
         if self.type:
