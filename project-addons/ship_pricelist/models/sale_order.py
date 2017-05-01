@@ -10,13 +10,7 @@ class SaleOrder(models.Model):
     zone = fields.Selection([('A', 'A'), ('B', 'B'), ('C', 'C')], 'Zona',
                             default='A')
     gt = fields.Integer("GT", related='scale.gt', readonly=True)
-
-    @api.onchange('scale')
-    def onchange_scale(self):
-        if self.scale:
-            self.gt = self.scale.gt
-        else:
-            self.gt = 0
+    ship = fields.Many2one('ship', related='scale.ship', required=True)
 
 
 class SaleOrderLine(models.Model):
@@ -24,6 +18,7 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     zone = fields.Selection([('A', 'A'), ('B', 'B'), ('C', 'C')], 'Zona')
+    gt = fields.Integer(related="order_id.gt")
 
     @api.multi
     @api.onchange('gt', 'zone')
@@ -37,8 +32,8 @@ class SaleOrderLine(models.Model):
             pricelist=self.order_id.pricelist_id.id,
             )
         self._compute_tax_id()
-        if self.order_id.pricelist_id and self.order_id.partner_id:
+        if self.order_id.pricelist_id and self.order_id.partner_id and product:
             vals['price_unit'] = self.env['account.tax'].\
                 _fix_tax_included_price(self._get_display_price(product),
                                         product.taxes_id, self.tax_id)
-        self.update(vals)
+            self.update(vals)

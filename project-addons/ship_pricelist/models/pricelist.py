@@ -50,7 +50,6 @@ class Pricelist(models.Model):
             return {}
         if not zone:
             return {}
-
         if not date:
             date = self._context.get('date', fields.Date.today())
         if not uom_id and self._context.get('uom'):
