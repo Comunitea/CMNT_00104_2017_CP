@@ -21,3 +21,4 @@ atlassian-ide-plugin.xml
 *~
 devel_*
 .mr.developer.cfg
+devel-*
