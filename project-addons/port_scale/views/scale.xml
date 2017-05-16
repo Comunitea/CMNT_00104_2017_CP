@@ -133,7 +133,8 @@
         </record>
 
         <menuitem name="Traffic management"
-            id="port_management_menu"/>
+            id="port_management_menu"
+            web_icon="port_scale,static/description/icon.png"/>
 
         <menuitem name="Configuration"
             id="port_management_configuration_menu" parent="port_management_menu" sequence="5" groups="base.group_system"/>

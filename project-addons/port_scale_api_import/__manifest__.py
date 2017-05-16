@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     'name': 'Port scale api import',
-    'summary': 'Import scales data from soap api',
+    'summary': 'Import scales data from soap api. Es necesaria la librería zeep',
     'version': '10.0.1.0.0',
     'category': 'Uncategorized',
     'website': 'comunitea.com',

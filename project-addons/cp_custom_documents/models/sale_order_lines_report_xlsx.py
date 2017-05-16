@@ -16,10 +16,9 @@ class OrderLinesReport(ReportXlsx):
     def generate_xlsx_report(self, workbook, data, orders):
         sheet = workbook.add_worksheet('1')
         pos = 1
-        header = [u'Escala', u'Tipo', u'Zona', u'Fecha solicitud',
-                  u'Fecha inicio', u'Fecha fin', u'Barco', u'Bandera', u'G.T.',
-                  u'Remolcadores', u'Práctico', u'Incidencias',
-                  u'Reclamaciones', u'Total', u'Muelle']
+        header = [u'Escala', u'Tipo', u'Zona', u'Fecha inicio', u'Fecha fin',
+                  u'Barco', u'Bandera', u'G.T.',  u'Remolcadores', u'Práctico',
+                  u'Total', u'Muelle']
         sheet.write_row(0, 0, header)
         type_dict = {'docking': 'Atraque',
                      'undocking': 'Desatraque',
@@ -40,11 +39,10 @@ class OrderLinesReport(ReportXlsx):
                 if order.type:
                     order_type = type_dict[order.type]
                 order_row = [
-                    order.name, order_type, line.zone, '',
-                    start_date, end_date,
+                    order.name, order_type, line.zone, start_date, end_date,
                     order.scale.ship.name, order.scale.ship.country.name,
                     order.scale.ship.gt, order.scale.tug_number,
-                    order.user_id.name, '', '', order.amount_total,
+                    order.coast_pilot.name, order.amount_total,
                     order.scale.dock.name]
                 sheet.write_row(pos, 0, order_row)
                 pos += 1

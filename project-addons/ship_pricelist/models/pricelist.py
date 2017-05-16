@@ -7,9 +7,6 @@ from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, ValidationError
 import odoo.addons.decimal_precision as dp
 
-class ShipType(models.Model):
-    _name = 'ship.type'
-
 
 class Pricelist(models.Model):
     _inherit = "product.pricelist"

@@ -22,6 +22,12 @@ msgstr ""
 msgid "Input"
 msgstr "Entrada"
 
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_scale_done_action
+#: model:ir.ui.menu,name:port_scale.port_scale_done
+#: selection:port.scale,state:0
+msgid "Done"
+msgstr "Finalizado"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_tug_number
