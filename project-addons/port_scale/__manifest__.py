@@ -13,12 +13,19 @@
     'installable': True,
     'depends': [
         'base',
+        'web',
         'web_digital_sign'
     ],
     'data': [
         'wizard/scale_quality.xml',
         'views/scale.xml',
         'views/ship.xml',
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
+        'views/assets.xml',
+        'views/tide.xml'
+    ],
+
+    'qweb': [
+        "static/src/xml/tide_menu.xml",
     ],
 }

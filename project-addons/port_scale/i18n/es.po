@@ -15,6 +15,19 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. module: port_scale
+#. openerp-web
+#: code:addons/port_scale/static/src/xml/tide_menu.xml:9
+#: model:ir.actions.act_window,name:port_scale.tide_action
+#: model:ir.ui.menu,name:port_scale.tide_menu
+#, python-format
+msgid "Tides"
+msgstr "Mareas"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_date
+msgid "Date"
+msgstr "Fecha"
 
 #. module: port_scale
 #: model:ir.actions.act_window,name:port_scale.port_scale_input_action

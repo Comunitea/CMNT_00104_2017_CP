@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_port_scale,access_port_scale,model_port_scale,base.group_user,1,1,1,1
 access_port_dock,access_port_dock,model_port_dock,base.group_user,1,1,1,1
 access_ship,access_ship,model_ship,base.group_user,1,1,1,1
+access_port_tide,access_port_tide,model_port_tide,base.group_user,1,1,1,1

@@ -4,3 +4,4 @@
 from . import scale
 from . import ship
 from . import dock
+from . import tide
