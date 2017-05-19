@@ -2,7 +2,6 @@
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models, fields, api
-from ..models.tug_data import TUG_SELECTOR
 
 
 class ScaleQualityWizard(models.TransientModel):

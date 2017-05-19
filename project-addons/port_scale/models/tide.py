@@ -2,7 +2,7 @@
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, exceptions, _
+from openerp import models, fields, api
 from datetime import date
 from lee_feeds_rss import main
 
@@ -37,7 +37,8 @@ class PortTide(models.Model):
             'pleamar_1': tide_list['Pleamar'][0][0],
             'pleamar_2': tide_list['Pleamar'][1][0],
         }
-        exist_tide = self.env['port.tide'].search([('date', '=', date.today())])
+        exist_tide = self.env['port.tide'].search(
+            [('date', '=', date.today())])
         if exist_tide:
             exist_tide.write(vals)
         else:

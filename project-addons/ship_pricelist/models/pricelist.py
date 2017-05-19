@@ -3,33 +3,36 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from itertools import chain
-from odoo import api, fields, models, tools, _
-from odoo.exceptions import UserError, ValidationError
-import odoo.addons.decimal_precision as dp
+from odoo import api, fields, models, tools
+from odoo.exceptions import UserError
 
 
 class Pricelist(models.Model):
     _inherit = "product.pricelist"
 
     @api.multi
-    def _compute_price_rule(self, products_qty_partner, date=False, uom_id=False):
+    def _compute_price_rule(self, products_qty_partner, date=False,
+                            uom_id=False):
 
         if self._context.get('gt', False):
-            results = self._compute_price_rule_with_gt(products_qty_partner, date=False, uom_id=False)
+            results = self._compute_price_rule_with_gt(
+                products_qty_partner, date=False, uom_id=False)
         else:
-            results = super(Pricelist, self)._compute_price_rule(products_qty_partner, date=False, uom_id=False)
+            results = super(Pricelist, self)._compute_price_rule(
+                products_qty_partner, date=False, uom_id=False)
         return results
 
-
-
     @api.multi
-    def _compute_price_rule_with_gt(self, products_qty_partner, date=False, uom_id=False):
+    def _compute_price_rule_with_gt(self, products_qty_partner, date=False,
+                                    uom_id=False):
         """ Low-level method - Mono pricelist, multi products
-        Returns: dict{product_id: (price, suitable_rule) for the given pricelist}
+        Returns: dict{product_id: (price, suitable_rule) for the given
+        pricelist}
 
         If date in context: Date of the pricelist (%Y-%m-%d)
 
-            :param products_qty_partner: list of typles products, quantity, partner
+            :param products_qty_partner: list of typles products, quantity,
+            partner
             :param datetime date: validity date
             :param ID uom_id: intermediate unit of measure
         """
@@ -54,9 +57,11 @@ class Pricelist(models.Model):
         if uom_id:
             # rebrowse with uom if given
             product_ids = [item[0].id for item in products_qty_partner]
-            products = self.env['product.product'].with_context(uom=uom_id).browse(product_ids)
-            products_qty_partner = [(products[index], data_struct[1], data_struct[2]) for index, data_struct in
-                                    enumerate(products_qty_partner)]
+            products = self.env['product.product'].with_context(
+                uom=uom_id).browse(product_ids)
+            products_qty_partner = [
+                (products[index], data_struct[1], data_struct[2])
+                for index, data_struct in enumerate(products_qty_partner)]
         else:
             products = [item[0] for item in products_qty_partner]
 
@@ -110,7 +115,6 @@ class Pricelist(models.Model):
             # which case the price_uom_id contains that UoM.
             # The final price will be converted to match `qty_uom_id`.
             qty_uom_id = self._context.get('uom') or product.uom_id.id
-            price_uom_id = product.uom_id.id
             qty_in_product_uom = qty
             if qty_uom_id != product.uom_id.id:
                 try:

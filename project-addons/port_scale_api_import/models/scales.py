@@ -94,7 +94,6 @@ class PortScale(models.Model):
             if scale_element.findtext('CANTIDAD'):
                 scale_vals['load_qty'] = scale_element.findtext('CANTIDAD')
 
-
             created_ship = False
             if ship_vals.get('imo', False):
                 created_ship = self.env['ship'].search(
