@@ -23,6 +23,7 @@ class PortScale(models.Model):
          ('R', 'scraps')))
     draft = fields.Float()
     eta = fields.Datetime()
+    etd = fields.Datetime()
     scale_state = fields.Char()  # selection?
     fondeo_previo = fields.Boolean()
     docking_state = fields.Selection(
@@ -47,6 +48,8 @@ class PortScale(models.Model):
     norays = fields.Char()
     tug_number = fields.Selection(TUG_SELECTOR)
     reten = fields.Boolean()
+    load = fields.Char()
+    load_qty = fields.Float()
 
     def start_docking(self):
         self.docking_start_time = datetime.now()

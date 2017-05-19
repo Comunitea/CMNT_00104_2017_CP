@@ -21,6 +21,16 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_load
+msgid "Load"
+msgstr "Carga"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_load_qty
+msgid "Load qty"
+msgstr "Cantidad de carga"
+
+#. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_signature
 msgid "Signature"
 msgstr "Firma"

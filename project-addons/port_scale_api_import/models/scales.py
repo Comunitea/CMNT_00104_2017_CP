@@ -52,6 +52,7 @@ class PortScale(models.Model):
                 'name': scale_element.findtext('NUM_ESCALA'),
                 'scale_state': scale_element.findtext('ESTADO'),
                 'eta': scale_element.findtext('ETA'),
+                'etd': scale_element.findtext('ETD'),
                 'origin': scale_element.findtext('PUERTO_ANTERIOR'),
             }
 
@@ -88,6 +89,11 @@ class PortScale(models.Model):
                     scale_element.findtext('FONDEO_PREVIO')]
             if scale_element.findtext('OPERACION'):
                 scale_vals['operation'] = scale_element.findtext('OPERACION')
+            if scale_element.findtext('CARGA'):
+                scale_vals['load'] = scale_element.findtext('CARGA')
+            if scale_element.findtext('CANTIDAD'):
+                scale_vals['load_qty'] = scale_element.findtext('CANTIDAD')
+
 
             created_ship = False
             if ship_vals.get('imo', False):

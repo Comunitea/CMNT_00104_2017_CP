@@ -86,10 +86,13 @@
                                 <field name="draft"/>
                                 <field name="norays"/>
                                 <field name="tug_number"/>
+                                <field name="load"/>
+                                <field name="load_qty"/>
                             </group>
                             <group>
                                 <field name="dock"/>
                                 <field name="eta"/>
+                                <field name="etd"/>
                                 <field name="scale_state"/>
                                 <field name="fondeo_previo"/>
                                 <field name="docking_state"/>
