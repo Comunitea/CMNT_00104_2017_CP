@@ -12,42 +12,15 @@
             <field name="arch" type="xml">
                 <form>
                     <group>
-                        <group>
-                            <field name="name"/>
-                        </group>
-                        <group>
-                            <field name="eta"/>
-                        </group>
-                    </group>
-                    <group>
-                        <separator string="Ship information" colspan="2"/>
-                        <group>
-                            <field name="ship_name"/>
-                            <field name="gt"/>
-                        </group>
-                        <group>
-                            <field name="partner_id"/>
-                            <field name="country"/>
-                            <field name="draft"/>
-                        </group>
-                    </group>
-                    <group>
-                        <separator string="pilotage" colspan="2"/>
-                        <group>
-                            <field name="norays"/>
-                        </group>
-                        <group>
-                            <field name="tug_number"/>
-                        </group>
-                    </group>
-                    <group>
-                        <field name="service_satisfaction" widget="priority"/>
-                        <field name="signature" widget="signature"/>
+                        <field name="signature" widget="signature" width="400" height="100"/>
                         <field name="scale_id" invisible="1"/>
                     </group>
+                    <group col="3">
+                        <button name="confirm_0" icon="fa-thumbs-o-down" type="object" colspan="1"/>
+                        <button name="confirm_1" icon="fa-minus" type="object" colspan="1"/>
+                        <button name="confirm_2" icon="fa-thumbs-o-up" type="object" colspan="1"/>
+                    </group>
                     <footer>
-                        <button name="confirm" string="Confirm" type="object" class="oe_highlight"/>
-                        or
                         <button string="Cancel" class="oe_link" special="cancel"/>
                     </footer>
                 </form>

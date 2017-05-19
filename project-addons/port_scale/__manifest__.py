@@ -22,7 +22,8 @@
         'views/ship.xml',
         'security/ir.model.access.csv',
         'views/assets.xml',
-        'views/tide.xml'
+        'views/tide.xml',
+        'data/ir_cron.xml'
     ],
 
     'qweb': [

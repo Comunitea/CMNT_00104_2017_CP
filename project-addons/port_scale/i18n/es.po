@@ -16,6 +16,37 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.scale_quality_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_signature
+msgid "Signature"
+msgstr "Firma"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_undocking_end_time
+msgid "Undocking end time"
+msgstr "Fecha de fin de desatraque"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_undocking_start_time
+msgid "Undocking start time"
+msgstr "Fecha de inicio de desatraque"
+
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_change_docking_end_time
+msgid "Change docking end time"
+msgstr "Fecha de fin de cambio de atraque"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_change_docking_start_time
+msgid "Change docking start time"
+msgstr "Fecha de inicio de cambio de atraque"
+
+#. module: port_scale
 #. openerp-web
 #: code:addons/port_scale/static/src/xml/tide_menu.xml:9
 #: model:ir.actions.act_window,name:port_scale.tide_action

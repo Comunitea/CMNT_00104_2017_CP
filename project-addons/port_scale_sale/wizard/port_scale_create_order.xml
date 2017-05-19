@@ -13,7 +13,7 @@
                 <form>
                     <group>
                         <group>
-                            <field name="type" invisible="True"/>
+                            <field name="type"/>
                             <field name="scale" readonly="True"/>
                             <field name="ship"/>
                             <field name="operation_start_time"/>
@@ -29,6 +29,7 @@
                             <field name="tug_number"/>
                             <field name="pricelist"/>
                             <field name="fiscal_position"/>
+                            <field name="reten"/>
                         </group>
                     </group>
                     <footer>

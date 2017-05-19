@@ -4,6 +4,7 @@
 
 from openerp import models, fields, api, exceptions, _
 from datetime import date
+from lee_feeds_rss import main
 
 
 class PortTide(models.Model):
@@ -21,4 +22,23 @@ class PortTide(models.Model):
         tide = self.search([('date', '=', date.today())])
         if not tide:
             return [('Bajamar', '-', '-'), ('Pleamar', '-', '-')]
-        return [('Bajamar', tide[0].bajamar_1, tide[0].bajamar_2), ('Pleamar', tide[0].pleamar_1, tide[0].pleamar_2)]
+        return [('Bajamar', tide[0].bajamar_1, tide[0].bajamar_2),
+                ('Pleamar', tide[0].pleamar_1, tide[0].pleamar_2)]
+
+    @api.model
+    def import_feed_rss_tides(self):
+        tide_dict = main()
+        # Sacamos id=1. TODO: cambiar por config?
+        tide_list = tide_dict['1+' + date.today().strftime('%d/%m/%Y')]
+        vals = {
+            'date': date.today(),
+            'bajamar_1': tide_list['Bajamar'][0][0],
+            'bajamar_2': tide_list['Bajamar'][1][0],
+            'pleamar_1': tide_list['Pleamar'][0][0],
+            'pleamar_2': tide_list['Pleamar'][1][0],
+        }
+        exist_tide = self.env['port.tide'].search([('date', '=', date.today())])
+        if exist_tide:
+            exist_tide.write(vals)
+        else:
+            self.env['port.tide'].create(vals)

@@ -31,7 +31,23 @@ class PortScaleCreateOrder(models.TransientModel):
         (('docking', 'Docking'),
          ('undocking', 'Undocking'),
          ('move', 'Move'),
-         ('in', 'In')))
+         ('in', 'In')), required=True)
+    reten = fields.Boolean(related='scale.reten')
+
+    @api.onchange('type')
+    def onchange_type(self):
+        if self.type == 'docking':
+            self.operation_start_time = self.scale.docking_start_time
+            self.operation_end_time = self.scale.docking_end_time
+        if self.type == 'undocking':
+            self.operation_start_time = self.scale.undocking_start_time
+            self.operation_end_time = self.scale.undocking_end_time
+        if self.type == 'move':
+            self.operation_start_time = self.scale.change_docking_start_time
+            self.operation_end_time = self.scale.change_docking_end_time
+        if self.type == 'in':
+            self.operation_start_time = self.scale.anchor_start_time
+            self.operation_end_time = self.scale.anchor_end_time
 
     @api.model
     def default_get(self, fields):
@@ -41,6 +57,7 @@ class PortScaleCreateOrder(models.TransientModel):
         res['type'] = self._context.get('sale_type', False)
         res['operation_start_time'] = self._context.get('start_time', False)
         res['operation_end_time'] = self._context.get('end_time', False)
+        res['user_id'] = self.env.user.id
         return res
 
     @api.multi

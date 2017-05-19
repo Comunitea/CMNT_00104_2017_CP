@@ -13,16 +13,17 @@
                 <tree>
                     <field name="name"/>
                     <field name="ship"/>
-                    <field name="gt"/>
+                    <field name="eta"/>
                     <field name="origin"/>
                     <field name="operation"/>
                     <field name="draft"/>
                     <field name="dock"/>
-                    <field name="eta"/>
+                    <field name="gt"/>
                     <field name="scale_state"/>
                     <field name="fondeo_previo"/>
                     <field name="docking_state"/>
                     <field name="docking"/>
+                    <field name="norays"/>
                     <field name="observaciones"/>
                     <field name="docking_start_time" invisible="1"/>
                     <field name="docking_end_time" invisible="1"/>
@@ -94,6 +95,7 @@
                                 <field name="docking_state"/>
                                 <field name="docking"/>
                                 <field name="observaciones"/>
+                                <field name="reten"/>
                                 <field name="docking_start_time"/>
                                 <field name="docking_end_time"/>
                                 <field name="anchor_start_time"/>

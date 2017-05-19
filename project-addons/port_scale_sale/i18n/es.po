@@ -54,6 +54,12 @@ msgstr "Cancelar"
 msgid "Coast pilot"
 msgstr "Práctico"
 
+
+#. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_zone
+msgid "Zone"
+msgstr "Zona"
+
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_partner_id
 msgid "Consignatario"

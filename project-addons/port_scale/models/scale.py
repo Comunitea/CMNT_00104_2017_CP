@@ -10,6 +10,7 @@ from .tug_data import TUG_SELECTOR
 class PortScale(models.Model):
 
     _name = 'port.scale'
+    _order = 'eta asc'
 
     name = fields.Char('Nº escala')
     ship = fields.Many2one('ship', required=True)
@@ -45,6 +46,7 @@ class PortScale(models.Model):
     quality_service_satisfaction = fields.Integer()
     norays = fields.Char()
     tug_number = fields.Selection(TUG_SELECTOR)
+    reten = fields.Boolean()
 
     def start_docking(self):
         self.docking_start_time = datetime.now()

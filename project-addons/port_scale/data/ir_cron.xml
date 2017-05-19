@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2017 Comunitea
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <data>
+
+        <record forcecreate="True" id="ir_cron_import_tides" model="ir.cron">
+            <field name="name">Import tides from feed rss</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model" eval="'port.tide'"/>
+            <field name="function" eval="'import_feed_rss_tides'"/>
+            <field name="args" eval="'()'"/>
+        </record>
+
+    </data>
+</odoo>
