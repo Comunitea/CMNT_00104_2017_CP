@@ -30,6 +30,8 @@ class SaleOrderLine(models.Model):
             quantity=vals.get('product_uom_qty') or self.product_uom_qty,
             date=self.order_id.date_order,
             pricelist=self.order_id.pricelist_id.id,
+            gt=self.gt,
+            zone=self.zone
             )
         self._compute_tax_id()
         if self.order_id.pricelist_id and self.order_id.partner_id and product:

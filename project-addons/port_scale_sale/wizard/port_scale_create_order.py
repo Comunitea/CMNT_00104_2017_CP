@@ -84,21 +84,16 @@ class PortScaleCreateOrder(models.TransientModel):
                 new_line_vals = {
                     'product_id': line_prod.id,
                     'product_uom_qty': 1,
-                    'price_unit': 0.0,
                     'order_id': new_order.id,
-                    'product_uom': False,
                     'zone': self.zone
                 }
-                new_line = self.env['sale.order.line']
-                specs = new_line._onchange_spec()
-                onchange_result = new_line.onchange(
-                    new_line_vals, ['product_id'], specs)
-                value = onchange_result.get('value', {})
-                for name, val in value.iteritems():
-                    if isinstance(val, tuple):
-                        value[name] = val[0]
-                new_line_vals.update(value)
-                new_line = self.env['sale.order.line'].create(new_line_vals)
+                new_line = self.env['sale.order.line'].new(new_line_vals)
+                new_line.product_id_change()
+                new_line.gt_zone_change()
+                line_vals = new_line._convert_to_write(
+                    new_line._cache)
+
+                new_line = self.env['sale.order.line'].create(line_vals)
         action = self.env.ref('sale.action_orders').read()[0]
         action['domain'] = "[('id', '=', " + str(new_order.id) + ")]"
         return action
