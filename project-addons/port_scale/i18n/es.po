@@ -253,7 +253,7 @@ msgstr "Nombre a mostrar"
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_dock
 msgid "Dock"
-msgstr "Muelle"
+msgstr "Atraque"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_docking_state
