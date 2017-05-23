@@ -14,7 +14,8 @@
     'depends': [
         'base',
         'web',
-        'web_digital_sign'
+        'web_digital_sign',
+        'web_tree_dynamic_colored_field'
     ],
     'data': [
         'wizard/scale_quality.xml',

@@ -192,9 +192,9 @@ msgid "Ship"
 msgstr "Buque"
 
 #. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_tug_number
-msgid "Tug number"
-msgstr "Número remolcadores"
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_tugs
+msgid "Tugs"
+msgstr "Remolcadores"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_type

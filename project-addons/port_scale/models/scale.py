@@ -4,13 +4,18 @@
 
 from odoo import models, fields
 from datetime import datetime
-from .tug_data import TUG_SELECTOR
+
+
+class PortTug(models.Model):
+    _name = 'port.tug'
+
+    name = fields.Char()
 
 
 class PortScale(models.Model):
 
     _name = 'port.scale'
-    _order = 'eta asc'
+    _order = 'eta desc'
 
     name = fields.Char('Nº escala')
     ship = fields.Many2one('ship', required=True)
@@ -26,9 +31,6 @@ class PortScale(models.Model):
     etd = fields.Datetime()
     scale_state = fields.Char()  # selection?
     fondeo_previo = fields.Boolean()
-    docking_state = fields.Selection(
-        (('a', 'a'), ('b', 'b')))  # ???
-    docking = fields.Char()
     observaciones = fields.Char()
     dock = fields.Many2one('port.dock')
     state = fields.Selection(
@@ -46,10 +48,11 @@ class PortScale(models.Model):
     quality_signature = fields.Binary()
     quality_service_satisfaction = fields.Integer()
     norays = fields.Char()
-    tug_number = fields.Selection(TUG_SELECTOR)
+    tugs = fields.Many2many('port.tug')
     reten = fields.Boolean()
     load = fields.Char()
     load_qty = fields.Float()
+    departure_authorization = fields.Boolean()
 
     def start_docking(self):
         self.docking_start_time = datetime.now()

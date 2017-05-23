@@ -10,20 +10,18 @@
             <field name="model">port.scale</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree colors="green:scale_state=='AUTORIZADO';orange:scale_state in ('AUTORIZADA CAP','AUTORIZADA AP' ) ">
                     <field name="name"/>
-                    <field name="ship"/>
+                    <field name="ship" fg_color="#1d2168:True;"/>
                     <field name="eta"/>
                     <field name="origin"/>
                     <field name="operation"/>
                     <field name="draft"/>
                     <field name="dock"/>
+                    <field name="norays"/>
                     <field name="gt"/>
                     <field name="scale_state"/>
                     <field name="fondeo_previo"/>
-                    <field name="docking_state"/>
-                    <field name="docking"/>
-                    <field name="norays"/>
                     <field name="observaciones"/>
                     <field name="docking_start_time" invisible="1"/>
                     <field name="docking_end_time" invisible="1"/>
@@ -39,6 +37,29 @@
                         attrs="{'invisible': ['|', ('anchor_start_time', '=', False), ('anchor_end_time', '!=', False)]}"/>
                     <button name="anchor_without_coast_pilot" type="object" icon="fa-anchor"
                         attrs="{'invisible': [('anchor_start_time', '!=', False)]}"/-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="port_scale_view_departure_tree" model="ir.ui.view">
+            <field name="name">port.scale.departure.tree</field>
+            <field name="model">port.scale</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="ship"  fg_color="#1d2168:True;"/>
+                    <field name="etd"/>
+                    <field name="operation"/>
+                    <field name="dock"/>
+                    <field name="norays"/>
+                    <field name="gt"/>
+                    <field name="departure_authorization"/>
+                    <field name="observaciones"/>
+                    <field name="docking_start_time" invisible="1"/>
+                    <field name="docking_end_time" invisible="1"/>
+                    <field name="anchor_start_time" invisible="1"/>
+                    <field name="anchor_end_time" invisible="1"/>
                 </tree>
             </field>
         </record>
@@ -85,7 +106,7 @@
                                 <field name="operation"/>
                                 <field name="draft"/>
                                 <field name="norays"/>
-                                <field name="tug_number"/>
+                                <field name="tugs" widget="many2many_tags" options="{'no_create_edit': True}"/>
                                 <field name="load"/>
                                 <field name="load_qty"/>
                             </group>
@@ -95,9 +116,8 @@
                                 <field name="etd"/>
                                 <field name="scale_state"/>
                                 <field name="fondeo_previo"/>
-                                <field name="docking_state"/>
-                                <field name="docking"/>
                                 <field name="observaciones"/>
+                                <field name="departure_authorization"/>
                                 <field name="reten"/>
                                 <field name="docking_start_time"/>
                                 <field name="docking_end_time"/>
@@ -137,6 +157,13 @@
             <field name="view_mode">tree,form</field>
         </record>
 
+        <record id="port_tug_action" model="ir.actions.act_window">
+            <field name="name">Port Tugs</field>
+            <field name="res_model">port.tug</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
         <menuitem name="Traffic management"
             id="port_management_menu"
             web_icon="port_scale,static/description/icon.png"/>
@@ -148,6 +175,7 @@
             id="port_managament_submenu" parent="port_management_menu" sequence="1"/>
 
         <menuitem name="Port docks" parent="port_management_configuration_menu" action="port_dock_action" id="port_dock_menu"/>
+        <menuitem name="Port tugs" parent="port_management_configuration_menu" action="port_tug_action" id="port_tug_menu"/>
 
         <record id="port_scale_input_action" model="ir.actions.act_window">
             <field name="name">Input</field>
@@ -176,7 +204,7 @@
             <field name="res_model">port.scale</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="port_scale_view_tree"/>
+            <field name="view_id" ref="port_scale_view_departure_tree"/>
             <field name="search_view_id" ref="port_scale_view_search"/>
             <field name="domain">[('state', '=', 'departure')]</field>
         </record>

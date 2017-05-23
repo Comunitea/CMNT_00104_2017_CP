@@ -21,6 +21,16 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_tug_action
+msgid "Port Tugs"
+msgstr "Remolcadores"
+
+#. module: port_scale
+#: model:ir.ui.menu,name:port_scale.port_tug_menu
+msgid "Port tugs"
+msgstr "Remolcadores"
+
+#. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_load
 msgid "Load"
 msgstr "Carga"
@@ -84,9 +94,9 @@ msgid "Done"
 msgstr "Finalizado"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_tug_number
-msgid "Tug number"
-msgstr "Número remolcadores"
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_tugs
+msgid "Tugs"
+msgstr "Remolcadores"
 
 
 #. module: port_scale
@@ -310,6 +320,7 @@ msgstr "MMSI"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_dock_name
+#: model:ir.model.fields,field_description:port_scale.field_port_tug_name
 #: model:ir.model.fields,field_description:port_scale.field_ship_name
 msgid "Name"
 msgstr "Nombre"
