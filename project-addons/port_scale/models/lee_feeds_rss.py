@@ -29,6 +29,7 @@ def main():
     rss = 'http://servizos.meteogalicia.gal/rss/predicion/rssMareas.action?request_locale=es'
     parse_dict = feedparser.parse(rss)
     mareas_dict = {}
+    #Por cada puerto tenemos que tener un diccionario con 2 horas distintas de Pleamar y 2 horas distintas de Bajamar
     for entry in parse_dict['entries']:
         #print "***%s****"%(entry['link'])
         url_link = entry['link']
@@ -49,7 +50,6 @@ def main():
 
         mareas_as_string =mareas_as_string[mareas_as_string.find("</thead>")+8:]
         estado_mareas =  mareas_as_string[mareas_as_string.find("<td>")+4:mareas_as_string.find("</td>")]
-
         if estado_mareas not in port_dict.keys():
             port_dict[estado_mareas] = []
 
@@ -71,7 +71,6 @@ def main():
         mareas_as_string =mareas_as_string[mareas_as_string.find("</td>")+5:]
         altura_2_mareas = mareas_as_string[mareas_as_string.find("<td>")+4:mareas_as_string.find("</td>")]
 
-
         if estado_2_mareas not in port_dict.keys():
             port_dict[estado_2_mareas] = [(hora_2_mareas,altura_2_mareas)]
         else:
@@ -86,12 +85,25 @@ def main():
         mareas_as_string =mareas_as_string[mareas_as_string.find("</td>")+5:]
         altura_3_mareas = mareas_as_string[mareas_as_string.find("<td>")+4:mareas_as_string.find("</td>")]
 
-
         if estado_3_mareas not in port_dict.keys():
             port_dict[estado_3_mareas] = [(hora_3_mareas,altura_3_mareas)]
         else:
             port_dict[estado_3_mareas].append((hora_3_mareas,altura_3_mareas))
-        port_dict['Pleamar'].append(('23:50', '2.2'))
+
+        mareas_as_string =mareas_as_string[mareas_as_string.find("</td>")+5:]
+        estado_4_mareas = mareas_as_string[mareas_as_string.find("<td>")+4:mareas_as_string.find("</td>")]
+
+        mareas_as_string =mareas_as_string[mareas_as_string.find("</td>")+5:]
+        hora_4_mareas = mareas_as_string[mareas_as_string.find("<td>")+4:mareas_as_string.find("</td>")]
+
+        mareas_as_string =mareas_as_string[mareas_as_string.find("</td>")+5:]
+        altura_4_mareas = mareas_as_string[mareas_as_string.find("<td>")+4:mareas_as_string.find("</td>")]
+
+        if estado_4_mareas not in port_dict.keys():
+            port_dict[estado_4_mareas] = [(hora_4_mareas,altura_4_mareas)]
+        else:
+            port_dict[estado_4_mareas].append((hora_4_mareas,altura_4_mareas))
+
         mareas_dict[dict_key] = port_dict
     return mareas_dict
 
