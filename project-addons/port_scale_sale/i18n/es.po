@@ -185,11 +185,11 @@ msgid "Scale"
 msgstr "Escala"
 
 #. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_account_invoice_ship
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_ship
-#: model:ir.ui.view,arch_db:port_scale_sale.account_invoice_search_add_ship
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_ship
 msgid "Ship"
 msgstr "Buque"
+
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_tugs

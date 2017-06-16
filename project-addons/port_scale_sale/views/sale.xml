@@ -22,5 +22,27 @@
             </field>
         </record>
 
+        <record id="view_quotation_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <tree position="attributes">
+                    <attribute name="colors">gray:state == 'cancel'; blue:state == 'sale'; green:state =='done'</attribute>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_order_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <tree position="attributes">
+                    <attribute name="colors">gray:state == 'cancel'; blue:state == 'sale'; green:state =='done'</attribute>
+                </tree>
+            </field>
+        </record>
+
     </data>
 </odoo>

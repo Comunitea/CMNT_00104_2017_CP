@@ -26,6 +26,11 @@ msgid "Port Tugs"
 msgstr "Remolcadores"
 
 #. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_departure_authorization
+msgid "Departure authorization"
+msgstr "Salida autorizada"
+
+#. module: port_scale
 #: model:ir.ui.menu,name:port_scale.port_tug_menu
 msgid "Port tugs"
 msgstr "Remolcadores"
@@ -44,6 +49,11 @@ msgstr "Cantidad de carga"
 #: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_signature
 msgid "Signature"
 msgstr "Firma"
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.scale_quality_action
+msgid "Scale quality"
+msgstr "Cuestionario de calidad"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_undocking_end_time
