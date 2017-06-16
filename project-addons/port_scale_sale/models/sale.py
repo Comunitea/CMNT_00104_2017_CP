@@ -28,7 +28,8 @@ class SaleOrder(models.Model):
             'price_unit': 0.0,
             'order_id': self.id,
             'product_uom': False,
-            'sequence': 100
+            'sequence': 100,
+            'zone': self.zone
         }
         new_line = self.env['sale.order.line']
         specs = new_line._onchange_spec()
