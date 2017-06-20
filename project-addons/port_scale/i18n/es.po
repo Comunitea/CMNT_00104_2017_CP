@@ -16,6 +16,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_dock_side
+msgid "Dock side"
+msgstr "Costado de atraque"
+
+#. module: port_scale
 #: model:ir.ui.view,arch_db:port_scale.scale_quality_form
 msgid "Cancel"
 msgstr "Cancelar"
