@@ -42,6 +42,7 @@
 
         <act_window name="Create sale order"
             res_model="port.scale.create.order"
+            src_model="port.scale"
             view_id="port_scale_create_order_form"
             view_mode="form"
             target="new"
