@@ -18,6 +18,7 @@ class PortScale(models.Model):
     _order = 'eta desc'
 
     name = fields.Char('Nº escala')
+    active = fields.Boolean(default=True)
     ship = fields.Many2one('ship', required=True)
     gt = fields.Integer("GT", related="ship.gt", readonly=True)
     origin = fields.Char()

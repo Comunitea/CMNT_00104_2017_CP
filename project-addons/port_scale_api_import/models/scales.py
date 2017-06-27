@@ -126,9 +126,8 @@ class PortScale(models.Model):
             if scale_element.findtext('DESPACHO_SALIDA'):
                 scale_vals['departure_authorization'] = self.BOOL_API[
                     scale_element.findtext('DESPACHO_SALIDA')]
-
             created_scale = self.env['port.scale'].search(
-                [('name', '=', scale_vals['name'])])
+                [('name', '=', scale_vals['name']), '|', ('active', '=', True), ('active', '=', False)])
             if created_scale:
                 created_scale.write(scale_vals)
             else:

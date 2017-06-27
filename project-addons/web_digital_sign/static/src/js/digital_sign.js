@@ -115,10 +115,8 @@ odoo.define('web_digital_sign.web_digital_sign',function(require){
             });
             if (self.options.size) {
                 var canvas = $(this.$el[0]).find(".kbw-signature canvas")
-                canvas.css("height", self.options.size[1] + "vh")
-                canvas.css("width", self.options.size[0] + "vw")
-                $img.css("width", "" + self.options.size[0] + "vw");
-                $img.css("height", "" + self.options.size[1] + "vh");
+                canvas.attr('height', self.options.size[1]);
+                canvas.attr('width', self.options.size[0]);
             }
             $img.on('error', function() {
                 self.on_clear();
