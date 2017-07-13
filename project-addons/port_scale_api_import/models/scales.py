@@ -93,6 +93,8 @@ class PortScale(models.Model):
                 scale_vals['load'] = scale_element.findtext('CARGA')
             if scale_element.findtext('CANTIDAD'):
                 scale_vals['load_qty'] = scale_element.findtext('CANTIDAD')
+            if scale_element.findtext('COSTADO_ATRAQUE'):
+                scale_vals['dock_side'] = scale_element.findtext('COSTADO_ATRAQUE')
 
             created_ship = False
             if ship_vals.get('imo', False):
