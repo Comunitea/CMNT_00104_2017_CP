@@ -2,7 +2,7 @@
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields
+from odoo import models, fields, api
 from datetime import datetime
 
 
@@ -87,3 +87,7 @@ class PortScale(models.Model):
 
     def end_change_docking(self):
         self.change_docking_end_time = datetime.now()
+
+    @api.multi
+    def unlink(self):
+        return self.write({'active': False})

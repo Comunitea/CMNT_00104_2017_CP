@@ -6,6 +6,7 @@ from zeep import Client
 from lxml import etree
 import logging
 from odoo import models, api
+from datetime import datetime, timedelta
 
 _logger = logging.getLogger(__name__)
 
@@ -26,6 +27,17 @@ class PortScale(models.Model):
         'N': False,
         'S': True
     }
+
+    def parse_api_datetime(self, datetime_str):
+        # Pasamos a gmt
+        ret = datetime.strptime(datetime_str[0:19], '%Y-%m-%dT%H:%M:%S')
+        if datetime_str[19] == '+':
+            ret -= timedelta(
+                hours=int(datetime_str[20:22]), minutes=int(datetime_str[23:]))
+        elif datetime_str[18] == '-':
+            ret += timedelta(
+                hours=int(datetime_str[19:22]), minutes=int(datetime_str[23:]))
+        return ret
 
     @api.model
     def import_api_data(self):
@@ -48,11 +60,17 @@ class PortScale(models.Model):
             ship_vals = {
                 'name': scale_element.findtext('BUQUE'),
             }
+            eta = etd = ''
+            if scale_element.findtext('ETA'):
+                eta = self.parse_api_datetime(scale_element.findtext('ETA'))
+            if scale_element.findtext('ETD'):
+                etd = self.parse_api_datetime(scale_element.findtext('ETD'))
+
             scale_vals = {
                 'name': scale_element.findtext('NUM_ESCALA'),
                 'scale_state': scale_element.findtext('ESTADO'),
-                'eta': scale_element.findtext('ETA'),
-                'etd': scale_element.findtext('ETD'),
+                'eta': eta,
+                'etd': etd,
                 'origin': scale_element.findtext('PUERTO_ANTERIOR'),
             }
 
@@ -129,7 +147,8 @@ class PortScale(models.Model):
                 scale_vals['departure_authorization'] = self.BOOL_API[
                     scale_element.findtext('DESPACHO_SALIDA')]
             created_scale = self.env['port.scale'].search(
-                [('name', '=', scale_vals['name']), '|', ('active', '=', True), ('active', '=', False)])
+                [('name', '=', scale_vals['name']), '|',
+                 ('active', '=', True), ('active', '=', False)])
             if created_scale:
                 created_scale.write(scale_vals)
             else:
