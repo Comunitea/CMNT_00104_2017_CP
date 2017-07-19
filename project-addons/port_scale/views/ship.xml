@@ -45,6 +45,7 @@
                             <group>
                                 <field name="name"/>
                                 <field name="partner_id"/>
+                                <field name="partner_name"/>
                                 <field name="country"/>
                                 <field name="gt"/>
                             </group>

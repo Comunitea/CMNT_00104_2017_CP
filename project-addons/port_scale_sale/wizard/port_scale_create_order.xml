@@ -23,6 +23,7 @@
                         </group>
                         <group>
                             <field name="gt"/>
+                            <field name="partner_name"/>
                             <field name="partner_id"/>
                             <field name="user_id"/>
                             <field name="tugs" widget="many2many_tags"/>

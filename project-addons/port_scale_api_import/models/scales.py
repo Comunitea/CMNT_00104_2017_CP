@@ -73,7 +73,7 @@ class PortScale(models.Model):
                 'etd': etd,
                 'origin': scale_element.findtext('PUERTO_ANTERIOR'),
             }
-
+            ship_vals['partner_name'] = scale_element.findtext('CONSIGNATARIO')
             partner = self.env['res.partner'].search(
                 [('name', '=', scale_element.findtext('CONSIGNATARIO'))])
             if partner:

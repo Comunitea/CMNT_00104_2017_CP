@@ -18,6 +18,7 @@ class Ship(models.Model):
     scales = fields.One2many('port.scale', 'ship')
     scales_count = fields.Integer(compute='_get_scales_count')
     gt = fields.Integer("GT")
+    partner_name = fields.Char('Nombre del consignatario')
 
     @api.depends('scales')
     def _get_scales_count(self):

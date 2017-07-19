@@ -15,7 +15,7 @@
                     <field name="ship" fg_color="#1d2168:True;"/>
                     <field name="eta"/>
                     <field name="origin"/>
-                    <field name="partner_id"/>
+                    <field name="partner_name"/>
                     <field name="draft"/>
                     <field name="dock"/>
                     <field name="gt"/>
@@ -99,7 +99,7 @@
                         <group>
                             <group>
                                 <field name="ship"/>
-                                <field name="partner_id"/>
+                                <field name="partner_name"/>
                                 <field name="name"/>
                                 <field name="gt"/>
                                 <field name="origin"/>
