@@ -143,9 +143,9 @@ class PortScale(models.Model):
                 scale_vals['dock'] = created_dock.id
             if scale_element.findtext('NORAYS'):
                 scale_vals['norays'] = scale_element.findtext('NORAYS')
-            if scale_element.findtext('DESPACHO_SALIDA'):
+            if scale_element.findtext('DESPACHADO_SALIDA'):
                 scale_vals['departure_authorization'] = self.BOOL_API[
-                    scale_element.findtext('DESPACHO_SALIDA')]
+                    scale_element.findtext('DESPACHADO_SALIDA')]
             created_scale = self.env['port.scale'].search(
                 [('name', '=', scale_vals['name']), '|',
                  ('active', '=', True), ('active', '=', False)])
