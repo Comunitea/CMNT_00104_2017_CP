@@ -17,7 +17,7 @@
                 <p>DECLARA QUE</p>
                 <p>De los datos obrantes en esta empresa Consignataria, el/los buque/s citado/s se encuentra/n afectado/s a la Navegación Marítima Internacional.</p>
                 <p>Lo que certifico a los efectos de documentar y acreditar la exención del IVA en los términos y actos que procedan según la legislación vigente en la materia.</p>
-                <p class="text-center"><span t-field="o.partner_id.city"/> a <span t-esc="time.strftime('%d de %B de %Y', time.strptime(o.date_invoice,'%Y-%m-%d'))"/></p>
+                <p class="text-center"><span t-field="o.partner_id.city"/> a <t t-if="o.date_invoice"><span t-esc="time.strftime('%d de %B de %Y', time.strptime(o.date_invoice,'%Y-%m-%d'))"/></t></p>
             </div>
         </template>
 
