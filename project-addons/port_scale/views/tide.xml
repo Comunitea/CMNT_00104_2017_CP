@@ -13,9 +13,13 @@
                 <tree editable="top">
                     <field name="date"/>
                     <field name="bajamar_1"/>
+                    <field name="altura_bajamar_1"/>
                     <field name="bajamar_2"/>
+                    <field name="altura_bajamar_2"/>
                     <field name="pleamar_1"/>
+                    <field name="altura_pleamar_1"/>
                     <field name="pleamar_2"/>
+                    <field name="altura_pleamar_2"/>
                 </tree>
             </field>
         </record>
