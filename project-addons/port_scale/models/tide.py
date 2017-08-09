@@ -44,13 +44,22 @@ class PortTide(models.Model):
             'date': date.today(),
             'bajamar_1': tide_list['Bajamar'][0][0],
             'altura_bajamar_1': tide_list['Bajamar'][0][1],
-            'bajamar_2': tide_list['Bajamar'][1][0],
-            'altura_bajamar_2': tide_list['Bajamar'][1][1],
             'pleamar_1': tide_list['Pleamar'][0][0],
             'altura_pleamar_1': tide_list['Pleamar'][0][1],
-            'pleamar_2': tide_list['Pleamar'][1][0],
-            'altura_pleamar_2': tide_list['Pleamar'][1][1],
         }
+        if len(tide_list['Bajamar']) > 1:
+            vals['bajamar_2'] = tide_list['Bajamar'][1][0]
+            vals['altura_bajamar_2'] = tide_list['Bajamar'][1][1]
+        else:
+            vals['bajamar_2'] = '-'
+            vals['altura_bajamar_2'] = '-'
+        if len(tide_list['Pleamar']) > 1:
+            vals['pleamar_2'] = tide_list['Pleamar'][1][0]
+            vals['altura_pleamar_2'] = tide_list['Pleamar'][1][1]
+        else:
+            vals['pleamar_2'] = '-'
+            vals['altura_pleamar_2'] = '-'
+
         exist_tide = self.env['port.tide'].search(
             [('date', '=', date.today())])
         if exist_tide:
