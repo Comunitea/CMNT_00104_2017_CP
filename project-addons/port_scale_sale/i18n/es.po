@@ -73,7 +73,7 @@ msgstr "Crear pedido"
 #. module: port_scale_sale
 #: model:ir.actions.act_window,name:port_scale_sale.port_scale_create_order_action
 msgid "Create sale order"
-msgstr "Crear pedido de venta"
+msgstr "Crear albarán"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_create_uid

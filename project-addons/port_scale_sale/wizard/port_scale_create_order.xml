@@ -28,7 +28,7 @@
                             <field name="user_id"/>
                             <field name="tugs" widget="many2many_tags"/>
                             <field name="pricelist"/>
-                            <field name="fiscal_position"/>
+                            <field name="fiscal_position" domain="[('id', 'in', (%(l10n_es.1_fp_extra)d, %(l10n_es.1_fp_nacional)d))]"/>
                             <field name="reten"/>
                         </group>
                     </group>

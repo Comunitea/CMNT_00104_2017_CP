@@ -12,6 +12,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     scale = fields.Many2one('port.scale', required=True)
+    ship = fields.Many2one('ship', related='scale.ship')
     coast_pilot = fields.Many2one('res.users')
     operation_start_time = fields.Datetime()
     operation_end_time = fields.Datetime()
@@ -21,9 +22,9 @@ class SaleOrder(models.Model):
          ('move', 'Move'),
          ('in', 'In')))
 
-    def impute_fault(self):
+    def _impute(self, product_id, percent):
         new_line_vals = {
-            'product_id': self.env.ref('port_scale_sale.product_fault').id,
+            'product_id': product_id,
             'product_uom_qty': 1,
             'price_unit': 0.0,
             'order_id': self.id,
@@ -40,8 +41,15 @@ class SaleOrder(models.Model):
             if isinstance(val, tuple):
                 value[name] = val[0]
         new_line_vals.update(value)
-        new_line_vals['price_unit'] = self.amount_untaxed
+        new_line_vals['price_unit'] = self.amount_untaxed * percent
         new_line = self.env['sale.order.line'].create(new_line_vals)
+
+    def impute_fault(self):
+        self._impute(self.env.ref('port_scale_sale.product_fault').id, 1)
+
+
+    def desembarque_ria(self):
+        self._impute(self.env.ref('port_scale_sale.product_desembarque_ria').id, 0.5)
 
     @api.multi
     def action_invoice_create(self, grouped=False, final=False):
@@ -115,3 +123,14 @@ class SaleOrder(models.Model):
         elif self._context.get('group_invoices', False) == 'partner':
             grouped = False
         return super(SaleOrder, self).action_invoice_create(grouped, final)
+
+
+class SaleOrderLine(models.Model):
+
+    _inherit = 'sale.order.line'
+
+    @api.multi
+    def _prepare_invoice_line(self, qty):
+        res = super(SaleOrderLine, self)._prepare_invoice_line(qty)
+        res['name'] += ' %s' % self.order_id.ship.name
+        return res

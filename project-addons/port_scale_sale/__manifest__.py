@@ -14,7 +14,8 @@
     'depends': [
         'base',
         'port_scale',
-        'sale'
+        'sale',
+        'l10n_es'
     ],
     'data': [
         'data/product.xml',

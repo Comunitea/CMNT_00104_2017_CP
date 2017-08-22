@@ -11,7 +11,8 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <header position="inside">
-                    <button name="impute_fault" type="object" string="Impute fault"/>
+                    <button name="impute_fault" type="object" string="Impute fault" states="draft,sent"/>
+                    <button name="desembarque_ria" type="object" string="Desembarque ría de Ares" states="draft,sent"/>
                 </header>
                 <field name="partner_id" position="after">
                     <field name="scale"/>
@@ -30,6 +31,12 @@
                 <tree position="attributes">
                     <attribute name="colors">gray:state == 'cancel'; blue:state == 'sale'; green:state =='done'</attribute>
                 </tree>
+                <field name="user_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="user_id" position="after">
+                    <field name="ship"/>
+                </field>
             </field>
         </record>
 
@@ -41,6 +48,12 @@
                 <tree position="attributes">
                     <attribute name="colors">gray:state == 'cancel'; blue:state == 'sale'; green:state =='done'</attribute>
                 </tree>
+                <field name="user_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="user_id" position="after">
+                    <field name="ship"/>
+                </field>
             </field>
         </record>
 

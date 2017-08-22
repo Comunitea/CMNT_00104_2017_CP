@@ -55,7 +55,23 @@ class PortScale(models.Model):
     load_qty = fields.Float()
     departure_authorization = fields.Boolean()
     dock_side = fields.Char()
-    partner_name = fields.Char('Consignatario', related='ship.partner_name', readonly=True)
+    partner_name = fields.Char('Consignatario')
+    partner_id = fields.Many2one('res.partner', 'Consignatario')
+    input_request_date = fields.Datetime()
+    anchoring_request_date = fields.Datetime()
+    departure_request_date = fields.Datetime()
+
+    @api.multi
+    def set_input_request_date(self):
+        self.input_request_date = datetime.now()
+
+    @api.multi
+    def set_anchoring_request_date(self):
+        self.anchoring_request_date = datetime.now()
+
+    @api.multi
+    def set_departure_request_date(self):
+        self.departure_request_date = datetime.now()
 
     def start_docking(self):
         self.docking_start_time = datetime.now()

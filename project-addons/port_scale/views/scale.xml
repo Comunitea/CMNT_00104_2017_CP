@@ -3,252 +3,324 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-    <data>
+    <record id="port_scale_input_view_tree" model="ir.ui.view">
+        <field name="name">port.scale.tree</field>
+        <field name="model">port.scale</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree colors="green:scale_state=='AUTORIZADO' or departure_authorization!=False;orange:scale_state in ('AUTORIZADA CAP','AUTORIZADA AP' ) ">
+                <field name="departure_authorization" invisible="1"/>
+                <field name="name"/>
+                <field name="ship" fg_color="#1d2168:True;"/>
+                <field name="eta"/>
+                <field name="origin"/>
+                <field name="partner_name"/>
+                <field name="draft"/>
+                <field name="dock"/>
+                <field name="gt"/>
+                <field name="scale_state"/>
+                <field name="fondeo_previo"/>
+                <field name="observaciones"/>
+                <field name="input_request_date" string="Request date"/>
+                <button name="set_input_request_date" type="object" icon="fa-clock-o" string="Set request dates" attrs="{'invisible': [('input_request_date', '!=', False)]}"/>
+            </tree>
+        </field>
+    </record>
 
-        <record id="port_scale_view_tree" model="ir.ui.view">
-            <field name="name">port.scale.tree</field>
-            <field name="model">port.scale</field>
-            <field name="type">tree</field>
-            <field name="arch" type="xml">
-                <tree colors="green:scale_state=='AUTORIZADO';orange:scale_state in ('AUTORIZADA CAP','AUTORIZADA AP' ) ">
-                    <field name="name"/>
-                    <field name="ship" fg_color="#1d2168:True;"/>
-                    <field name="eta"/>
-                    <field name="origin"/>
-                    <field name="partner_name"/>
-                    <field name="draft"/>
-                    <field name="dock"/>
-                    <field name="gt"/>
-                    <field name="scale_state"/>
-                    <field name="fondeo_previo"/>
-                    <field name="observaciones"/>
-                    <field name="docking_start_time" invisible="1"/>
-                    <field name="docking_end_time" invisible="1"/>
-                    <field name="anchor_start_time" invisible="1"/>
-                    <field name="anchor_end_time" invisible="1"/>
-                    <!--button name="start_docking" type="object" icon="fa-anchor"
-                        attrs="{'invisible': [('docking_start_time', '!=', False)]}"/>
-                    <button name="end_docking" type="object" icon="fa-anchor"
-                        attrs="{'invisible': ['|', ('docking_start_time', '=', False), ('docking_end_time', '!=', False)]}"/>
-                    <button name="start_anchor" type="object" icon="fa-anchor"
-                        attrs="{'invisible': [('anchor_start_time', '!=', False)]}"/>
-                    <button name="end_anchor" type="object" icon="fa-anchor"
-                        attrs="{'invisible': ['|', ('anchor_start_time', '=', False), ('anchor_end_time', '!=', False)]}"/>
-                    <button name="anchor_without_coast_pilot" type="object" icon="fa-anchor"
-                        attrs="{'invisible': [('anchor_start_time', '!=', False)]}"/-->
-                </tree>
-            </field>
-        </record>
+    <record id="port_scale_anchoring_view_tree" model="ir.ui.view">
+        <field name="name">port.scale.tree</field>
+        <field name="model">port.scale</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree colors="green:scale_state=='AUTORIZADO' or departure_authorization!=False;orange:scale_state in ('AUTORIZADA CAP','AUTORIZADA AP' ) ">
+                <field name="departure_authorization" invisible="1"/>
+                <field name="name"/>
+                <field name="ship" fg_color="#1d2168:True;"/>
+                <field name="eta"/>
+                <field name="origin"/>
+                <field name="partner_name"/>
+                <field name="draft"/>
+                <field name="dock"/>
+                <field name="gt"/>
+                <field name="scale_state"/>
+                <field name="fondeo_previo"/>
+                <field name="observaciones"/>
+                <field name="anchoring_request_date" string="Request date"/>
+                <button name="set_anchoring_request_date" type="object" icon="fa-clock-o" string="Set request dates" attrs="{'invisible': [('anchoring_request_date', '!=', False)]}"/>
+            </tree>
+        </field>
+    </record>
 
-        <record id="port_scale_view_departure_tree" model="ir.ui.view">
-            <field name="name">port.scale.departure.tree</field>
-            <field name="model">port.scale</field>
-            <field name="type">tree</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="name"/>
-                    <field name="ship"  fg_color="#1d2168:True;"/>
-                    <field name="etd"/>
-                    <field name="operation"/>
-                    <field name="dock"/>
-                    <field name="norays"/>
-                    <field name="gt"/>
-                    <field name="departure_authorization"/>
-                    <field name="observaciones"/>
-                    <field name="docking_start_time" invisible="1"/>
-                    <field name="docking_end_time" invisible="1"/>
-                    <field name="anchor_start_time" invisible="1"/>
-                    <field name="anchor_end_time" invisible="1"/>
-                </tree>
-            </field>
-        </record>
+    <record id="port_scale_departure_view_tree" model="ir.ui.view">
+        <field name="name">port.scale.tree</field>
+        <field name="model">port.scale</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree colors="green:scale_state=='AUTORIZADO' or departure_authorization!=False;orange:scale_state in ('AUTORIZADA CAP','AUTORIZADA AP' ) ">
+                <field name="departure_authorization" invisible="1"/>
+                <field name="name"/>
+                <field name="ship" fg_color="#1d2168:True;"/>
+                <field name="eta"/>
+                <field name="origin"/>
+                <field name="partner_name"/>
+                <field name="draft"/>
+                <field name="dock"/>
+                <field name="gt"/>
+                <field name="scale_state"/>
+                <field name="fondeo_previo"/>
+                <field name="observaciones"/>
+                <field name="departure_request_date" string="Request date"/>
+                <button name="set_departure_request_date" type="object" icon="fa-clock-o" string="Set request dates" attrs="{'invisible': [('departure_request_date', '!=', False)]}"/>
+            </tree>
+        </field>
+    </record>
 
-        <record id="port_scale_view_form" model="ir.ui.view">
-            <field name="name">port.scale.form</field>
-            <field name="model">port.scale</field>
-            <field name="type">form</field>
-            <field name="arch" type="xml">
-                <form>
-                    <header>
-                        <button name="start_docking" type="object" string="Start docking"
-                            attrs="{'invisible': ['|', ('state', 'not in', ('input', 'anchoring')), ('docking_start_time', '!=', False)]}"/>
-                        <button name="end_docking" type="object" string="End docking"
-                            attrs="{'invisible': ['|', '|', ('state', 'not in', ('input', 'anchoring')), ('docking_start_time', '=', False), ('docking_end_time', '!=', False)]}"/>
-                        <button name="start_anchor" type="object" string="Start anchor"
-                            attrs="{'invisible': ['|', ('state', '!=', 'input'), ('anchor_start_time', '!=', False)]}"/>
-                        <button name="end_anchor" type="object" string="End anchor"
-                            attrs="{'invisible': ['|', '|', ('state', '!=', 'input'), ('anchor_start_time', '=', False), ('anchor_end_time', '!=', False)]}"/>
-                        <button name="anchor_without_coast_pilot" type="object" string="Anchor without coast pilot"
-                            attrs="{'invisible': ['|', ('state', '!=', 'input'), ('anchor_start_time', '!=', False)]}"/>
+    <record id="port_scale_view_tree" model="ir.ui.view">
+        <field name="name">port.scale.tree</field>
+        <field name="model">port.scale</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree colors="green:scale_state=='AUTORIZADO' or departure_authorization!=False;orange:scale_state in ('AUTORIZADA CAP','AUTORIZADA AP' ) ">
+                <field name="departure_authorization" invisible="1"/>
+                <field name="name"/>
+                <field name="ship" fg_color="#1d2168:True;"/>
+                <field name="eta"/>
+                <field name="origin"/>
+                <field name="partner_name"/>
+                <field name="draft"/>
+                <field name="dock"/>
+                <field name="gt"/>
+                <field name="scale_state"/>
+                <field name="fondeo_previo"/>
+                <field name="observaciones"/>
+            </tree>
+        </field>
+    </record>
 
-                        <button name="start_undocking" type="object" string="Start undocking"
-                            attrs="{'invisible': ['|', ('state', '!=', 'departure'), ('undocking_start_time', '!=', False)]}"/>
-                        <button name="end_undocking" type="object" string="End undocking"
-                            attrs="{'invisible': ['|', '|', ('state', '!=', 'departure'), ('undocking_start_time', '=', False), ('undocking_end_time', '!=', False)]}"/>
-                        <button name="start_change_docking" type="object" string="Start change docking"
-                            attrs="{'invisible': ['|', ('state', '!=', 'departure'), ('change_docking_start_time', '!=', False)]}"/>
-                        <button name="end_change_docking" type="object" string="End change docking"
-                            attrs="{'invisible': ['|', '|', ('state', '!=', 'departure'), ('change_docking_start_time', '=', False), ('change_docking_end_time', '!=', False)]}"/>
+    <record id="port_scale_view_departure_tree" model="ir.ui.view">
+        <field name="name">port.scale.departure.tree</field>
+        <field name="model">port.scale</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="ship"  fg_color="#1d2168:True;"/>
+                <field name="etd"/>
+                <field name="operation"/>
+                <field name="dock"/>
+                <field name="norays"/>
+                <field name="gt"/>
+                <field name="departure_authorization"/>
+                <field name="observaciones"/>
+                <field name="docking_start_time" invisible="1"/>
+                <field name="docking_end_time" invisible="1"/>
+                <field name="anchor_start_time" invisible="1"/>
+                <field name="anchor_end_time" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="port_scale_view_form" model="ir.ui.view">
+        <field name="name">port.scale.form</field>
+        <field name="model">port.scale</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="start_docking" type="object" string="Start docking"
+                        attrs="{'invisible': ['|', ('state', 'not in', ('input', 'anchoring')), ('docking_start_time', '!=', False)]}"/>
+                    <button name="end_docking" type="object" string="End docking"
+                        attrs="{'invisible': ['|', '|', ('state', 'not in', ('input', 'anchoring')), ('docking_start_time', '=', False), ('docking_end_time', '!=', False)]}"/>
+                    <button name="start_anchor" type="object" string="Start anchor"
+                        attrs="{'invisible': ['|', ('state', '!=', 'input'), ('anchor_start_time', '!=', False)]}"/>
+                    <button name="end_anchor" type="object" string="End anchor"
+                        attrs="{'invisible': ['|', '|', ('state', '!=', 'input'), ('anchor_start_time', '=', False), ('anchor_end_time', '!=', False)]}"/>
+                    <button name="anchor_without_coast_pilot" type="object" string="Anchor without coast pilot"
+                        attrs="{'invisible': ['|', ('state', '!=', 'input'), ('anchor_start_time', '!=', False)]}"/>
+
+                    <button name="start_undocking" type="object" string="Start undocking"
+                        attrs="{'invisible': ['|', ('state', '!=', 'departure'), ('undocking_start_time', '!=', False)]}"/>
+                    <button name="end_undocking" type="object" string="End undocking"
+                        attrs="{'invisible': ['|', '|', ('state', '!=', 'departure'), ('undocking_start_time', '=', False), ('undocking_end_time', '!=', False)]}"/>
+                    <button name="start_change_docking" type="object" string="Start change docking"
+                        attrs="{'invisible': ['|', ('state', '!=', 'departure'), ('change_docking_start_time', '!=', False)]}"/>
+                    <button name="end_change_docking" type="object" string="End change docking"
+                        attrs="{'invisible': ['|', '|', ('state', '!=', 'departure'), ('change_docking_start_time', '=', False), ('change_docking_end_time', '!=', False)]}"/>
 
 
-                        <button name="%(port_scale.scale_quality_action)d" type="action" string="Open quality question" />
-                        <field name="state" widget="statusbar" nolabel="1"
-                            statusbar_visible="input,anchoring,departure"/>
-                    </header>
-                    <sheet>
+                    <button name="%(port_scale.scale_quality_action)d" type="action" string="Open quality question" />
+                    <field name="state" widget="statusbar" nolabel="1"
+                        statusbar_visible="input,anchoring,departure"/>
+                </header>
+                <sheet>
+                    <group>
                         <group>
-                            <group>
-                                <field name="ship"/>
-                                <field name="partner_name"/>
-                                <field name="name"/>
-                                <field name="gt"/>
-                                <field name="origin"/>
-                                <field name="operation"/>
-                                <field name="draft"/>
-                                <field name="norays"/>
-                                <field name="dock_side"/>
-                                <field name="tugs" widget="many2many_tags" options="{'no_create_edit': True}"/>
-                                <field name="load"/>
-                                <field name="load_qty"/>
-                            </group>
-                            <group>
-                                <field name="dock"/>
-                                <field name="eta"/>
-                                <field name="etd"/>
-                                <field name="scale_state"/>
-                                <field name="fondeo_previo"/>
-                                <field name="observaciones"/>
-                                <field name="departure_authorization"/>
-                                <field name="reten"/>
-                                <field name="docking_start_time"/>
-                                <field name="docking_end_time"/>
-                                <field name="anchor_start_time"/>
-                                <field name="anchor_end_time"/>
-                                <field name="undocking_start_time"/>
-                                <field name="undocking_end_time"/>
-                                <field name="change_docking_start_time"/>
-                                <field name="change_docking_end_time"/>
-                                <field name="quality_signature" widget="image"/>
-                                <field name="quality_service_satisfaction"/>
-                                <field name="active"/>
-                            </group>
+                            <field name="ship"/>
+                            <field name="partner_name"/>
+                            <field name="partner_id"/>
+                            <field name="name"/>
+                            <field name="gt"/>
+                            <field name="origin"/>
+                            <field name="operation"/>
+                            <field name="draft"/>
+                            <field name="dock"/>
+                            <field name="norays"/>
+                            <field name="dock_side"/>
+                            <field name="tugs" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                            <field name="load"/>
+                            <field name="load_qty"/>
                         </group>
-                    </sheet>
+                        <group>
+                            <field name="eta"/>
+                            <field name="etd"/>
+                            <field name="scale_state"/>
+                            <field name="fondeo_previo"/>
+                            <field name="observaciones"/>
+                            <field name="departure_authorization"/>
+                            <field name="reten"/>
+                            <field name="docking_start_time"/>
+                            <field name="docking_end_time"/>
+                            <field name="anchor_start_time"/>
+                            <field name="anchor_end_time"/>
+                            <field name="undocking_start_time"/>
+                            <field name="undocking_end_time"/>
+                            <field name="change_docking_start_time"/>
+                            <field name="change_docking_end_time"/>
+                            <field name="quality_signature" widget="image"/>
+                            <field name="quality_service_satisfaction"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
 
-                </form>
-            </field>
-        </record>
+            </form>
+        </field>
+    </record>
 
-        <record id="port_scale_view_search" model="ir.ui.view">
-            <field name="name">port.scale.search</field>
-            <field name="model">port.scale</field>
-            <field name="type">search</field>
-            <field name="arch" type="xml">
-                <search>
-                   <field name="ship"/>
-                   <field name="name"/>
-                   <field name="dock"/>
-               </search>
-            </field>
-        </record>
+    <record id="port_scale_view_search" model="ir.ui.view">
+        <field name="name">port.scale.search</field>
+        <field name="model">port.scale</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+               <field name="ship"/>
+               <field name="partner_id"/>
+               <field name="name"/>
+               <field name="dock"/>
+           </search>
+        </field>
+    </record>
 
-        <record id="port_dock_action" model="ir.actions.act_window">
-            <field name="name">Port Docks</field>
-            <field name="res_model">port.dock</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
+    <record model="ir.ui.view" id="view_port_scale_pivot">
+        <field name="name">port.scale.pivot</field>
+        <field name="model">port.scale</field>
+        <field name="arch" type="xml">
+            <pivot string="Scales">
+                <field name="ship" type="row"/>
+                <field name="eta" type="row" interval="day"/>
+                <field name="quality_service_satisfaction" type="measure"/>
+            </pivot>
+        </field>
+    </record>
 
-        <record id="port_tug_action" model="ir.actions.act_window">
-            <field name="name">Port Tugs</field>
-            <field name="res_model">port.tug</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
+    <record id="port_dock_action" model="ir.actions.act_window">
+        <field name="name">Port Docks</field>
+        <field name="res_model">port.dock</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
-        <menuitem name="Traffic management"
-            id="port_management_menu"
-            web_icon="port_scale,static/description/icon.png"/>
+    <record id="port_tug_action" model="ir.actions.act_window">
+        <field name="name">Port Tugs</field>
+        <field name="res_model">port.tug</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
-        <menuitem name="Configuration"
-            id="port_management_configuration_menu" parent="port_management_menu" sequence="5" groups="base.group_system"/>
+    <menuitem name="Traffic management"
+        id="port_management_menu"
+        web_icon="port_scale,static/description/icon.png"/>
 
-        <menuitem name="Traffic management"
-            id="port_managament_submenu" parent="port_management_menu" sequence="1"/>
+    <menuitem name="Configuration"
+        id="port_management_configuration_menu" parent="port_management_menu" sequence="5" groups="base.group_system"/>
 
-        <menuitem name="Port docks" parent="port_management_configuration_menu" action="port_dock_action" id="port_dock_menu"/>
-        <menuitem name="Port tugs" parent="port_management_configuration_menu" action="port_tug_action" id="port_tug_menu"/>
+    <menuitem name="Traffic management"
+        id="port_managament_submenu" parent="port_management_menu" sequence="1"/>
 
-        <record id="port_scale_input_action" model="ir.actions.act_window">
-            <field name="name">Input</field>
-            <field name="res_model">port.scale</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="limit">100</field>
-            <field name="view_id" ref="port_scale_view_tree"/>
-            <field name="search_view_id" ref="port_scale_view_search"/>
-            <field name="domain">[('state', '=', 'input')]</field>
-        </record>
-        <menuitem name="Inputs" parent="port_managament_submenu" action="port_scale_input_action" id="port_scale_input" sequence="1"/>
+    <menuitem name="Port docks" parent="port_management_configuration_menu" action="port_dock_action" id="port_dock_menu"/>
+    <menuitem name="Port tugs" parent="port_management_configuration_menu" action="port_tug_action" id="port_tug_menu"/>
 
-        <record id="port_scale_anchoring_action" model="ir.actions.act_window">
-            <field name="name">Anchoring</field>
-            <field name="res_model">port.scale</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="limit">100</field>
-            <field name="view_id" ref="port_scale_view_tree"/>
-            <field name="search_view_id" ref="port_scale_view_search"/>
-            <field name="domain">[('state', '=', 'anchoring')]</field>
-        </record>
-        <menuitem name="Anchoring" parent="port_managament_submenu" action="port_scale_anchoring_action" id="port_scale_anchoring" sequence="2"/>
+    <record id="port_scale_input_action" model="ir.actions.act_window">
+        <field name="name">Input</field>
+        <field name="res_model">port.scale</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="limit">100</field>
+        <field name="view_id" ref="port_scale_input_view_tree"/>
+        <field name="search_view_id" ref="port_scale_view_search"/>
+        <field name="domain">[('state', '=', 'input')]</field>
+    </record>
+    <menuitem name="Inputs" parent="port_managament_submenu" action="port_scale_input_action" id="port_scale_input" sequence="1"/>
 
-        <record id="port_scale_departure_action" model="ir.actions.act_window">
-            <field name="name">Departure</field>
-            <field name="res_model">port.scale</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="limit">100</field>
-            <field name="view_id" ref="port_scale_view_departure_tree"/>
-            <field name="search_view_id" ref="port_scale_view_search"/>
-            <field name="domain">[('state', '=', 'departure')]</field>
-        </record>
-        <menuitem name="Departures" parent="port_managament_submenu" action="port_scale_departure_action" id="port_scale_departure" sequence="3"/>
+    <record id="port_scale_anchoring_action" model="ir.actions.act_window">
+        <field name="name">Anchoring</field>
+        <field name="res_model">port.scale</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="limit">100</field>
+        <field name="view_id" ref="port_scale_anchoring_view_tree"/>
+        <field name="search_view_id" ref="port_scale_view_search"/>
+        <field name="domain">[('state', '=', 'anchoring')]</field>
+    </record>
+    <menuitem name="Anchoring" parent="port_managament_submenu" action="port_scale_anchoring_action" id="port_scale_anchoring" sequence="2"/>
 
-        <record id="port_scale_done_action" model="ir.actions.act_window">
-            <field name="name">Done</field>
-            <field name="res_model">port.scale</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="limit">100</field>
-            <field name="view_id" ref="port_scale_view_tree"/>
-            <field name="search_view_id" ref="port_scale_view_search"/>
-            <field name="domain">[('state', '=', 'done')]</field>
-        </record>
-        <menuitem name="Done" parent="port_managament_submenu" action="port_scale_done_action" id="port_scale_done" sequence="4"/>
+    <record id="port_scale_departure_action" model="ir.actions.act_window">
+        <field name="name">Departure</field>
+        <field name="res_model">port.scale</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="limit">100</field>
+        <field name="view_id" ref="port_scale_departure_view_tree"/>
+        <field name="search_view_id" ref="port_scale_view_search"/>
+        <field name="domain">[('state', '=', 'departure')]</field>
+    </record>
+    <menuitem name="Departures" parent="port_managament_submenu" action="port_scale_departure_action" id="port_scale_departure" sequence="3"/>
 
-
-        <record id="port_scale_action" model="ir.actions.act_window">
-            <field name="name">Scales</field>
-            <field name="res_model">port.scale</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="limit">100</field>
-            <field name="view_id" ref="port_scale_view_tree"/>
-            <field name="search_view_id" ref="port_scale_view_search"/>
-        </record>
+    <record id="port_scale_done_action" model="ir.actions.act_window">
+        <field name="name">Done</field>
+        <field name="res_model">port.scale</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="limit">100</field>
+        <field name="view_id" ref="port_scale_view_tree"/>
+        <field name="search_view_id" ref="port_scale_view_search"/>
+        <field name="domain">[('state', '=', 'done')]</field>
+    </record>
+    <menuitem name="Done" parent="port_managament_submenu" action="port_scale_done_action" id="port_scale_done" sequence="4"/>
 
 
-        <record id="action_partner_form" model="ir.actions.act_window">
-            <field name="name">Consignatarios</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">res.partner</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="context">{"search_default_customer":1}</field>
-            <field name="search_view_id" ref="base.view_res_partner_filter"/>
-        </record>
+    <record id="port_scale_action" model="ir.actions.act_window">
+        <field name="name">Scales</field>
+        <field name="res_model">port.scale</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="limit">100</field>
+        <field name="view_id" ref="port_scale_view_tree"/>
+        <field name="search_view_id" ref="port_scale_view_search"/>
+    </record>
 
-        <menuitem id="menu_partner" name="Consignatarios" action="action_partner_form" parent="port_management_configuration_menu"/>
-    </data>
+    <menuitem name="All scales" parent="port_managament_submenu" action="port_scale_action" id="port_scale_all" sequence="5"/>
+
+
+    <record id="action_partner_form" model="ir.actions.act_window">
+        <field name="name">Consignatarios</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_customer":1}</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+    </record>
+
+    <menuitem id="menu_partner" name="Consignatarios" action="action_partner_form" parent="port_management_configuration_menu"/>
 </odoo>

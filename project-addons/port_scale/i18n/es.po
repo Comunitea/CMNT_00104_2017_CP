@@ -16,6 +16,30 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_anchoring_view_tree
+#: model:ir.ui.view,arch_db:port_scale.port_scale_departure_view_tree
+#: model:ir.ui.view,arch_db:port_scale.port_scale_input_view_tree
+msgid "Request date"
+msgstr "Fecha de solicitud"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_ship_attachment_count
+msgid "Attachments"
+msgstr "Adjuntos"
+
+#. module: port_scale
+#: model:ir.ui.menu,name:port_scale.port_scale_all
+msgid "All scales"
+msgstr "Todas las escalas"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_anchoring_view_tree
+#: model:ir.ui.view,arch_db:port_scale.port_scale_departure_view_tree
+#: model:ir.ui.view,arch_db:port_scale.port_scale_input_view_tree
+msgid "Set request dates"
+msgstr "Establecer fecha de solicitud"
+
+#. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_dock_side
 msgid "Dock side"
 msgstr "Costado de atraque"
@@ -232,7 +256,7 @@ msgstr "Atraque"
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_draft
 msgid "Draft"
-msgstr "Calado llegada"
+msgstr "Calado"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_ship_callsign
