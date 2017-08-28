@@ -48,6 +48,7 @@ class PortScale(models.Model):
     change_docking_end_time = fields.Datetime()
     quality_signature = fields.Binary()
     quality_service_satisfaction = fields.Integer()
+    quality_sign_date = fields.Date()
     norays = fields.Char()
     tugs = fields.Many2many('port.tug')
     reten = fields.Boolean()

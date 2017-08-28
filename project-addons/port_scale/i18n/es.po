@@ -23,6 +23,11 @@ msgid "Request date"
 msgstr "Fecha de solicitud"
 
 #. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_quality_sign_date
+msgid "Quality sign date"
+msgstr "Fecha cuestionario de calidad"
+
+#. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_ship_attachment_count
 msgid "Attachments"
 msgstr "Adjuntos"

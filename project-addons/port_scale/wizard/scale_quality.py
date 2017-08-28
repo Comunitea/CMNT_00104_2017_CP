@@ -2,6 +2,7 @@
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models, fields, api
+from datetime import date
 
 
 class ScaleQualityWizard(models.TransientModel):
@@ -37,6 +38,8 @@ class ScaleQualityWizard(models.TransientModel):
 
     @api.multi
     def confirm(self, satisfaction):
-        self.scale_id.quality_signature = self.signature
-        self.scale_id.quality_service_satisfaction = satisfaction
+        self.scale_id.write(
+            {'quality_signature': self.signature,
+             'quality_service_satisfaction': satisfaction,
+             'quality_sign_date': date.today()})
         return {'type': 'ir.actions.act_window_close'}

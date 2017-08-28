@@ -188,6 +188,7 @@
                             <field name="change_docking_end_time"/>
                             <field name="quality_signature" widget="image"/>
                             <field name="quality_service_satisfaction"/>
+                            <field name="quality_sign_date"/>
                             <field name="active"/>
                         </group>
                     </group>
