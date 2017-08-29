@@ -147,8 +147,10 @@ class PortScale(models.Model):
                 scale_vals['departure_authorization'] = self.BOOL_API[
                     scale_element.findtext('DESPACHADO_SALIDA')]
             created_scale = self.env['port.scale'].search(
-                [('name', '=', scale_vals['name']), '|',
-                 ('active', '=', True), ('active', '=', False)])
+                [('ship', '=', scale_vals['ship']),
+                 ('eta', '=', scale_vals['eta'].strftime('%Y-%m-%d %H:%M:%S')),
+                 ('etd', '=', scale_vals['etd'].strftime('%Y-%m-%d %H:%M:%S')),
+                 '|', ('active', '=', True), ('active', '=', False)])
             if created_scale:
                 created_scale.write(scale_vals)
             else:
