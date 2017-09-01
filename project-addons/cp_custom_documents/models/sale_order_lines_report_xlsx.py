@@ -20,8 +20,7 @@ class OrderLinesReport(ReportXlsx):
                   u'Barco', u'Bandera', u'G.T.',  u'Remolcadores', u'Práctico',
                   u'Total', u'Muelle']
         sheet.write_row(0, 0, header)
-        type_dict = {'docking': 'Atraque',
-                     'undocking': 'Desatraque',
+        type_dict = {'out': 'Salida',
                      'move': 'Movimiento',
                      'in': 'Entrada'}
         for order in orders:

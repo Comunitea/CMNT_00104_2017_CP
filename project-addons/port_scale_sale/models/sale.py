@@ -17,8 +17,7 @@ class SaleOrder(models.Model):
     operation_start_time = fields.Datetime()
     operation_end_time = fields.Datetime()
     type = fields.Selection(
-        (('docking', 'Docking'),
-         ('undocking', 'Undocking'),
+        (('out', 'Out'),
          ('move', 'Move'),
          ('in', 'In')))
 
