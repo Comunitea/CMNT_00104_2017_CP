@@ -10,6 +10,12 @@ class PortScaleCreateOrder(models.TransientModel):
 
     scale = fields.Many2one('port.scale')
     ship = fields.Many2one('ship', related='scale.ship', required=True)
+    input_request_date = fields.Datetime(related="scale.input_request_date")
+    scale_state = fields.Selection(related="scale.state", readonly=True)
+    anchoring_request_date = fields.\
+        Datetime(related="scale.anchoring_request_date")
+    departure_request_date = fields.\
+        Datetime(related="scale.departure_request_date")
     operation_start_time = fields.Datetime()
     operation_end_time = fields.Datetime()
     country = fields.Many2one('res.country',
@@ -74,6 +80,7 @@ class PortScaleCreateOrder(models.TransientModel):
             'type': self.type,
             'operation_start_time': self.operation_start_time,
             'operation_end_time': self.operation_end_time,
+            'zone': self.zone
         }
         new_order = self.env['sale.order'].create(order_vals)
         if self.type:
@@ -101,4 +108,7 @@ class PortScaleCreateOrder(models.TransientModel):
                 new_line = self.env['sale.order.line'].create(line_vals)
         action = self.env.ref('sale.action_orders').read()[0]
         action['domain'] = "[('id', '=', " + str(new_order.id) + ")]"
+        if self.env.context.get("next_state", False):
+            eval("self.scale." + self.env.context["next_state"],
+                 {'self': self})
         return action

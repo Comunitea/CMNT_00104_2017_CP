@@ -13,9 +13,20 @@ class SaleOrder(models.Model):
 
     scale = fields.Many2one('port.scale', required=True)
     ship = fields.Many2one('ship', related='scale.ship')
+    input_request_date = fields.Datetime(related="scale.input_request_date")
+    scale_state = fields.Selection(related="scale.state", readonly=True)
+    anchoring_request_date = fields.\
+        Datetime(related="scale.anchoring_request_date")
+    departure_request_date = fields.\
+        Datetime(related="scale.departure_request_date")
     coast_pilot = fields.Many2one('res.users')
     operation_start_time = fields.Datetime()
     operation_end_time = fields.Datetime()
+    operation = fields.Selection(
+        (('D', 'disembarkation'),
+         ('E', 'embarkation'),
+         ('T', 'transfer'),
+         ('R', 'scraps')), related="scale.operation", readonly=True)
     type = fields.Selection(
         (('out', 'Out'),
          ('move', 'Move'),

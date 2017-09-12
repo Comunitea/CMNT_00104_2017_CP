@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#   * port_scale_sale
+#       * port_scale_sale
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-17 10:52+0000\n"
-"PO-Revision-Date: 2017-08-30 18:28+0200\n"
-"Last-Translator: Jesús Ventosinos Mayor <jesus@comunitea.com>\n"
+"POT-Creation-Date: 2017-09-12 18:14+0000\n"
+"PO-Revision-Date: 2017-09-12 18:14+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,32 +16,26 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_operation_end_time
-#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_operation_end_time
-msgid "Operation end time"
-msgstr "Fecha fin de operación"
+#: model:product.product,name:port_scale_sale.product_anchoring
+#: model:product.template,name:port_scale_sale.product_anchoring_product_template
+msgid "Amarre/Desamarre"
+msgstr "Amarre/Desamarre"
 
 #. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_operation_start_time
-#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_operation_start_time
-msgid "Operation start time"
-msgstr "Fecha inicio de operación"
-
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_anchoring_request_date
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_anchoring_request_date
+msgid "Anchoring request date"
+msgstr "Fecha solicitud fondeo"
 
 #. module: port_scale_sale
 #: selection:sale.advance.payment.inv,group_invoices:0
 msgid "By partner"
-msgstr "Por cliente"
+msgstr "Por consignatario"
 
 #. module: port_scale_sale
 #: selection:sale.advance.payment.inv,group_invoices:0
 msgid "By ship"
 msgstr "Por barco"
-
-#. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_sale_advance_payment_inv_group_invoices
-msgid "Group invoices"
-msgstr "Agrupar facturas"
 
 #. module: port_scale_sale
 #: model:ir.ui.view,arch_db:port_scale_sale.port_scale_create_order_form
@@ -54,16 +48,16 @@ msgstr "Cancelar"
 msgid "Coast pilot"
 msgstr "Práctico"
 
-
-#. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_zone
-msgid "Zone"
-msgstr "Zona"
-
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_partner_id
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_partner_name
 msgid "Consignatario"
 msgstr "Consignatario"
+
+#. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_country
+msgid "Country"
+msgstr "País"
 
 #. module: port_scale_sale
 #: model:ir.ui.view,arch_db:port_scale_sale.port_scale_create_order_form
@@ -86,25 +80,22 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_departure_request_date
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_departure_request_date
+msgid "Departure request date"
+msgstr "Fecha solicitud desatraque"
+
+#. module: port_scale_sale
+#: model:ir.ui.view,arch_db:port_scale_sale.view_order_form_port_scale
+#: model:product.product,name:port_scale_sale.product_desembarque_ria
+#: model:product.template,name:port_scale_sale.product_desembarque_ria_product_template
+msgid "Desembarque ría de Ares"
+msgstr "Desembarque ría de Ares"
+
+#. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_display_name
 msgid "Display Name"
 msgstr "Nombre a mostrar"
-
-#. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_docking
-#: selection:port.scale.create.order,type:0
-msgid "Docking"
-msgstr "Atraque"
-
-#. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_docking_end_time
-msgid "Docking end time"
-msgstr "Fecha fin atraque"
-
-#. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_docking_start_time
-msgid "Docking start time"
-msgstr "Fecha inicio atraque"
 
 #. module: port_scale_sale
 #: model:product.product,name:port_scale_sale.product_fault
@@ -118,14 +109,14 @@ msgid "Fiscal position"
 msgstr "Posición fiscal"
 
 #. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_country
-msgid "Country"
-msgstr "País"
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_gt
+msgid "GT"
+msgstr "GT"
 
 #. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_gt
-msgid "Gt"
-msgstr "Gt"
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_advance_payment_inv_group_invoices
+msgid "Group invoices"
+msgstr "Agrupar facturas"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_id
@@ -139,13 +130,15 @@ msgstr "Imputar avería"
 
 #. module: port_scale_sale
 #: selection:port.scale.create.order,type:0
+#: selection:sale.order,type:0
 msgid "In"
 msgstr "Entrada"
 
 #. module: port_scale_sale
-#: model:ir.model,name:port_scale_sale.model_account_invoice
-msgid "Invoice"
-msgstr "Factura"
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_input_request_date
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_input_request_date
+msgid "Input request date"
+msgstr "Fecha solicitud atraque"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order___last_update
@@ -164,8 +157,32 @@ msgstr "Última actualización el"
 
 #. module: port_scale_sale
 #: selection:port.scale.create.order,type:0
+#: selection:sale.order,type:0
 msgid "Move"
 msgstr "Movimiento"
+
+#. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_operation
+msgid "Operation"
+msgstr "Operación"
+
+#. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_operation_end_time
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_operation_end_time
+msgid "Operation end time"
+msgstr "Fecha fin de operación"
+
+#. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_operation_start_time
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_operation_start_time
+msgid "Operation start time"
+msgstr "Fecha inicio de operación"
+
+#. module: port_scale_sale
+#: selection:port.scale.create.order,type:0
+#: selection:sale.order,type:0
+msgid "Out"
+msgstr "Salida"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_pricelist
@@ -173,12 +190,26 @@ msgid "Pricelist"
 msgstr "Tarifa"
 
 #. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_reten
+msgid "Reten"
+msgstr "Reten"
+
+#. module: port_scale_sale
+#: model:ir.model,name:port_scale_sale.model_sale_advance_payment_inv
+msgid "Sales Advance Payment Invoice"
+msgstr "Ventas. Anticipo pago factura"
+
+#. module: port_scale_sale
 #: model:ir.model,name:port_scale_sale.model_sale_order
 msgid "Sales Order"
 msgstr "Pedido de venta"
 
 #. module: port_scale_sale
-#: model:ir.model.fields,field_description:port_scale_sale.field_account_invoice_scale
+#: model:ir.model,name:port_scale_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de pedido de venta"
+
+#. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_scale
 #: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_scale
 msgid "Scale"
@@ -186,10 +217,21 @@ msgstr "Escala"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_ship
-#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_ship
 msgid "Ship"
 msgstr "Buque"
 
+#. module: port_scale_sale
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_scale_state
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_scale_state
+msgid "State"
+msgstr "Estado"
+
+#. module: port_scale_sale
+#: code:addons/port_scale_sale/models/sale.py:111
+#: code:addons/port_scale_sale/models/sale.py:115
+#, python-format
+msgid "There is no invoicable line."
+msgstr "No hay lineas facturables."
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_tugs
@@ -198,13 +240,14 @@ msgstr "Remolcadores"
 
 #. module: port_scale_sale
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_type
+#: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_type
 msgid "Type"
 msgstr "Tipo"
 
 #. module: port_scale_sale
-#: selection:port.scale.create.order,type:0
-msgid "Undocking"
-msgstr "Desatraque"
+#: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_zone
+msgid "Zone"
+msgstr "Zona"
 
 #. module: port_scale_sale
 #: model:product.product,name:port_scale_sale.product_docking
@@ -233,11 +276,6 @@ msgstr "o"
 #: model:product.product,name:port_scale_sale.product_out
 #: model:product.template,name:port_scale_sale.product_out_product_template
 msgid "out"
-msgstr "Salida"
-
-#. module: port_scale_sale
-#: selection:port.scale.create.order,type:0
-msgid "Out"
 msgstr "Salida"
 
 #. module: port_scale_sale

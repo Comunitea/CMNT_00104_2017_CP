@@ -16,9 +16,17 @@
                 </header>
                 <field name="partner_id" position="after">
                     <field name="scale"/>
+                    <field name="operation"/>
+                    <field name="scale_state" invisible="1"/>
+                    <field name="input_request_date" attrs="{'invisible': [('scale_state', '!=', 'input')]}"/>
+                    <field name="anchoring_request_date" attrs="{'invisible': [('scale_state', '!=', 'anchoring')]}"/>
+                    <field name="departure_request_date" attrs="{'invisible': [('scale_state', '!=', 'departure')]}"/>
                     <field name="coast_pilot"/>
                     <field name="operation_start_time"/>
                     <field name="operation_end_time"/>
+                </field>
+                <field name="payment_term_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
                 </field>
             </field>
         </record>

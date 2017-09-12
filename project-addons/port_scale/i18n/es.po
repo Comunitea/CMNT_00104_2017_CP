@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#   * port_scale
+#       * port_scale
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-31 11:31+0000\n"
-"PO-Revision-Date: 2017-08-30 18:29+0200\n"
-"Last-Translator: Jesús Ventosinos Mayor <jesus@comunitea.com>\n"
+"POT-Creation-Date: 2017-09-12 18:07+0000\n"
+"PO-Revision-Date: 2017-09-12 18:07+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,38 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: port_scale
-#: model:ir.ui.view,arch_db:port_scale.port_scale_anchoring_view_tree
-#: model:ir.ui.view,arch_db:port_scale.port_scale_departure_view_tree
-#: model:ir.ui.view,arch_db:port_scale.port_scale_input_view_tree
-msgid "Request date"
-msgstr "Fecha de solicitud"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_quality_sign_date
-msgid "Quality sign date"
-msgstr "Fecha cuestionario de calidad"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_ship_attachment_count
-msgid "Attachments"
-msgstr "Adjuntos"
-
-#. module: port_scale
-#: model:ir.ui.menu,name:port_scale.port_scale_all
-msgid "All scales"
-msgstr "Todas las escalas"
-
-#. module: port_scale
-#: model:ir.ui.view,arch_db:port_scale.port_scale_anchoring_view_tree
-#: model:ir.ui.view,arch_db:port_scale.port_scale_departure_view_tree
-#: model:ir.ui.view,arch_db:port_scale.port_scale_input_view_tree
-msgid "Set request dates"
-msgstr "Establecer fecha de solicitud"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_dock_side
-msgid "Dock side"
-msgstr "Costado de atraque"
+#: model:ir.ui.view,arch_db:port_scale.ship_view_form
+msgid "<span class=\"o_stat_text\">Scales</span>"
+msgstr "<span class=\"o_stat_text\">Escalas</span>"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_active
@@ -55,108 +26,29 @@ msgid "Active"
 msgstr "Activo"
 
 #. module: port_scale
-#: model:ir.ui.view,arch_db:port_scale.scale_quality_form
-msgid "Cancel"
-msgstr "Cancelar"
+#: model:ir.ui.menu,name:port_scale.port_scale_all
+msgid "All scales"
+msgstr "Todas las escalas"
 
 #. module: port_scale
-#: model:ir.actions.act_window,name:port_scale.port_tug_action
-msgid "Port Tugs"
-msgstr "Remolcadores"
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_altura_bajamar_1
+msgid "Altura bajamar 1"
+msgstr "Altura bajamar 1"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_departure_authorization
-msgid "Departure authorization"
-msgstr "Salida autorizada"
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_altura_bajamar_2
+msgid "Altura bajamar 2"
+msgstr "Altura bajamar 2"
 
 #. module: port_scale
-#: model:ir.ui.menu,name:port_scale.port_tug_menu
-msgid "Port tugs"
-msgstr "Remolcadores"
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_altura_pleamar_1
+msgid "Altura pleamar 1"
+msgstr "Altura pleamar 1"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_load
-msgid "Load"
-msgstr "Carga"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_load_qty
-msgid "Load qty"
-msgstr "Cantidad de carga"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_signature
-msgid "Signature"
-msgstr "Firma"
-
-#. module: port_scale
-#: model:ir.actions.act_window,name:port_scale.scale_quality_action
-msgid "Scale quality"
-msgstr "Cuestionario de calidad"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_undocking_end_time
-msgid "Undocking end time"
-msgstr "Fecha de fin de desatraque"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_undocking_start_time
-msgid "Undocking start time"
-msgstr "Fecha de inicio de desatraque"
-
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_change_docking_end_time
-msgid "Change docking end time"
-msgstr "Fecha de fin de cambio de atraque"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_change_docking_start_time
-msgid "Change docking start time"
-msgstr "Fecha de inicio de cambio de atraque"
-
-#. module: port_scale
-#. openerp-web
-#: code:addons/port_scale/static/src/xml/tide_menu.xml:9
-#: model:ir.actions.act_window,name:port_scale.tide_action
-#: model:ir.ui.menu,name:port_scale.tide_menu
-#, python-format
-msgid "Tides"
-msgstr "Mareas"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_tide_date
-msgid "Date"
-msgstr "Fecha"
-
-#. module: port_scale
-#: model:ir.actions.act_window,name:port_scale.port_scale_input_action
-#: selection:port.scale,state:0
-msgid "Input"
-msgstr "Entrada"
-
-#. module: port_scale
-#: model:ir.actions.act_window,name:port_scale.port_scale_done_action
-#: model:ir.ui.menu,name:port_scale.port_scale_done
-#: selection:port.scale,state:0
-msgid "Done"
-msgstr "Finalizado"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_tugs
-msgid "Tugs"
-msgstr "Remolcadores"
-
-
-#. module: port_scale
-#: model:ir.ui.menu,name:port_scale.port_scale_input
-msgid "Inputs"
-msgstr "Entradas"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_partner_id
-msgid "Agent"
-msgstr "Agente"
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_altura_pleamar_2
+msgid "Altura pleamar 2"
+msgstr "Altura pleamar 2"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_anchor_end_time
@@ -167,74 +59,6 @@ msgstr "Fecha fin fondeo"
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_anchor_start_time
 msgid "Anchor start time"
 msgstr "Fecha inicio fondeo"
-
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_docking_end_time
-msgid "Docking end time"
-msgstr "Fecha fin atraque"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_docking_start_time
-msgid "Docking start time"
-msgstr "Fecha inicio atraque"
-
-#. module: port_scale
-#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
-msgid "End anchor"
-msgstr "Finalizar fondeo"
-
-#. module: port_scale
-#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
-msgid "Open quality question"
-msgstr "Abrir cuestionario de calidad"
-
-#. module: port_scale
-#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
-msgid "Start docking"
-msgstr "Iniciar atraque"
-
-#. module: port_scale
-#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
-msgid "End docking"
-msgstr "Finalizar atraque"
-
-#. module: port_scale
-#: model:ir.actions.act_window,name:port_scale.port_scale_departure_action
-#: selection:port.scale,state:0
-msgid "Departure"
-msgstr "Salida"
-
-#. module: port_scale
-#: model:ir.ui.menu,name:port_scale.port_scale_departure
-msgid "Departures"
-msgstr "Salidas"
-
-#. module: port_scale
-#: model:ir.actions.act_window,name:port_scale.port_dock_action
-msgid "Port Docks"
-msgstr "Muelles"
-
-#. module: port_scale
-#: model:ir.ui.menu,name:port_scale.port_dock_menu
-msgid "Port docks"
-msgstr "Muelles"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_quality_signature
-msgid "Quality signature"
-msgstr "Firma cuestionario de calidad"
-
-#. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_quality_service_satisfaction
-msgid "Quality service satisfaction"
-msgstr "Satisfacción con el servicio"
-
-
-#. module: port_scale
-#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
-msgid "Start anchor"
-msgstr "Iniciar fondeo"
 
 #. module: port_scale
 #: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
@@ -249,19 +73,24 @@ msgid "Anchoring"
 msgstr "Fondeo"
 
 #. module: port_scale
-#: model:ir.ui.view,arch_db:port_scale.ship_view_form
-msgid "<span class=\"o_stat_text\">Scales</span>"
-msgstr "<span class=\"o_stat_text\">Scales</span>"
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_anchoring_request_date
+msgid "Anchoring request date"
+msgstr "Fecha solicitud fondeo"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_docking
-msgid "Docking"
-msgstr "Atraque"
+#: model:ir.model.fields,field_description:port_scale.field_ship_attachment_count
+msgid "Attachments"
+msgstr "Adjuntos"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_draft
-msgid "Draft"
-msgstr "Calado"
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_bajamar_1
+msgid "Bajamar 1"
+msgstr "Bajamar 1"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_bajamar_2
+msgid "Bajamar 2"
+msgstr "Bajamar 2"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_ship_callsign
@@ -269,18 +98,48 @@ msgid "Callsign"
 msgstr "Callsign"
 
 #. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.scale_quality_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_change_docking_end_time
+msgid "Change docking end time"
+msgstr "Fecha de fin de cambio de atraque"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_change_docking_start_time
+msgid "Change docking start time"
+msgstr "Fecha de inicio de cambio de atraque"
+
+#. module: port_scale
 #: model:ir.ui.menu,name:port_scale.port_management_configuration_menu
 msgid "Configuration"
 msgstr "Configuración"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_ship_partner_id
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_partner_id
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_partner_name
 msgid "Consignatario"
 msgstr "Consignatario"
 
 #. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.action_partner_form
+#: model:ir.ui.menu,name:port_scale.menu_partner
+msgid "Consignatarios"
+msgstr "Consignatarios"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_ship_country
+msgid "Country"
+msgstr "País"
+
+#. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_dock_create_uid
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_create_uid
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_create_uid
+#: model:ir.model.fields,field_description:port_scale.field_port_tug_create_uid
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_create_uid
 #: model:ir.model.fields,field_description:port_scale.field_ship_create_uid
 msgid "Created by"
 msgstr "Creado por"
@@ -288,13 +147,45 @@ msgstr "Creado por"
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_dock_create_date
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_create_date
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_create_date
+#: model:ir.model.fields,field_description:port_scale.field_port_tug_create_date
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_create_date
 #: model:ir.model.fields,field_description:port_scale.field_ship_create_date
 msgid "Created on"
 msgstr "Creado el"
 
 #. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_scale_departure_action
+#: selection:port.scale,state:0
+msgid "Departure"
+msgstr "Salida"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_departure_authorization
+msgid "Departure authorization"
+msgstr "Salida autorizada"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_departure_request_date
+msgid "Departure request date"
+msgstr "Fecha solicitud desatraque"
+
+#. module: port_scale
+#: model:ir.ui.menu,name:port_scale.port_scale_departure
+msgid "Departures"
+msgstr "Salidas"
+
+#. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_dock_display_name
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_display_name
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_display_name
+#: model:ir.model.fields,field_description:port_scale.field_port_tug_display_name
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_display_name
 #: model:ir.model.fields,field_description:port_scale.field_ship_display_name
 msgid "Display Name"
 msgstr "Nombre a mostrar"
@@ -302,12 +193,34 @@ msgstr "Nombre a mostrar"
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_dock
 msgid "Dock"
-msgstr "Atraque"
+msgstr "Muelle"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_docking_state
-msgid "Docking state"
-msgstr "Estado atraque"
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_dock_side
+msgid "Dock side"
+msgstr "Costado de atraque"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_docking_end_time
+msgid "Docking end time"
+msgstr "Fecha fin atraque"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_docking_start_time
+msgid "Docking start time"
+msgstr "Fecha inicio atraque"
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_scale_done_action
+#: model:ir.ui.menu,name:port_scale.port_scale_done
+#: selection:port.scale,state:0
+msgid "Done"
+msgstr "Finalizado"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_draft
+msgid "Draft"
+msgstr "Calado"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_eta
@@ -315,9 +228,9 @@ msgid "Eta"
 msgstr "Eta"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_ship_country
-msgid "Country"
-msgstr "País"
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_etd
+msgid "Etd"
+msgstr "Etd"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_fondeo_previo
@@ -326,12 +239,16 @@ msgstr "Fondeo previo"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_gt
-msgid "Gt"
-msgstr "Gt"
+#: model:ir.model.fields,field_description:port_scale.field_ship_gt
+msgid "GT"
+msgstr "GT"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_dock_id
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_id
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_id
+#: model:ir.model.fields,field_description:port_scale.field_port_tug_id
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_id
 #: model:ir.model.fields,field_description:port_scale.field_ship_id
 msgid "ID"
 msgstr "ID"
@@ -342,8 +259,27 @@ msgid "IMO"
 msgstr "IMO"
 
 #. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_scale_input_action
+#: selection:port.scale,state:0
+msgid "Input"
+msgstr "Entrada"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_input_request_date
+msgid "Input request date"
+msgstr "Fecha solicitud atraque"
+
+#. module: port_scale
+#: model:ir.ui.menu,name:port_scale.port_scale_input
+msgid "Inputs"
+msgstr "Entradas"
+
+#. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_dock___last_update
 #: model:ir.model.fields,field_description:port_scale.field_port_scale___last_update
+#: model:ir.model.fields,field_description:port_scale.field_port_tide___last_update
+#: model:ir.model.fields,field_description:port_scale.field_port_tug___last_update
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard___last_update
 #: model:ir.model.fields,field_description:port_scale.field_ship___last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
@@ -351,6 +287,9 @@ msgstr "Última modificación en"
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_dock_write_uid
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_write_uid
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_write_uid
+#: model:ir.model.fields,field_description:port_scale.field_port_tug_write_uid
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_write_uid
 #: model:ir.model.fields,field_description:port_scale.field_ship_write_uid
 msgid "Last Updated by"
 msgstr "Última actualización por"
@@ -358,9 +297,22 @@ msgstr "Última actualización por"
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_dock_write_date
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_write_date
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_write_date
+#: model:ir.model.fields,field_description:port_scale.field_port_tug_write_date
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_write_date
 #: model:ir.model.fields,field_description:port_scale.field_ship_write_date
 msgid "Last Updated on"
 msgstr "Última actualización el"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_load
+msgid "Load"
+msgstr "Carga"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_load_qty
+msgid "Load qty"
+msgstr "Cantidad de carga"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_ship_mmsi
@@ -375,6 +327,11 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_norays
+msgid "Norays"
+msgstr "Norays"
+
+#. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_name
 msgid "Nº escala"
 msgstr "Nº escala"
@@ -383,6 +340,11 @@ msgstr "Nº escala"
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_observaciones
 msgid "Observaciones"
 msgstr "Observaciones"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "Open quality question"
+msgstr "Abrir cuestionario de calidad"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_operation
@@ -395,10 +357,72 @@ msgid "Origin"
 msgstr "Origen"
 
 #. module: port_scale
-#: model:ir.actions.act_window,name:port_scale.port_scale_action
-#: model:ir.ui.menu,name:port_scale.port_scale
-msgid "Port scale"
-msgstr "Escalas"
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_pleamar_1
+msgid "Pleamar 1"
+msgstr "Pleamar 1"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_tide_pleamar_2
+msgid "Pleamar 2"
+msgstr "Pleamar 2"
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_dock_action
+msgid "Port Docks"
+msgstr "Muelles"
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_tug_action
+msgid "Port Tugs"
+msgstr "Remolcadores"
+
+#. module: port_scale
+#: model:ir.ui.menu,name:port_scale.port_dock_menu
+msgid "Port docks"
+msgstr "Muelles"
+
+#. module: port_scale
+#: model:ir.ui.menu,name:port_scale.port_tug_menu
+msgid "Port tugs"
+msgstr "Remolcadores"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_quality_service_satisfaction
+msgid "Quality service satisfaction"
+msgstr "Satisfacción con el servicio"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_quality_sign_date
+msgid "Quality sign date"
+msgstr "Fecha cuestionario de calidad"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_quality_signature
+msgid "Quality signature"
+msgstr "Firma cuestionario de calidad"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_anchoring_view_tree
+#: model:ir.ui.view,arch_db:port_scale.port_scale_departure_view_tree
+#: model:ir.ui.view,arch_db:port_scale.port_scale_input_view_tree
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "Request date"
+msgstr "Fecha de solicitud"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_reten
+msgid "Reten"
+msgstr "Reten"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_scale_id
+msgid "Scale id"
+msgstr "Escala"
+
+#. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.scale_quality_action
+msgid "Scale quality"
+msgstr "Cuestionario de calidad"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_scale_state
@@ -406,14 +430,29 @@ msgid "Scale state"
 msgstr "Estado escala"
 
 #. module: port_scale
+#: model:ir.actions.act_window,name:port_scale.port_scale_action
 #: model:ir.model.fields,field_description:port_scale.field_ship_scales
+#: model:ir.ui.view,arch_db:port_scale.view_port_scale_pivot
 msgid "Scales"
 msgstr "Escalas"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_ship_scales_count
 msgid "Scales count"
-msgstr "Scales count"
+msgstr "Nº escalas"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_service_satisfaction
+msgid "Service satisfaction"
+msgstr "Satisfacción"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_anchoring_view_tree
+#: model:ir.ui.view,arch_db:port_scale.port_scale_departure_view_tree
+#: model:ir.ui.view,arch_db:port_scale.port_scale_input_view_tree
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "Set request dates"
+msgstr "Establecer fecha de solicitud"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_ship
@@ -427,10 +466,64 @@ msgid "Ships"
 msgstr "Buques"
 
 #. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_scale_quality_wizard_signature
+msgid "Signature"
+msgstr "Firma"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "Start anchor"
+msgstr "Iniciar fondeo"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "Start change docking"
+msgstr "Iniciar cambio de atraque"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "Start docking"
+msgstr "Iniciar atraque"
+
+#. module: port_scale
+#: model:ir.ui.view,arch_db:port_scale.port_scale_view_form
+msgid "Start undocking"
+msgstr "Iniciar desatraque"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_state
+msgid "State"
+msgstr "Estado"
+
+#. module: port_scale
+#. openerp-web
+#: code:addons/port_scale/static/src/xml/tide_menu.xml:9
+#: model:ir.actions.act_window,name:port_scale.tide_action
+#: model:ir.ui.menu,name:port_scale.tide_menu
+#, python-format
+msgid "Tides"
+msgstr "Mareas"
+
+#. module: port_scale
 #: model:ir.ui.menu,name:port_scale.port_managament_submenu
 #: model:ir.ui.menu,name:port_scale.port_management_menu
 msgid "Traffic management"
 msgstr "Gestión de tráfico"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_tugs
+msgid "Tugs"
+msgstr "Remolcadores"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_undocking_end_time
+msgid "Undocking end time"
+msgstr "Fecha de fin de desatraque"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_undocking_start_time
+msgid "Undocking start time"
+msgstr "Fecha de inicio de desatraque"
 
 #. module: port_scale
 #: selection:port.scale,operation:0
@@ -451,6 +544,21 @@ msgstr "port.dock"
 #: model:ir.model,name:port_scale.model_port_scale
 msgid "port.scale"
 msgstr "port.scale"
+
+#. module: port_scale
+#: model:ir.model,name:port_scale.model_port_tide
+msgid "port.tide"
+msgstr "port.tide"
+
+#. module: port_scale
+#: model:ir.model,name:port_scale.model_port_tug
+msgid "port.tug"
+msgstr "port.tug"
+
+#. module: port_scale
+#: model:ir.model,name:port_scale.model_scale_quality_wizard
+msgid "scale.quality.wizard"
+msgstr "scale.quality.wizard"
 
 #. module: port_scale
 #: selection:port.scale,operation:0

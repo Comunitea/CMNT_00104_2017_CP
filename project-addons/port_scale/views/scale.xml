@@ -60,8 +60,7 @@
                 <field name="departure_authorization" invisible="1"/>
                 <field name="name"/>
                 <field name="ship" fg_color="#1d2168:True;"/>
-                <field name="eta"/>
-                <field name="origin"/>
+                <field name="etd"/>
                 <field name="partner_name"/>
                 <field name="draft"/>
                 <field name="dock"/>
@@ -93,6 +92,30 @@
                 <field name="scale_state"/>
                 <field name="fondeo_previo"/>
                 <field name="observaciones"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="port_scale_all_view_tree" model="ir.ui.view">
+        <field name="name">port.scale.all.tree</field>
+        <field name="model">port.scale</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree colors="green:scale_state=='AUTORIZADO' or departure_authorization!=False;orange:scale_state in ('AUTORIZADA CAP','AUTORIZADA AP' ) ">
+                <field name="departure_authorization" invisible="1"/>
+                <field name="name"/>
+                <field name="ship" fg_color="#1d2168:True;"/>
+                <field name="eta"/>
+                <field name="etd"/>
+                <field name="origin"/>
+                <field name="partner_name"/>
+                <field name="draft"/>
+                <field name="dock"/>
+                <field name="gt"/>
+                <field name="scale_state"/>
+                <field name="fondeo_previo"/>
+                <field name="observaciones"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -129,24 +152,15 @@
                 <header>
                     <button name="start_docking" type="object" string="Start docking"
                         attrs="{'invisible': ['|', ('state', 'not in', ('input', 'anchoring')), ('docking_start_time', '!=', False)]}"/>
-                    <button name="end_docking" type="object" string="End docking"
-                        attrs="{'invisible': ['|', '|', ('state', 'not in', ('input', 'anchoring')), ('docking_start_time', '=', False), ('docking_end_time', '!=', False)]}"/>
                     <button name="start_anchor" type="object" string="Start anchor"
                         attrs="{'invisible': ['|', ('state', '!=', 'input'), ('anchor_start_time', '!=', False)]}"/>
-                    <button name="end_anchor" type="object" string="End anchor"
-                        attrs="{'invisible': ['|', '|', ('state', '!=', 'input'), ('anchor_start_time', '=', False), ('anchor_end_time', '!=', False)]}"/>
                     <button name="anchor_without_coast_pilot" type="object" string="Anchor without coast pilot"
                         attrs="{'invisible': ['|', ('state', '!=', 'input'), ('anchor_start_time', '!=', False)]}"/>
 
                     <button name="start_undocking" type="object" string="Start undocking"
                         attrs="{'invisible': ['|', ('state', '!=', 'departure'), ('undocking_start_time', '!=', False)]}"/>
-                    <button name="end_undocking" type="object" string="End undocking"
-                        attrs="{'invisible': ['|', '|', ('state', '!=', 'departure'), ('undocking_start_time', '=', False), ('undocking_end_time', '!=', False)]}"/>
                     <button name="start_change_docking" type="object" string="Start change docking"
                         attrs="{'invisible': ['|', ('state', '!=', 'departure'), ('change_docking_start_time', '!=', False)]}"/>
-                    <button name="end_change_docking" type="object" string="End change docking"
-                        attrs="{'invisible': ['|', '|', ('state', '!=', 'departure'), ('change_docking_start_time', '=', False), ('change_docking_end_time', '!=', False)]}"/>
-
 
                     <button name="%(port_scale.scale_quality_action)d" type="action" string="Open quality question" />
                     <field name="state" widget="statusbar" nolabel="1"
@@ -171,6 +185,14 @@
                             <field name="load_qty"/>
                         </group>
                         <group>
+                            <group col="3">
+                                <field name="input_request_date" string="Request date" attrs="{'invisible': [('state', '!=', 'input')]}"/>
+                                <button name="set_input_request_date" type="object" icon="fa-clock-o" string="Set request dates" attrs="{'invisible': ['|',('input_request_date', '!=', False),('state', '!=', 'input')]}"/>
+                                <field name="anchoring_request_date" string="Request date" attrs="{'invisible': [('state', '!=', 'anchoring')]}"/>
+                                <button name="set_anchoring_request_date" type="object" icon="fa-clock-o" string="Set request dates" attrs="{'invisible': ['|',('anchoring_request_date', '!=', False),('state', '!=', 'anchoring')]}"/>
+                                <field name="departure_request_date" string="Request date" attrs="{'invisible': [('state', '!=', 'departure')]}"/>
+                                <button name="set_departure_request_date" type="object" icon="fa-clock-o" string="Set request dates" attrs="{'invisible': ['|',('departure_request_date', '!=', False),('state', '!=', 'departure')]}"/>
+                            </group>
                             <field name="eta"/>
                             <field name="etd"/>
                             <field name="scale_state"/>
@@ -306,8 +328,9 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form,pivot</field>
         <field name="limit">100</field>
-        <field name="view_id" ref="port_scale_view_tree"/>
+        <field name="view_id" ref="port_scale_all_view_tree"/>
         <field name="search_view_id" ref="port_scale_view_search"/>
+        <field name="domain">[('state', '!=', 'done')]</field>
     </record>
 
     <menuitem name="All scales" parent="port_managament_submenu" action="port_scale_action" id="port_scale_all" sequence="5"/>

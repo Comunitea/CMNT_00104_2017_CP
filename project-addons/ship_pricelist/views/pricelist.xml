@@ -33,7 +33,6 @@
                 </xpath>
 
                 <xpath expr="//field[@name='pricelist_id']" position="after">
-
                     <field name="gt" invisible="0"/>
                     <field name="zone"/>
                 </xpath>

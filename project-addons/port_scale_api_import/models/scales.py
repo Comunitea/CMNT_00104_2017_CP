@@ -148,8 +148,7 @@ class PortScale(models.Model):
                     scale_element.findtext('DESPACHADO_SALIDA')]
             created_scale = self.env['port.scale'].search(
                 [('ship', '=', scale_vals['ship']),
-                 ('eta', '=', scale_vals['eta'].strftime('%Y-%m-%d %H:%M:%S')),
-                 ('etd', '=', scale_vals['etd'].strftime('%Y-%m-%d %H:%M:%S')),
+                 ('name', '=', scale_vals['name']),
                  '|', ('active', '=', True), ('active', '=', False)])
             if created_scale:
                 created_scale.write(scale_vals)
