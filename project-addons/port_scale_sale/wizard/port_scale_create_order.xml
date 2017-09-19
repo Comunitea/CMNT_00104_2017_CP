@@ -30,7 +30,8 @@
                             <field name="partner_name"/>
                             <field name="partner_id"/>
                             <field name="user_id"/>
-                            <field name="tugs" widget="many2many_tags"/>
+                            <field name="tugs_in" widget="many2many_tags"/>
+                            <field name="tugs_out" widget="many2many_tags"/>
                             <field name="pricelist"/>
                             <field name="fiscal_position" domain="[('id', 'in', (%(l10n_es.1_fp_extra)d, %(l10n_es.1_fp_nacional)d))]"/>
                             <field name="reten"/>
@@ -49,6 +50,7 @@
             res_model="port.scale.create.order"
             src_model="port.scale"
             view_id="port_scale_create_order_form"
+            groups="port_scale.group_coast_pilot"
             view_mode="form"
             target="new"
             key2=""

@@ -13,6 +13,7 @@
                 <header position="inside">
                     <button name="impute_fault" type="object" string="Impute fault" states="draft,sent"/>
                     <button name="desembarque_ria" type="object" string="Desembarque ría de Ares" states="draft,sent"/>
+                    <button name="boat_towing" type="object" string="Boat towing" states="draft,sent"/>
                 </header>
                 <field name="partner_id" position="after">
                     <field name="scale"/>
@@ -24,6 +25,8 @@
                     <field name="coast_pilot"/>
                     <field name="operation_start_time"/>
                     <field name="operation_end_time"/>
+                    <field name="tugs_in" widget="many2many_tags"/>
+                    <field name="tugs_out" widget="many2many_tags"/>
                 </field>
                 <field name="payment_term_id" position="attributes">
                     <attribute name="invisible">1</attribute>

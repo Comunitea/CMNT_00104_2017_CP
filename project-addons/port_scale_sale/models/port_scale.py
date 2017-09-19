@@ -42,12 +42,6 @@ class PortScale(models.Model):
                                   self.anchor_end_time,
                                   "end_anchor()")
 
-    def anchor_without_coast_pilot(self):
-        super(PortScale, self).anchor_without_coast_pilot()
-        return self._create_order('in',
-                                  self.anchor_start_time,
-                                  self.anchor_end_time)
-
     def start_change_docking(self):
         super(PortScale, self).start_change_docking()
         return self._create_order('move',

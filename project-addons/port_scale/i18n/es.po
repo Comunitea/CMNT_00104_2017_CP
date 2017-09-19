@@ -7,13 +7,23 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-12 18:07+0000\n"
-"PO-Revision-Date: 2017-09-12 18:07+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2017-09-19 12:14+0200\n"
+"Last-Translator: Jesús Ventosinos Mayor <jesus@comunitea.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: port_scale
+#: model:res.groups,name:port_scale.group_coast_pilot
+msgid "Coast pilot"
+msgstr "Práctico"
+
+#. module: port_scale
+#: model:res.groups,name:port_scale.group_seaman_administrative
+msgid "Seaman/Administrative"
+msgstr "Marinero/Administrativo"
 
 #. module: port_scale
 #: model:ir.ui.view,arch_db:port_scale.ship_view_form
@@ -511,9 +521,14 @@ msgid "Traffic management"
 msgstr "Gestión de tráfico"
 
 #. module: port_scale
-#: model:ir.model.fields,field_description:port_scale.field_port_scale_tugs
-msgid "Tugs"
-msgstr "Remolcadores"
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_tugs_in
+msgid "Tugs in"
+msgstr "Remolcadores entrada"
+
+#. module: port_scale
+#: model:ir.model.fields,field_description:port_scale.field_port_scale_tugs_out
+msgid "Tugs out"
+msgstr "Remolcadores salida"
 
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_undocking_end_time

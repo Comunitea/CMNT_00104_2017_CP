@@ -18,6 +18,7 @@
         'web_tree_dynamic_colored_field'
     ],
     'data': [
+        'security/port_scale_security.xml',
         'wizard/scale_quality.xml',
         'views/scale.xml',
         'views/ship.xml',

@@ -40,7 +40,7 @@ class OrderLinesReport(ReportXlsx):
                 order_row = [
                     order.name, order_type, line.zone, start_date, end_date,
                     order.scale.ship.name, order.scale.ship.country.name,
-                    order.scale.ship.gt, ', '.join([x.name for x in order.scale.tugs]),
+                    order.scale.ship.gt, ', '.join([x.name for x in order.scale.tugs_in]),
                     order.coast_pilot.name, order.amount_total,
                     order.scale.dock.name]
                 sheet.write_row(pos, 0, order_row)

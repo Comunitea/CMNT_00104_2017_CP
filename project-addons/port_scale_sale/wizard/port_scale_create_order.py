@@ -25,7 +25,8 @@ class PortScaleCreateOrder(models.TransientModel):
                                  related='scale.partner_id',
                                  required=True)
     partner_name = fields.Char(related='scale.partner_name', readonly=True)
-    tugs = fields.Many2many('port.tug', related='scale.tugs')
+    tugs_in = fields.Many2many('port.tug', related='scale.tugs_in')
+    tugs_out = fields.Many2many('port.tug', related='scale.tugs_out')
     user_id = fields.Many2one('res.users', 'Coast pilot', required=True)
     pricelist = fields.Many2one('product.pricelist', required=True)
     fiscal_position = fields.Many2one('account.fiscal.position', default=lambda self: self.env.ref('l10n_es.1_fp_extra'))

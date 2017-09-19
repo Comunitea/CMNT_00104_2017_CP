@@ -31,6 +31,8 @@ class SaleOrder(models.Model):
         (('out', 'Out'),
          ('move', 'Move'),
          ('in', 'In')))
+    tugs_in = fields.Many2many('port.tug', related='scale.tugs_in')
+    tugs_out = fields.Many2many('port.tug', related='scale.tugs_out')
 
     def _impute(self, product_id, percent):
         new_line_vals = {
@@ -60,6 +62,27 @@ class SaleOrder(models.Model):
 
     def desembarque_ria(self):
         self._impute(self.env.ref('port_scale_sale.product_desembarque_ria').id, 0.5)
+
+    def boat_towing(self):
+        new_line_vals = {
+            'product_id': self.env.ref('port_scale_sale.product_boat_towing').id,
+            'product_uom_qty': 1,
+            'price_unit': 0.0,
+            'order_id': self.id,
+            'product_uom': False,
+            'sequence': 100,
+            'zone': self.zone
+        }
+        new_line = self.env['sale.order.line']
+        specs = new_line._onchange_spec()
+        onchange_result = new_line.onchange(
+            new_line_vals, ['product_id'], specs)
+        value = onchange_result.get('value', {})
+        for name, val in value.iteritems():
+            if isinstance(val, tuple):
+                value[name] = val[0]
+        new_line_vals.update(value)
+        new_line = self.env['sale.order.line'].create(new_line_vals)
 
     @api.multi
     def action_invoice_create(self, grouped=False, final=False):
