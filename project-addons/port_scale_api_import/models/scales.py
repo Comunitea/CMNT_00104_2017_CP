@@ -153,4 +153,12 @@ class PortScale(models.Model):
             if created_scale:
                 created_scale.write(scale_vals)
             else:
-                self.env['port.scale'].create(scale_vals)
+                #Buscamos si hay alguna escala como enviada para este barco
+                sendend_scale = self.env['port.scale'].search(
+                    [('ship', '=', scale_vals['ship']),
+                     ('name', '=', '****'),
+                     '|', ('active', '=', True), ('active', '=', False)])
+                if sendend_scale:
+                    sendend_scale.write(scale_vals)
+                else:
+                    self.env['port.scale'].create(scale_vals)
