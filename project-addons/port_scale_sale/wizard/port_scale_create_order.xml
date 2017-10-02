@@ -30,8 +30,8 @@
                             <field name="partner_name"/>
                             <field name="partner_id"/>
                             <field name="user_id"/>
-                            <field name="tugs_in" widget="many2many_tags"/>
-                            <field name="tugs_out" widget="many2many_tags"/>
+                            <field name="tugs_in" widget="many2many_tags" attrs="{'invisible': [('scale_state', '!=', 'input')]}"/>
+                            <field name="tugs_out" widget="many2many_tags" attrs="{'invisible': [('scale_state', '!=', 'departure')]}"/>
                             <field name="pricelist"/>
                             <field name="fiscal_position" domain="[('id', 'in', (%(l10n_es.1_fp_extra)d, %(l10n_es.1_fp_nacional)d))]"/>
                             <field name="reten"/>

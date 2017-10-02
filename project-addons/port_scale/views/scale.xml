@@ -154,7 +154,7 @@
                     <button name="start_undocking" type="object" string="Start undocking"
                         attrs="{'invisible': ['|', ('state', '!=', 'departure'), ('undocking_start_time', '!=', False)]}" groups="port_scale.group_coast_pilot"/>
                     <button name="start_change_docking" type="object" string="Start change docking"
-                        attrs="{'invisible': ['|', ('state', '!=', 'departure'), ('change_docking_start_time', '!=', False)]}" groups="port_scale.group_coast_pilot"/>
+                        attrs="{'invisible': [('state', '!=', 'departure')]}" groups="port_scale.group_coast_pilot"/>
 
                     <button name="%(port_scale.scale_quality_action)d" type="action" string="Open quality question"  groups="port_scale.group_coast_pilot"/>
                     <field name="state" widget="statusbar" nolabel="1"
