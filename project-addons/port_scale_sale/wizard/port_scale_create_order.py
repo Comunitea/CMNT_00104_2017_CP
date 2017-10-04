@@ -10,6 +10,7 @@ class PortScaleCreateOrder(models.TransientModel):
 
     scale = fields.Many2one('port.scale')
     ship = fields.Many2one('ship', related='scale.ship', required=True)
+    dock = fields.Many2one('port.dock', related='scale.dock')
     input_request_date = fields.Datetime(related="scale.input_request_date")
     scale_state = fields.Selection(related="scale.state", readonly=True)
     anchoring_request_date = fields.\

@@ -35,6 +35,7 @@
                             <field name="pricelist"/>
                             <field name="fiscal_position" domain="[('id', 'in', (%(l10n_es.1_fp_extra)d, %(l10n_es.1_fp_nacional)d))]"/>
                             <field name="reten"/>
+                            <field name="dock"/>
                         </group>
                     </group>
                     <footer>
