@@ -97,8 +97,8 @@ class PortScale(models.Model):
                 scale_vals['draft'] = scale_element.findtext(
                     'CALADO_LLEGADA')
             if scale_element.findtext('GT'):
-                ship_vals['gt'] = int(float(scale_element.findtext(
-                    'GT')))
+                ship_vals['gt'] = float(scale_element.findtext(
+                    'GT'))
             if scale_element.findtext('ESTADO_ATRAQUE'):
                 scale_vals['scale_state'] = scale_element.findtext(
                     'ESTADO_ATRAQUE')

@@ -21,7 +21,7 @@ class PortScaleCreateOrder(models.TransientModel):
     operation_end_time = fields.Datetime()
     country = fields.Many2one('res.country',
                               related='scale.ship.country', required=True)
-    gt = fields.Integer(related='scale.gt', required=True)
+    gt = fields.Float(related='scale.gt', required=True)
     partner_id = fields.Many2one('res.partner',
                                  related='scale.partner_id',
                                  required=True)

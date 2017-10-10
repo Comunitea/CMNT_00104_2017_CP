@@ -16,7 +16,7 @@ class Ship(models.Model):
     callsign = fields.Char()
     scales = fields.One2many('port.scale', 'ship')
     scales_count = fields.Integer(compute='_get_scales_count')
-    gt = fields.Integer("GT")
+    gt = fields.Float("GT")
     attachment_count = fields.Integer('Attachments', compute='_compute_attachment_count')
 
     @api.depends('scales')

@@ -208,5 +208,5 @@ class Pricelist(models.Model):
 class PricelistItem(models.Model):
     _inherit = "product.pricelist.item"
 
-    gt_min = fields.Integer('from gt')
-    gt_max = fields.Integer('to gt')
+    gt_min = fields.Float('from gt')
+    gt_max = fields.Float('to gt')

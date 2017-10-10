@@ -9,7 +9,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
     zone = fields.Selection([('A', 'A'), ('B', 'B'), ('C', 'C')], 'Zona',
                             default='A')
-    gt = fields.Integer("GT", related='scale.gt', readonly=True)
+    gt = fields.Float("GT", related='scale.gt', readonly=True)
     ship = fields.Many2one('ship', related='scale.ship', required=True)
 
 
@@ -18,7 +18,7 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     zone = fields.Selection([('A', 'A'), ('B', 'B'), ('C', 'C')], 'Zona')
-    gt = fields.Integer(related="order_id.gt")
+    gt = fields.Float(related="order_id.gt")
 
     @api.multi
     @api.onchange('gt', 'zone')
