@@ -1,0 +1,26 @@
+From bd5956faa0d4f5e6614ea1c6e0bcc780cf155c89 Mon Sep 17 00:00:00 2001
+From: jesusVMayor <jesus@comunitea.com>
+Date: Fri, 13 Oct 2017 12:18:25 +0200
+Subject: [PATCH] PATCH!!: [IMP]sale: create grouped invoices grouping by
+ fiscal position.
+
+---
+ addons/sale/models/sale.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/addons/sale/models/sale.py b/addons/sale/models/sale.py
+index 38a4036f609..faac5221c60 100644
+--- a/addons/sale/models/sale.py
++++ b/addons/sale/models/sale.py
+@@ -335,7 +335,7 @@ class SaleOrder(models.Model):
+         invoices = {}
+         references = {}
+         for order in self:
+-            group_key = order.id if grouped else (order.partner_invoice_id.id, order.currency_id.id)
++            group_key = order.id if grouped else (order.partner_invoice_id.id, order.currency_id.id, order.fiscal_position_id.id)
+             for line in order.order_line.sorted(key=lambda l: l.qty_to_invoice < 0):
+                 if float_is_zero(line.qty_to_invoice, precision_digits=precision):
+                     continue
+-- 
+2.14.2
+

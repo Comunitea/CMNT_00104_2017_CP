@@ -96,7 +96,8 @@ class SaleOrder(models.Model):
             for order in self:
                 group_key = (order.partner_invoice_id.id,
                              order.scale.ship.id,
-                             order.currency_id.id)
+                             order.currency_id.id,
+                             order.fiscal_position_id.id)
                 for line in order.order_line.sorted(
                         key=lambda l: l.qty_to_invoice < 0):
                     if float_is_zero(line.qty_to_invoice,

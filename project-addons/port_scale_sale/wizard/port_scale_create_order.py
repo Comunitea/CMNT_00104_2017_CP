@@ -108,6 +108,7 @@ class PortScaleCreateOrder(models.TransientModel):
                     new_line._cache)
 
                 new_line = self.env['sale.order.line'].create(line_vals)
+        new_order.action_confirm()
         action = self.env.ref('sale.action_orders').read()[0]
         action['domain'] = "[('id', '=', " + str(new_order.id) + ")]"
         if self.env.context.get("next_state", False):

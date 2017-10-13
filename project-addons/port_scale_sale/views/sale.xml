@@ -11,9 +11,9 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <header position="inside">
-                    <button name="impute_fault" type="object" string="Impute fault" states="draft,sent"/>
-                    <button name="desembarque_ria" type="object" string="Desembarque ría de Ares" states="draft,sent"/>
-                    <button name="boat_towing" type="object" string="Boat towing" states="draft,sent"/>
+                    <button name="impute_fault" type="object" string="Impute fault" states="draft,sent,sale"/>
+                    <button name="desembarque_ria" type="object" string="Desembarque ría de Ares" states="draft,sent,sale"/>
+                    <button name="boat_towing" type="object" string="Boat towing" states="draft,sent,sale"/>
                 </header>
                 <field name="partner_id" position="after">
                     <field name="scale"/>

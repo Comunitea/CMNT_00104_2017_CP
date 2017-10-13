@@ -92,6 +92,9 @@ class PortScale(models.Model):
     def anchor_without_coast_pilot(self):
         self.state = 'anchoring'
 
+    def docking_without_coast_pilot(self):
+        self.state = 'departure'
+
     def start_undocking(self):
         self.undocking_start_time = datetime.now()
 
