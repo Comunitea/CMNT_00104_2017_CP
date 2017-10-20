@@ -35,7 +35,7 @@ class OrderLinesReport(ReportXlsx):
                         order.operation_end_time).strftime(
                         '%d/%m/%Y %H:%M:%S')
                 order_type = ''
-                if order.type:
+                if order.type and order.type in type_dict:
                     order_type = type_dict[order.type]
                 order_row = [
                     order.name, order_type, line.zone, start_date, end_date,
