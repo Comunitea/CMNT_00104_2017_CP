@@ -20,6 +20,7 @@
     'data': [
         'data/product.xml',
         'views/sale.xml',
+        'views/account.xml',
         'wizard/port_scale_create_order.xml',
         'wizard/sale_make_invoice_view.xml'
     ],

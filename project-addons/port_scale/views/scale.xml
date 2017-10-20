@@ -53,7 +53,6 @@
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree colors="green:scale_state=='AUTORIZADO' or departure_authorization!=False;orange:scale_state in ('AUTORIZADA CAP','AUTORIZADA AP' ) ">
-                <field name="departure_authorization" invisible="1"/>
                 <field name="name"/>
                 <field name="ship" fg_color="#1d2168:True;"/>
                 <field name="etd"/>
@@ -61,7 +60,8 @@
                 <field name="draft"/>
                 <field name="dock"/>
                 <field name="gt"/>
-                <field name="scale_state"/>
+                <field name="scale_state" invisible="1"/>
+                <field name="departure_authorization"/>
                 <field name="fondeo_previo"/>
                 <field name="observaciones"/>
             </tree>
@@ -332,7 +332,22 @@
         <field name="domain">[('state', '!=', 'done')]</field>
     </record>
 
+
     <menuitem name="All scales" parent="port_managament_submenu" action="port_scale_action" id="port_scale_all" sequence="5"/>
+
+
+    <record id="port_scale_action_disabled" model="ir.actions.act_window">
+        <field name="name">Scales</field>
+        <field name="res_model">port.scale</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="limit">100</field>
+        <field name="view_id" ref="port_scale_all_view_tree"/>
+        <field name="search_view_id" ref="port_scale_view_search"/>
+        <field name="domain">[('active', '=', False)]</field>
+    </record>
+
+    <menuitem name="All disabled scales" parent="port_managament_submenu" action="port_scale_action_disabled" id="port_scale_all_disabled" sequence="6"/>
 
 
     <record id="action_partner_form" model="ir.actions.act_window">

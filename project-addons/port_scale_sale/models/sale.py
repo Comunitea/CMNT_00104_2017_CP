@@ -85,6 +85,13 @@ class SaleOrder(models.Model):
         new_line = self.env['sale.order.line'].create(new_line_vals)
 
     @api.multi
+    def _prepare_invoice(self):
+        vals = super(SaleOrder, self)._prepare_invoice()
+        if self._context.get('group_invoices', False) == 'ship':
+            vals['ship'] = self.ship.id
+        return vals
+
+    @api.multi
     def action_invoice_create(self, grouped=False, final=False):
         grouped = True
         if self._context.get('group_invoices', False) == 'ship':
