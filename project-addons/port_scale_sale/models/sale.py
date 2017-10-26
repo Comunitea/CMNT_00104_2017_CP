@@ -11,8 +11,8 @@ class SaleOrder(models.Model):
 
     _inherit = 'sale.order'
 
-    scale = fields.Many2one('port.scale', required=True)
-    ship = fields.Many2one('ship', related='scale.ship')
+    scale = fields.Many2one('port.scale', required=False)
+    ship = fields.Many2one('ship')
     input_request_date = fields.Datetime(related="scale.input_request_date")
     scale_state = fields.Selection(related="scale.state", readonly=True)
     anchoring_request_date = fields.\
@@ -33,6 +33,7 @@ class SaleOrder(models.Model):
          ('in', 'In')))
     tugs_in = fields.Many2many('port.tug', related='scale.tugs_in')
     tugs_out = fields.Many2many('port.tug', related='scale.tugs_out')
+    tugs_move = fields.Many2many('port.tug', related='scale.tugs_move')
 
     def _impute(self, product_id, percent):
         new_line_vals = {

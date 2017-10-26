@@ -25,8 +25,10 @@
                     <field name="coast_pilot"/>
                     <field name="operation_start_time"/>
                     <field name="operation_end_time"/>
-                    <field name="tugs_in" widget="many2many_tags"/>
-                    <field name="tugs_out" widget="many2many_tags"/>
+                    <field name="type" invisible="1"/>
+                    <field name="tugs_in" string="tugs" widget="many2many_tags" attrs="{'invisible': [('type', '!=', 'in')]}"/>
+                    <field name="tugs_out" string="tugs" widget="many2many_tags" attrs="{'invisible': [('type', '!=', 'out')]}"/>
+                    <field name="tugs_move" string="tugs" widget="many2many_tags" attrs="{'invisible': [('type', '!=', 'move')]}"/>
                 </field>
                 <field name="payment_term_id" position="attributes">
                     <attribute name="invisible">1</attribute>

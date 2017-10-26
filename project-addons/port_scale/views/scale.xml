@@ -178,6 +178,7 @@
                             <field name="dock_side"/>
                             <field name="tugs_in" widget="many2many_tags" options="{'no_create_edit': True}"/>
                             <field name="tugs_out" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                            <field name="tugs_move" widget="many2many_tags" options="{'no_create_edit': True}"/>
                             <field name="load"/>
                             <field name="load_qty"/>
                         </group>
@@ -198,6 +199,7 @@
                                 <field name="observaciones"/>
                                 <field name="departure_authorization"/>
                                 <field name="reten"/>
+                                <field name="reten_subalterno"/>
                                 <field name="docking_start_time"/>
                                 <field name="docking_end_time"/>
                                 <field name="anchor_start_time"/>

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-12 18:14+0000\n"
-"PO-Revision-Date: 2017-10-04 12:32+0200\n"
+"PO-Revision-Date: 2017-10-26 17:29+0200\n"
 "Last-Translator: Jesús Ventosinos Mayor <jesus@comunitea.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_dock
 msgid "Dock"
 msgstr "Atraque"
+
+#. module: port_scale_sale
+#: model:ir.ui.view,arch_db:port_scale_sale.port_scale_create_order_form
+#: model:ir.ui.view,arch_db:port_scale_sale.view_order_form_port_scale
+msgid "tugs"
+msgstr "Remolcadores"
 
 #. module: port_scale_sale
 #: model:product.product,name:port_scale_sale.product_anchoring
