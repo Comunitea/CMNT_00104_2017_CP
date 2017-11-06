@@ -17,7 +17,9 @@ class Ship(models.Model):
     scales = fields.One2many('port.scale', 'ship')
     scales_count = fields.Integer(compute='_get_scales_count')
     gt = fields.Float("GT")
-    attachment_count = fields.Integer('Attachments', compute='_compute_attachment_count')
+    attachment_count = fields.Integer(
+        'Attachments', compute='_compute_attachment_count',
+        search='_search_attachment_count')
 
     @api.depends('scales')
     def _get_scales_count(self):
@@ -29,6 +31,19 @@ class Ship(models.Model):
         result = action.read()[0]
         result['domain'] = [('ship', 'in', self.ids)]
         return result
+
+    def _search_attachment_count(self, operator, operand):
+        if operand in (None, False):
+            operand = 0
+        self.env.cr.execute("""
+SELECT sp.id as id
+FROM ir_attachment ia RIGHT OUTER JOIN
+     ship sp ON ia.res_id=sp.id AND ia.res_model='ship'
+GROUP BY sp.id
+HAVING count(ia.id) %s %s;
+        """ % (operator, operand))
+        ship_ids = [x[0] for x in self.env.cr.fetchall()]
+        return [('id', 'in', ship_ids)]
 
     def _compute_attachment_count(self):
         for ship in self:
