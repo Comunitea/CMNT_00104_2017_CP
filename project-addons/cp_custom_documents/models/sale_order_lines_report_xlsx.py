@@ -17,6 +17,7 @@ class OrderLinesReport(ReportXlsx):
         sheet = workbook.add_worksheet('1')
         pos = 1
         header = [u'Escala', u'Tipo', u'Zona', u'Fecha inicio', u'Fecha fin',
+                  u'Fecha de solicitud',
                   u'Barco', u'Bandera', u'G.T.',  u'Remolcadores', u'Práctico',
                   u'Total', u'Muelle']
         sheet.write_row(0, 0, header)
@@ -25,7 +26,7 @@ class OrderLinesReport(ReportXlsx):
                      'in': 'Entrada'}
         for order in orders:
             for line in order.order_line:
-                start_date = end_date = ''
+                start_date = request_date = end_date = ''
                 if order.operation_start_time:
                     start_date = fields.Datetime.from_string(
                         order.operation_start_time).strftime(
@@ -34,11 +35,15 @@ class OrderLinesReport(ReportXlsx):
                     end_date = fields.Datetime.from_string(
                         order.operation_end_time).strftime(
                         '%d/%m/%Y %H:%M:%S')
+                if order.request_date:
+                    request_date = fields.Datetime.from_string(
+                        order.request_date).strftime(
+                        '%d/%m/%Y %H:%M:%S')
                 order_type = ''
                 if order.type and order.type in type_dict:
                     order_type = type_dict[order.type]
                 order_row = [
-                    order.name, order_type, line.zone, start_date, end_date,
+                    order.scale.name, order_type, line.zone, start_date, end_date, request_date,
                     order.scale.ship.name, order.scale.ship.country.name,
                     order.scale.ship.gt, ', '.join([x.name for x in order.scale.tugs_in]),
                     order.coast_pilot.name, order.amount_total,
