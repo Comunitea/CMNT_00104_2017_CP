@@ -22,6 +22,7 @@ class SaleOrder(models.Model):
     coast_pilot = fields.Many2one('res.users')
     operation_start_time = fields.Datetime()
     operation_end_time = fields.Datetime()
+    request_date = fields.Datetime()
     operation = fields.Selection(
         (('D', 'disembarkation'),
          ('E', 'embarkation'),

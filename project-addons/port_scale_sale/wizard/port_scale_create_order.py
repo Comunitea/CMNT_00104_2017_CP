@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions, _
 
 
 class PortScaleCreateOrder(models.TransientModel):
@@ -75,6 +75,11 @@ class PortScaleCreateOrder(models.TransientModel):
 
     @api.multi
     def create_order(self):
+        if self.operation_start_time and self.operation_end_time and \
+                self.operation_start_time > self.operation_end_time:
+            raise exceptions.UserError(
+                _('The operation start time must be earlier than the \
+operation end time'))
         order_vals = {
             'partner_id': self.partner_id.id,
             'pricelist_id': self.pricelist.id,
@@ -87,6 +92,12 @@ class PortScaleCreateOrder(models.TransientModel):
             'operation_end_time': self.operation_end_time,
             'zone': self.zone
         }
+        if self.scale_state == 'input':
+            order_vals['request_date'] = self.scale.input_request_date
+        elif self.scale_state == 'anchoring':
+            order_vals['request_date'] = self.scale.anchoring_request_date
+        elif self.scale_state == 'departure':
+            order_vals['request_date'] = self.scale.departure_request_date
         new_order = self.env['sale.order'].create(order_vals)
         if self.type:
             prods = [self.env.ref('port_scale_sale.product_%s' % self.type)]
