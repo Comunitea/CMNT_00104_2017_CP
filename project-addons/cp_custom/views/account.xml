@@ -15,6 +15,7 @@
             </field>
             <field name="amount_total_signed" position="after">
                 <field name="amount_tax" string="IVA"/>
+                <field name="paydays"/>
             </field>
         </field>
     </record>
