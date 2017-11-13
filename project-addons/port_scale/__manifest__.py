@@ -14,8 +14,11 @@
     'depends': [
         'base',
         'web',
+        'account',
+        'sales_team',
+        'document',
         'web_digital_sign',
-        'web_tree_dynamic_colored_field'
+        'web_tree_dynamic_colored_field',
     ],
     'data': [
         'security/port_scale_security.xml',
