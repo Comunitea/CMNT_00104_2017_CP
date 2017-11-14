@@ -31,7 +31,7 @@ class SaleOrder(models.Model):
     type = fields.Selection(
         (('out', 'Out'),
          ('move', 'Move'),
-         ('in', 'In')))
+         ('in', 'In'),('compensacion', 'Compensación')))
     tugs_in = fields.Many2many('port.tug', related='scale.tugs_in')
     tugs_out = fields.Many2many('port.tug', related='scale.tugs_out')
     tugs_move = fields.Many2many('port.tug', related='scale.tugs_move')

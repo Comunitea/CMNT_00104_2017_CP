@@ -27,14 +27,14 @@
                         </group>
                         <group>
                             <field name="gt"/>
-                            <field name="partner_name"/>
+                            <field name="partner_name" invisible="1"/>
                             <field name="partner_id"/>
                             <field name="user_id"/>
                             <field name="tugs_in" string="tugs" widget="many2many_tags" attrs="{'invisible': [('type', '!=', 'in')]}"/>
                             <field name="tugs_out" string="tugs" widget="many2many_tags" attrs="{'invisible': [('type', '!=', 'out')]}"/>
                             <field name="tugs_move" string="tugs" widget="many2many_tags" attrs="{'invisible': [('type', '!=', 'move')]}"/>
                             <field name="pricelist"/>
-                            <field name="fiscal_position" domain="[('id', 'in', (%(l10n_es.fp_extra)d, %(l10n_es.fp_nacional)d))]"/>
+                            <field name="fiscal_position" domain="[('id', 'in', (%(l10n_es.1_fp_extra)d, %(l10n_es.1_fp_nacional)d))]"/>
                             <field name="reten"/>
                             <field name="reten_subalterno"/>
                             <field name="dock"/>

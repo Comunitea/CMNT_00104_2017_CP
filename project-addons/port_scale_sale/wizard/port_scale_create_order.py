@@ -37,7 +37,7 @@ class PortScaleCreateOrder(models.TransientModel):
     type = fields.Selection(
         (('in', 'In'),
          ('move', 'Move'),
-         ('out', 'Out')), required=True)
+         ('out', 'Out'),('compensacion', 'Compensación')), required=True)
     reten = fields.Boolean(related='scale.reten')
     reten_subalterno = fields.Boolean(related='scale.reten_subalterno')
 
@@ -118,9 +118,8 @@ operation end time'))
                 new_line = self.env['sale.order.line'].new(new_line_vals)
                 new_line.product_id_change()
                 new_line.gt_zone_change()
-                line_vals = new_line._convert_to_write(
-                    new_line._cache)
-
+                line_vals = new_line._convert_to_write(new_line._cache)
+                line_vals.update({'tax_id': self.fiscal_position.id == self.env.ref('l10n_es.1_fp_nacional').id and [(6, 0, [self.env.ref('l10n_es.account_tax_template_s_iva21s').id])] or []})
                 new_line = self.env['sale.order.line'].create(line_vals)
         new_order.action_confirm()
         action = self.env.ref('sale.action_orders').read()[0]
