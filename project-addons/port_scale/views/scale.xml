@@ -30,7 +30,7 @@
         <field name="model">port.scale</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree colors="green:scale_state=='AUTORIZADO' or departure_authorization!=False;orange:scale_state in ('AUTORIZADA CAP','AUTORIZADA AP' ) ">
+            <tree colors="green:departure_authorization!=False">
                 <field name="departure_authorization" invisible="1"/>
                 <field name="name"/>
                 <field name="ship" fg_color="#1d2168:True;"/>
@@ -52,7 +52,7 @@
         <field name="model">port.scale</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree colors="green:scale_state=='AUTORIZADO' or departure_authorization!=False;orange:scale_state in ('AUTORIZADA CAP','AUTORIZADA AP') ">
+            <tree colors="green:departure_authorization!=False">
                 <field name="name"/>
                 <field name="ship" fg_color="#1d2168:True;"/>
                 <field name="etd"/>
@@ -168,7 +168,7 @@
                     <group>
                         <group>
                             <field name="ship"/>
-                            <field name="partner_name" invisible="1"/>
+                            <field name="partner_name"/>
                             <field name="partner_id"/>
                             <field name="name"/>
                             <field name="gt"/>
