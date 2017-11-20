@@ -119,7 +119,12 @@ operation end time'))
                 new_line.product_id_change()
                 new_line.gt_zone_change()
                 line_vals = new_line._convert_to_write(new_line._cache)
-                line_vals.update({'tax_id': self.fiscal_position.id == self.env.ref('l10n_es.1_fp_nacional').id and [(6, 0, [self.env.ref('l10n_es.account_tax_template_s_iva21s').id])] or []})
+                iva_21_account_tax = self.env['port.tide'].search([('name','=','S_IVA21')])
+                if iva_21_account_tax:
+                    iva_21_account_tax_id = iva_21_account_tax.id
+                #line_vals.update({'tax_id': self.fiscal_position.id == self.env.ref('l10n_es.1_fp_nacional').id and [(6, 0, [self.env.ref('l10n_es.account_tax_template_s_iva21s').id])] or []})
+                line_vals.update({'tax_id': self.fiscal_position.id == self.env.ref('l10n_es.1_fp_nacional').id and [
+                    (6, 0, [iva_21_account_tax_id])] or []})
                 new_line = self.env['sale.order.line'].create(line_vals)
         new_order.action_confirm()
         action = self.env.ref('sale.action_orders').read()[0]
