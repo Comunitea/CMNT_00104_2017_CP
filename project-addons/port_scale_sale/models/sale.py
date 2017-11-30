@@ -12,7 +12,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     scale = fields.Many2one('port.scale', required=False)
-    ship = fields.Many2one('ship')
+    ship = fields.Many2one('ship', string="Buque")
     input_request_date = fields.Datetime(related="scale.input_request_date")
     scale_state = fields.Selection(related="scale.state", readonly=True)
     anchoring_request_date = fields.\
@@ -32,11 +32,13 @@ class SaleOrder(models.Model):
         (('out', 'Out'),
          ('move', 'Move'),
          ('in', 'In'),('compensacion', 'Compensación')))
-    tugs_in = fields.Many2many('port.tug', related='scale.tugs_in')
-    tugs_out = fields.Many2many('port.tug', related='scale.tugs_out')
-    tugs_move = fields.Many2many('port.tug', related='scale.tugs_move')
+    #tugs_in = fields.Many2many('port.tug', related='scale.tugs_in')
+    #tugs_out = fields.Many2many('port.tug', related='scale.tugs_out')
+    #tugs_move = fields.Many2many('port.tug', related='scale.tugs_move')
+    tugs = fields.Many2many('port.tug', 'sale_order_tugs_relation', string='Remolcadores')
     reten = fields.Boolean(related='scale.reten')
     reten_subalterno = fields.Boolean(related='scale.reten_subalterno')
+    quality_service_satisfaction = fields.Integer(related='scale.quality_service_satisfaction', string="Satisfacción con el servicio")
 
     def _impute(self, product_id, percent):
         new_line_vals = {

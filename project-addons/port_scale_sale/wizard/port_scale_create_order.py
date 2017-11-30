@@ -92,12 +92,26 @@ operation end time'))
             'operation_end_time': self.operation_end_time,
             'zone': self.zone
         }
+
+        #Rellenamos el campo 'remolcadores' en función de la operación
+        if self.type == 'in':
+            order_vals['tugs'] = [(6, 0, self.tugs_in.ids)]
+        elif self.type == 'move':
+            order_vals['tugs'] = [(6, 0, self.tugs_move.ids)]
+        elif self.type == 'out':
+            order_vals['tugs'] = [(6, 0, self.tugs_out.ids)]
+
+        print "****TUGS VALE: %s" %(order_vals['tugs'])
+
+
         if self.scale_state == 'input':
             order_vals['request_date'] = self.scale.input_request_date
         elif self.scale_state == 'anchoring':
             order_vals['request_date'] = self.scale.anchoring_request_date
         elif self.scale_state == 'departure':
             order_vals['request_date'] = self.scale.departure_request_date
+
+
         new_order = self.env['sale.order'].create(order_vals)
         if self.type:
             prods = [self.env.ref('port_scale_sale.product_%s' % self.type)]
