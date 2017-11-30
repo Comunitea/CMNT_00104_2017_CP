@@ -35,6 +35,8 @@ class SaleOrder(models.Model):
     tugs_in = fields.Many2many('port.tug', related='scale.tugs_in')
     tugs_out = fields.Many2many('port.tug', related='scale.tugs_out')
     tugs_move = fields.Many2many('port.tug', related='scale.tugs_move')
+    reten = fields.Boolean(related='scale.reten')
+    reten_subalterno = fields.Boolean(related='scale.reten_subalterno')
 
     def _impute(self, product_id, percent):
         new_line_vals = {
