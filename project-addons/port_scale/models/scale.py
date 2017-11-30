@@ -65,6 +65,7 @@ class PortScale(models.Model):
     input_request_date = fields.Datetime()
     anchoring_request_date = fields.Datetime()
     departure_request_date = fields.Datetime()
+    request_date = fields.Datetime(string="Fecha Solicitud Operación")
 
     @api.multi
     def set_input_request_date(self):

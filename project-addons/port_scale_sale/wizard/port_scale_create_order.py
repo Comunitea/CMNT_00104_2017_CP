@@ -103,11 +103,13 @@ operation end time'))
 
         if self.scale_state == 'input':
             order_vals['request_date'] = self.scale.input_request_date
+            scale_request_date = self.scale.input_request_date
         elif self.scale_state == 'anchoring':
             order_vals['request_date'] = self.scale.anchoring_request_date
+            scale_request_date = self.scale.anchoring_request_date
         elif self.scale_state == 'departure':
             order_vals['request_date'] = self.scale.departure_request_date
-
+            scale_request_date = self.scale.departure_request_date
 
         new_order = self.env['sale.order'].create(order_vals)
         if self.type:
@@ -140,6 +142,10 @@ operation end time'))
         new_order.action_confirm()
         action = self.env.ref('sale.action_orders').read()[0]
         action['domain'] = "[('id', '=', " + str(new_order.id) + ")]"
+
+        #Actualizo el campo de la escala
+        self.scale.write({'request_date':scale_request_date})
+
         if self.env.context.get("next_state", False):
             eval("self.scale." + self.env.context["next_state"],
                  {'self': self})

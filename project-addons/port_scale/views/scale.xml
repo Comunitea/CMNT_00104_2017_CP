@@ -78,6 +78,7 @@
                 <field name="name"/>
                 <field name="ship" fg_color="#1d2168:True;"/>
                 <field name="eta"/>
+                <field name="request_date"/>
                 <field name="undocking_end_time"/>
                 <field name="origin"/>
                 <field name="partner_name"/>
@@ -186,12 +187,13 @@
                         </group>
                         <group>
                             <group col="3" colspan="3">
-                                <field name="input_request_date" string="Request date" attrs="{'invisible': [('state', '!=', 'input')]}"/>
+                                <field name="input_request_date" string="Fecha Solicitud Entrada" attrs="{'invisible': [('state', '!=', 'input')]}"/>
                                 <button name="set_input_request_date" type="object" icon="fa-clock-o" string="Set request dates" attrs="{'invisible': ['|',('input_request_date', '!=', False),('state', '!=', 'input')]}"/>
-                                <field name="anchoring_request_date" string="Request date" attrs="{'invisible': [('state', '!=', 'anchoring')]}"/>
+                                <field name="anchoring_request_date" string="Fecha Solicitud Fondeo" attrs="{'invisible': [('state', '!=', 'anchoring')]}"/>
                                 <button name="set_anchoring_request_date" type="object" icon="fa-clock-o" string="Set request dates" attrs="{'invisible': ['|',('anchoring_request_date', '!=', False),('state', '!=', 'anchoring')]}"/>
-                                <field name="departure_request_date" string="Request date" attrs="{'invisible': [('state', '!=', 'departure')]}"/>
+                                <field name="departure_request_date" string="Fecha Solicitud Salida" attrs="{'invisible': [('state', '!=', 'departure')]}"/>
                                 <button name="set_departure_request_date" type="object" icon="fa-clock-o" string="Set request dates" attrs="{'invisible': ['|',('departure_request_date', '!=', False),('state', '!=', 'departure')]}"/>
+                                <field name="request_date"/>
                             </group>
                             <group col="2">
                                 <field name="eta"/>
