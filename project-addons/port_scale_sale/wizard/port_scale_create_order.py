@@ -101,9 +101,6 @@ operation end time'))
         elif self.type == 'out':
             order_vals['tugs'] = [(6, 0, self.tugs_out.ids)]
 
-        print "****TUGS VALE: %s" %(order_vals['tugs'])
-
-
         if self.scale_state == 'input':
             order_vals['request_date'] = self.scale.input_request_date
         elif self.scale_state == 'anchoring':
