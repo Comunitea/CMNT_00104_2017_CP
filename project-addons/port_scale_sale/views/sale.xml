@@ -57,7 +57,7 @@
                     <field name="ship"/>
                 </field>
                 <field name="date_order" position="after">
-                    <field name="request_date" string="Fecha Solic. Servicio"/>
+                    <field name="request_date" string="Fecha Solic.Servicio"/>
                 </field>
             </field>
         </record>
@@ -77,7 +77,7 @@
                     <field name="ship"/>
                 </field>
                 <field name="date_order" position="after">
-                    <field name="request_date" string="Fecha Solic. Servicio"/>
+                    <field name="request_date" string="Fecha Solic.Servicio"/>
                 </field>
             </field>
         </record>
