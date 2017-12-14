@@ -154,6 +154,8 @@ class PortScale(models.Model):
             # [05/12/17] Si los campos ETA y ETD se modifican por el usuario no se pueden machacar
             # con los que nos vienen de Portel
             if created_scale:
+                print "UID ESCRITURA: %s"%(created_scale.write_uid.id)
+                print "UID CREACION: %s" % (created_scale.create_uid.id)
                 if created_scale.write_uid == created_scale.create_uid:
                     scale_vals['eta'] = eta
                     scale_vals['etd'] = etd
@@ -166,7 +168,7 @@ class PortScale(models.Model):
                      ('name', '=', '****'),
                      '|', ('active', '=', True), ('active', '=', False)])
                 if sendend_scale:
-                    if sendend_scale.write_uid == sendend_scale.create_uid:
+                    if self.write_uid == sendend_scale.create_uid:
                         scale_vals['eta'] = eta
                         scale_vals['etd'] = etd
                     sendend_scale.write(scale_vals)
