@@ -66,8 +66,9 @@ class PortScale(models.Model):
             if scale_element.findtext('ETD'):
                 etd = self.parse_api_datetime(scale_element.findtext('ETD'))
 
-            #[05/12/17] Si los campos ETA y ETD se modifican por el usuario no se pueden machacar
-            #con los que nos vienen de Portel
+            #[05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock side)
+            # se modifican por el usuario no se pueden machacar con los que nos vienen de Portel
+
             scale_vals = {
                 'name': scale_element.findtext('NUM_ESCALA'),
                 'scale_state': scale_element.findtext('ESTADO'),
@@ -151,13 +152,22 @@ class PortScale(models.Model):
                  ('name', '=', scale_vals['name']),
                  '|', ('active', '=', True), ('active', '=', False)])
 
-            # [05/12/17] Si los campos ETA y ETD se modifican por el usuario no se pueden machacar
-            # con los que nos vienen de Portel
+            # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock_side)
+            # se modifican por el usuario no se pueden machacar con los que nos vienen de Portel
             if created_scale:
                 try:
                     if created_scale.write_uid.id == created_scale.create_uid.id:
                         scale_vals['eta'] = eta
                         scale_vals['etd'] = etd
+                    else:
+                        if 'draft' in scale_vals:
+                            del scale_vals['draft']
+                        if 'dock' in scale_vals:
+                            del scale_vals['dock']
+                        if 'norays' in scale_vals:
+                            del scale_vals['norays']
+                        if 'dock_side' in scale_vals:
+                            del scale_vals['dock_side']
                 except:
                     scale_vals['eta'] = eta
                     scale_vals['etd'] = etd
@@ -174,6 +184,15 @@ class PortScale(models.Model):
                         if sendend_scale.write_uid.id == sendend_scale.create_uid.id:
                             scale_vals['eta'] = eta
                             scale_vals['etd'] = etd
+                        else:
+                            if 'draft' in scale_vals:
+                                del scale_vals['draft']
+                            if 'dock' in scale_vals:
+                                del scale_vals['dock']
+                            if 'norays' in scale_vals:
+                                del scale_vals['norays']
+                            if 'dock_side' in scale_vals:
+                                del scale_vals['dock_side']
                     except:
                         scale_vals['eta'] = eta
                         scale_vals['etd'] = etd
