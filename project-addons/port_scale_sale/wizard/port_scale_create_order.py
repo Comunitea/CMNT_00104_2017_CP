@@ -160,8 +160,8 @@ operation end time'))
             scale_write_vals.update({'undocking_start_time': self.operation_start_time})
             scale_write_vals.update({'undocking_end_time': self.operation_end_time})
 
-        print '*********SELF.TYPE: %s' % (self.type)
-        print '*********SCALE WRITE VALS: %s'%(scale_write_vals)
+        #print '*********SELF.TYPE: %s' % (self.type)
+        #print '*********SCALE WRITE VALS: %s'%(scale_write_vals)
         self.scale.write(scale_write_vals)
 
 
