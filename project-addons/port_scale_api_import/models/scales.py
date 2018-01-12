@@ -164,7 +164,7 @@ class PortScale(models.Model):
 
                     if 'draft' in scale_vals and created_scale.draft and created_scale.draft != scale_vals['draft']:
                         del scale_vals['draft']
-                    if 'dock' in scale_vals and created_scale.dock and created_scale.dock != scale_vals['dock']:
+                    if 'dock' in scale_vals and created_scale.dock and created_scale.dock.id != scale_vals['dock']:
                         del scale_vals['dock']
                     if 'norays' in scale_vals and created_scale.norays and created_scale.norays != scale_vals['norays']:
                         del scale_vals['norays']
@@ -187,7 +187,7 @@ class PortScale(models.Model):
 
                         if 'draft' in scale_vals and sendend_scale.draft and sendend_scale.draft != scale_vals['draft']:
                             del scale_vals['draft']
-                        if 'dock' in scale_vals and sendend_scale.dock and sendend_scale.dock != scale_vals['dock']:
+                        if 'dock' in scale_vals and sendend_scale.dock and sendend_scale.dock.id != scale_vals['dock']:
                             del scale_vals['dock']
                         if 'norays' in scale_vals and sendend_scale.norays and sendend_scale.norays != scale_vals['norays']:
                             del scale_vals['norays']
