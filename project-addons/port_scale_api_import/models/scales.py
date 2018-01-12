@@ -147,7 +147,7 @@ class PortScale(models.Model):
             if scale_element.findtext('DESPACHADO_SALIDA'):
                 scale_vals['departure_authorization'] = self.BOOL_API[
                     scale_element.findtext('DESPACHADO_SALIDA')]
-            created_scale = self.env['port.scale'].search(
+            created_scales = self.env['port.scale'].search(
                 [('ship', '=', scale_vals['ship']),
                  ('name', '=', scale_vals['name']),
                  '|', ('active', '=', True), ('active', '=', False)])
@@ -155,44 +155,46 @@ class PortScale(models.Model):
             # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock_side)
             # se modifican por el usuario no se pueden machacar con los que nos vienen de Portel
             #[13/01/18] No puedo controlar que el cambio lo haga Portel u otro usuario, por lo que solo controlo que sean distintos
-            if created_scale:
-                if not created_scale.eta:
-                    scale_vals['eta'] = eta
-                if not created_scale.etd:
-                    scale_vals['etd'] = etd
+            if created_scales:
+                for created_scale in created_scales:
+                    if not created_scale.eta:
+                        scale_vals['eta'] = eta
+                    if not created_scale.etd:
+                        scale_vals['etd'] = etd
 
-                if 'draft' in scale_vals and created_scale.draft and created_scale.draft != scale_vals['draft']:
-                    del scale_vals['draft']
-                if 'dock' in scale_vals and created_scale.dock and created_scale.dock != scale_vals['dock']:
-                    del scale_vals['dock']
-                if 'norays' in scale_vals and created_scale.norays and created_scale.norays != scale_vals['norays']:
-                    del scale_vals['norays']
-                if 'dock_side' in scale_vals and created_scale.dock_side and created_scale.dock_side != scale_vals['dock_side']:
-                    del scale_vals['dock_side']
+                    if 'draft' in scale_vals and created_scale.draft and created_scale.draft != scale_vals['draft']:
+                        del scale_vals['draft']
+                    if 'dock' in scale_vals and created_scale.dock and created_scale.dock != scale_vals['dock']:
+                        del scale_vals['dock']
+                    if 'norays' in scale_vals and created_scale.norays and created_scale.norays != scale_vals['norays']:
+                        del scale_vals['norays']
+                    if 'dock_side' in scale_vals and created_scale.dock_side and created_scale.dock_side != scale_vals['dock_side']:
+                        del scale_vals['dock_side']
 
-                created_scale.write(scale_vals)
+                    created_scale.write(scale_vals)
             else:
                 #Buscamos si hay alguna escala como enviada para este barco
-                sendend_scale = self.env['port.scale'].search(
+                sendend_scales = self.env['port.scale'].search(
                     [('ship', '=', scale_vals['ship']),
                      ('name', '=', '****'),
                      '|', ('active', '=', True), ('active', '=', False)])
-                if sendend_scale:
-                    if not sendend_scale.eta:
-                        scale_vals['eta'] = eta
-                    if not sendend_scale.etd:
-                        scale_vals['etd'] = etd
+                if sendend_scales:
+                    for sendend_scale in sendend_scales:
+                        if not sendend_scale.eta:
+                            scale_vals['eta'] = eta
+                        if not sendend_scale.etd:
+                            scale_vals['etd'] = etd
 
-                    if 'draft' in scale_vals and sendend_scale.draft and sendend_scale.draft != scale_vals['draft']:
-                        del scale_vals['draft']
-                    if 'dock' in scale_vals and sendend_scale.dock and sendend_scale.dock != scale_vals['dock']:
-                        del scale_vals['dock']
-                    if 'norays' in scale_vals and sendend_scale.norays and sendend_scale.norays != scale_vals['norays']:
-                        del scale_vals['norays']
-                    if 'dock_side' in scale_vals and sendend_scale.dock_side and sendend_scale.dock_side != scale_vals['dock_side']:
-                        del scale_vals['dock_side']
+                        if 'draft' in scale_vals and sendend_scale.draft and sendend_scale.draft != scale_vals['draft']:
+                            del scale_vals['draft']
+                        if 'dock' in scale_vals and sendend_scale.dock and sendend_scale.dock != scale_vals['dock']:
+                            del scale_vals['dock']
+                        if 'norays' in scale_vals and sendend_scale.norays and sendend_scale.norays != scale_vals['norays']:
+                            del scale_vals['norays']
+                        if 'dock_side' in scale_vals and sendend_scale.dock_side and sendend_scale.dock_side != scale_vals['dock_side']:
+                            del scale_vals['dock_side']
 
-                    sendend_scale.write(scale_vals)
+                        sendend_scale.write(scale_vals)
                 else:
                     scale_vals['eta'] = eta
                     scale_vals['etd'] = etd
