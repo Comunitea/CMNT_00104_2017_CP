@@ -42,7 +42,7 @@ class PortScaleCreateOrder(models.TransientModel):
     reten_subalterno = fields.Boolean(related='scale.reten_subalterno')
 
 
-    '''@api.onchange('type')
+    """"@api.onchange('type')
     def onchange_type(self):
         if self.type == 'docking':
             self.operation_start_time = self.scale.docking_start_time
@@ -55,7 +55,7 @@ class PortScaleCreateOrder(models.TransientModel):
             self.operation_end_time = self.scale.change_docking_end_time
         if self.type == 'in':
             self.operation_start_time = self.scale.anchor_start_time
-            self.operation_end_time = self.scale.anchor_end_time'''
+            self.operation_end_time = self.scale.anchor_end_time"""
 
     @api.model
     def default_get(self, fields):
@@ -144,7 +144,27 @@ operation end time'))
         action['domain'] = "[('id', '=', " + str(new_order.id) + ")]"
 
         #Actualizo el campo de la escala
-        self.scale.write({'request_date':scale_request_date})
+        scale_write_vals = {'request_date': scale_request_date}
+
+        if self.type == 'move':
+            scale_write_vals.update({'change_docking_start_time': self.operation_start_time})
+            scale_write_vals.update({'change_docking_end_time': self.operation_end_time})
+        elif self.type == 'in':
+            if self.scale.anchor_start_time:
+                scale_write_vals.update({'anchor_start_time': self.operation_start_time})
+                scale_write_vals.update({'anchor_end_time': self.operation_end_time})
+            else:
+                scale_write_vals.update({'docking_start_time': self.operation_start_time})
+                scale_write_vals.update({'docking_end_time': self.operation_end_time})
+        elif self.type == 'out':
+            scale_write_vals.update({'undocking_start_time': self.operation_start_time})
+            scale_write_vals.update({'undocking_end_time': self.operation_end_time})
+
+        print '*********SELF.TYPE: %s' % (self.type)
+        print '*********SCALE WRITE VALS: %s'%(scale_write_vals)
+        self.scale.write(scale_write_vals)
+
+
 
         if self.env.context.get("next_state", False):
             eval("self.scale." + self.env.context["next_state"],

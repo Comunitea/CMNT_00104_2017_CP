@@ -83,14 +83,14 @@ class PortScale(models.Model):
         self.docking_start_time = datetime.now()
 
     def end_docking(self):
-        self.docking_end_time = datetime.now()
+        #self.docking_end_time = datetime.now()
         self.state = 'departure'
 
     def start_anchor(self):
         self.anchor_start_time = datetime.now()
 
     def end_anchor(self):
-        self.anchor_end_time = datetime.now()
+        #self.anchor_end_time = datetime.now()
         self.state = 'anchoring'
 
     def anchor_without_coast_pilot(self):
@@ -103,14 +103,15 @@ class PortScale(models.Model):
         self.undocking_start_time = datetime.now()
 
     def end_undocking(self):
-        self.undocking_end_time = datetime.now()
+        #self.undocking_end_time = datetime.now()
         self.state = 'done'
 
     def start_change_docking(self):
         self.change_docking_start_time = datetime.now()
 
     def end_change_docking(self):
-        self.change_docking_end_time = datetime.now()
+        return True
+        #self.change_docking_end_time = datetime.now()
 
     @api.multi
     def unlink(self):
