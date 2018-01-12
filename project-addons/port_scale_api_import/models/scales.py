@@ -154,23 +154,21 @@ class PortScale(models.Model):
 
             # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock_side)
             # se modifican por el usuario no se pueden machacar con los que nos vienen de Portel
+            #[13/01/18] No puedo controlar que el cambio lo haga Portel u otro usuario, por lo que solo controlo que sean distintos
             if created_scale:
-                try:
-                    if created_scale.write_uid.id == created_scale.create_uid.id:
-                        scale_vals['eta'] = eta
-                        scale_vals['etd'] = etd
-                    else:
-                        if 'draft' in scale_vals:
-                            del scale_vals['draft']
-                        if 'dock' in scale_vals:
-                            del scale_vals['dock']
-                        if 'norays' in scale_vals:
-                            del scale_vals['norays']
-                        if 'dock_side' in scale_vals:
-                            del scale_vals['dock_side']
-                except:
+                if not created_scale.eta:
                     scale_vals['eta'] = eta
+                if not created_scale.etd:
                     scale_vals['etd'] = etd
+
+                if 'draft' in scale_vals and created_scale.draft and created_scale.draft != scale_vals['draft']:
+                    del scale_vals['draft']
+                if 'dock' in scale_vals and created_scale.dock and created_scale.dock != scale_vals['dock']:
+                    del scale_vals['dock']
+                if 'norays' in scale_vals and created_scale.norays and created_scale.norays != scale_vals['norays']:
+                    del scale_vals['norays']
+                if 'dock_side' in scale_vals and created_scale.dock_side and created_scale.dock_side != scale_vals['dock_side']:
+                    del scale_vals['dock_side']
 
                 created_scale.write(scale_vals)
             else:
@@ -180,22 +178,19 @@ class PortScale(models.Model):
                      ('name', '=', '****'),
                      '|', ('active', '=', True), ('active', '=', False)])
                 if sendend_scale:
-                    try:
-                        if sendend_scale.write_uid.id == sendend_scale.create_uid.id:
-                            scale_vals['eta'] = eta
-                            scale_vals['etd'] = etd
-                        else:
-                            if 'draft' in scale_vals:
-                                del scale_vals['draft']
-                            if 'dock' in scale_vals:
-                                del scale_vals['dock']
-                            if 'norays' in scale_vals:
-                                del scale_vals['norays']
-                            if 'dock_side' in scale_vals:
-                                del scale_vals['dock_side']
-                    except:
+                    if not sendend_scale.eta:
                         scale_vals['eta'] = eta
+                    if not sendend_scale.etd:
                         scale_vals['etd'] = etd
+
+                    if 'draft' in scale_vals and sendend_scale.draft and sendend_scale.draft != scale_vals['draft']:
+                        del scale_vals['draft']
+                    if 'dock' in scale_vals and sendend_scale.dock and sendend_scale.dock != scale_vals['dock']:
+                        del scale_vals['dock']
+                    if 'norays' in scale_vals and sendend_scale.norays and sendend_scale.norays != scale_vals['norays']:
+                        del scale_vals['norays']
+                    if 'dock_side' in scale_vals and sendend_scale.dock_side and sendend_scale.dock_side != scale_vals['dock_side']:
+                        del scale_vals['dock_side']
 
                     sendend_scale.write(scale_vals)
                 else:
