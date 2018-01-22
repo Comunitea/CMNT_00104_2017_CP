@@ -35,9 +35,11 @@ class PortScaleCreateOrder(models.TransientModel):
     zone = fields.Selection([('A', 'A'), ('B', 'B'), ('C', 'C')], 'Zone',
                             default='A', required=True)
     type = fields.Selection(
-        (('in', 'In'),
-         ('move', 'Move'),
-         ('out', 'Out'),('compensacion', 'Compensación')), required=True)
+        (('entrada', 'Entrada'),
+         ('movimiento', 'Movimiento'),
+         ('salida', 'Salida'),
+         ('compensacion', 'Compensación')
+         ), required=True)
     reten = fields.Boolean(related='scale.reten')
     reten_subalterno = fields.Boolean(related='scale.reten_subalterno')
 
@@ -113,7 +115,13 @@ operation end time'))
 
         new_order = self.env['sale.order'].create(order_vals)
         if self.type:
-            prods = [self.env.ref('port_scale_sale.product_%s' % self.type)]
+            TYPES_DICT = {
+                'entrada': 'in',
+                'movimiento': 'move',
+                'salida': 'out',
+                'compensacion': 'compensacion'
+            }
+            prods = [self.env.ref('port_scale_sale.product_%s' % TYPES_DICT[self.type])]
             if self.type == 'in':
                 prods.append(self.env.ref('port_scale_sale.product_docking'))
             elif self.type == 'move':

@@ -22,16 +22,18 @@ class SaleOrder(models.Model):
     coast_pilot = fields.Many2one('res.users')
     operation_start_time = fields.Datetime()
     operation_end_time = fields.Datetime()
-    request_date = fields.Datetime()
+    request_date = fields.Datetime(string="Fecha Solic. Servicio")
     operation = fields.Selection(
         (('D', 'disembarkation'),
          ('E', 'embarkation'),
          ('T', 'transfer'),
          ('R', 'scraps')), related="scale.operation", readonly=True)
     type = fields.Selection(
-        (('out', 'Out'),
-         ('move', 'Move'),
-         ('in', 'In'),('compensacion', 'Compensación')))
+        (('salida', 'Salida'),
+         ('movimiento', 'Movimiento'),
+         ('entrada', 'Entrada'),
+         ('compensacion', 'Compensación'))
+    )
     #tugs_in = fields.Many2many('port.tug', related='scale.tugs_in')
     #tugs_out = fields.Many2many('port.tug', related='scale.tugs_out')
     #tugs_move = fields.Many2many('port.tug', related='scale.tugs_move')
