@@ -14,7 +14,7 @@
                     <group>
                         <label for="signature"/>
                         <br/>
-                        <field name="signature" widget="signature" nolabel="1" options="{'size': [330,470]}"/>
+                        <field name="signature" widget="signature" nolabel="1" options="{'size': [310,400]}"/>
                         <field name="scale_id" invisible="1"/>
                     </group>
                     <group col="3">
