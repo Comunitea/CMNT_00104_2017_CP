@@ -43,22 +43,6 @@ class PortScaleCreateOrder(models.TransientModel):
     reten = fields.Boolean(related='scale.reten')
     reten_subalterno = fields.Boolean(related='scale.reten_subalterno')
 
-
-    """"@api.onchange('type')
-    def onchange_type(self):
-        if self.type == 'docking':
-            self.operation_start_time = self.scale.docking_start_time
-            self.operation_end_time = self.scale.docking_end_time
-        if self.type == 'undocking':
-            self.operation_start_time = self.scale.undocking_start_time
-            self.operation_end_time = self.scale.undocking_end_time
-        if self.type == 'move':
-            self.operation_start_time = self.scale.change_docking_start_time
-            self.operation_end_time = self.scale.change_docking_end_time
-        if self.type == 'in':
-            self.operation_start_time = self.scale.anchor_start_time
-            self.operation_end_time = self.scale.anchor_end_time"""
-
     @api.model
     def default_get(self, fields):
         res = super(PortScaleCreateOrder, self).default_get(fields)
@@ -96,11 +80,11 @@ operation end time'))
         }
 
         #Rellenamos el campo 'remolcadores' en función de la operación
-        if self.type == 'in':
+        if self.type == 'entrada':
             order_vals['tugs'] = [(6, 0, self.tugs_in.ids)]
-        elif self.type == 'move':
+        elif self.type == 'movimiento':
             order_vals['tugs'] = [(6, 0, self.tugs_move.ids)]
-        elif self.type == 'out':
+        elif self.type == 'salida':
             order_vals['tugs'] = [(6, 0, self.tugs_out.ids)]
 
         if self.scale_state == 'input':
@@ -122,12 +106,12 @@ operation end time'))
                 'compensacion': 'compensacion'
             }
             prods = [self.env.ref('port_scale_sale.product_%s' % TYPES_DICT[self.type])]
-            if self.type == 'in':
+            if self.type == 'entrada':
                 prods.append(self.env.ref('port_scale_sale.product_docking'))
-            elif self.type == 'move':
+            elif self.type == 'movimiento':
                 prods.append(self.env.ref('port_scale_sale.product_docking'))
                 prods.append(self.env.ref('port_scale_sale.product_undocking'))
-            elif self.type == 'out':
+            elif self.type == 'salida':
                 prods.append(self.env.ref('port_scale_sale.product_undocking'))
             for line_prod in prods:
                 new_line_vals = {
@@ -154,17 +138,17 @@ operation end time'))
         #Actualizo el campo de la escala
         scale_write_vals = {'request_date': scale_request_date}
 
-        if self.type == 'move':
+        if self.type == 'movimiento':
             scale_write_vals.update({'change_docking_start_time': self.operation_start_time})
             scale_write_vals.update({'change_docking_end_time': self.operation_end_time})
-        elif self.type == 'in':
+        elif self.type == 'entrada':
             if self.scale.anchor_start_time:
                 scale_write_vals.update({'anchor_start_time': self.operation_start_time})
                 scale_write_vals.update({'anchor_end_time': self.operation_end_time})
             else:
                 scale_write_vals.update({'docking_start_time': self.operation_start_time})
                 scale_write_vals.update({'docking_end_time': self.operation_end_time})
-        elif self.type == 'out':
+        elif self.type == 'salida':
             scale_write_vals.update({'undocking_start_time': self.operation_start_time})
             scale_write_vals.update({'undocking_end_time': self.operation_end_time})
 

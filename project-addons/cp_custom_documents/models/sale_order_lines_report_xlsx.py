@@ -21,9 +21,9 @@ class OrderLinesReport(ReportXlsx):
                   u'Barco', u'Bandera', u'G.T.',  u'Remolcadores', u'Práctico',
                   u'Total', u'Muelle']
         sheet.write_row(0, 0, header)
-        type_dict = {'out': 'Salida',
-                     'move': 'Movimiento',
-                     'in': 'Entrada'}
+        type_dict = {'salida': 'Salida',
+                     'movimiento': 'Movimiento',
+                     'entrada': 'Entrada'}
         for order in orders:
             for line in order.order_line:
                 start_date = request_date = end_date = ''

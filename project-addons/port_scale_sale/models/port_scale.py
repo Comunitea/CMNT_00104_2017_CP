@@ -23,28 +23,28 @@ class PortScale(models.Model):
 
     def start_docking(self):
         super(PortScale, self).start_docking()
-        return self._create_order('in',
+        return self._create_order('entrada',
                                   self.docking_start_time,
                                   self.docking_end_time,
                                   "end_docking()")
 
     def start_undocking(self):
         super(PortScale, self).start_undocking()
-        return self._create_order('out',
+        return self._create_order('salida',
                                   self.undocking_start_time,
                                   self.undocking_end_time,
                                   "end_undocking()")
 
     def start_anchor(self):
         super(PortScale, self).start_anchor()
-        return self._create_order('in',
+        return self._create_order('entrada',
                                   self.anchor_start_time,
                                   self.anchor_end_time,
                                   "end_anchor()")
 
     def start_change_docking(self):
         super(PortScale, self).start_change_docking()
-        return self._create_order('move',
+        return self._create_order('movimiento',
                                   self.change_docking_start_time,
                                   self.change_docking_end_time,
                                   "end_change_docking()")
