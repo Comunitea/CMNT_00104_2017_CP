@@ -76,7 +76,8 @@ operation end time'))
             'type': self.type,
             'operation_start_time': self.operation_start_time,
             'operation_end_time': self.operation_end_time,
-            'zone': self.zone
+            'zone': self.zone,
+            'user_id': self.user_id.id
         }
 
         #Rellenamos el campo 'remolcadores' en función de la operación
