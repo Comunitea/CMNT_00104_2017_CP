@@ -4,20 +4,43 @@
 
 <odoo>
     <data>
+
         <template id="report_exemption_iva_document">
-            <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+            <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
             <div class="page">
-                <p class="text-center">DECLARACIÓN A EFECTOS DE DOCUMENTAR LA AFECTACIÓN DE LOS BUQUES A NAVEGACIÓN MARÍTIMA INTERNACIONAL</p>
-                <p><span t-field="o.partner_id.name"/> Con domicilio en <span t-field="o.partner_id.street"/> en <span t-field="o.partner_id.city"/> y con N.I.F <span t-field="o.partner_id.vat"/></p>
+                <p class="text-center">DECLARACIÓN A EFECTOS DE DOCUMENTAR LA AFECTACIÓN DE LOS BUQUES A NAVEGACIÓN
+                    MARÍTIMA INTERNACIONAL
+                </p>
+                <p>
+                    <span t-field="o.partner_id.name"/>
+                    Con domicilio en
+                    <span t-field="o.partner_id.street"/>
+                    en
+                    <span t-field="o.partner_id.city"/>
+                    y con N.I.F
+                    <span t-field="o.partner_id.vat"/>
+                </p>
                 <p>Como consignatario de los siguientes buques:</p>
                 <t t-foreach="o.ships" t-as="ship">
                     <p t-field="ship.name"/>
                 </t>
-                <p style="margin-top: 55px;">Incluidos en la factura <span t-field="o.number"/></p>
+                <p style="margin-top: 55px;">Incluidos en la factura
+                    <span t-field="o.number"/>
+                </p>
                 <p>DECLARA QUE</p>
-                <p>De los datos obrantes en esta empresa Consignataria, el/los buque/s citado/s se encuentra/n afectado/s a la Navegación Marítima Internacional.</p>
-                <p>Lo que certifico a los efectos de documentar y acreditar la exención del IVA en los términos y actos que procedan según la legislación vigente en la materia.</p>
-                <p class="text-center"><span t-field="o.partner_id.city"/> a <t t-if="o.date_invoice"><span t-esc="time.strftime('%d de %B de %Y', time.strptime(o.date_invoice,'%Y-%m-%d'))"/></t></p>
+                <p>De los datos obrantes en esta empresa Consignataria, el/los buque/s citado/s se encuentra/n
+                    afectado/s a la Navegación Marítima Internacional.
+                </p>
+                <p>Lo que certifico a los efectos de documentar y acreditar la exención del IVA en los términos y actos
+                    que procedan según la legislación vigente en la materia.
+                </p>
+                <p class="text-center">
+                    <span t-field="o.partner_id.city"/>
+                    a
+                    <t t-if="o.date_invoice">
+                        <span t-esc="time.strftime('%d de %B de %Y', time.strptime(o.date_invoice,'%Y-%m-%d'))"/>
+                    </t>
+                </p>
             </div>
         </template>
 
@@ -30,18 +53,18 @@
         </template>
 
         <report
-            id="report_exemption"
-            string="IVA exemption"
-            model="account.invoice"
-            report_type="qweb-pdf"
-            file="cp_custom_documents.report_exemption_iva_"
-            name="cp_custom_documents.report_exemption_iva_"
+                id="report_exemption"
+                string="IVA exemption"
+                model="account.invoice"
+                report_type="qweb-pdf"
+                file="cp_custom_documents.report_exemption_iva_"
+                name="cp_custom_documents.report_exemption_iva_"
         />
 
 
         <record id="paperformat_iva" model="report.paperformat">
             <field name="name">IVA paperformat</field>
-            <field name="default" eval="True" />
+            <field name="default" eval="True"/>
             <field name="format">A4</field>
             <field name="page_height">0</field>
             <field name="page_width">0</field>
@@ -50,7 +73,7 @@
             <field name="margin_bottom">23</field>
             <field name="margin_left">7</field>
             <field name="margin_right">7</field>
-            <field name="header_line" eval="False" />
+            <field name="header_line" eval="False"/>
             <field name="header_spacing">3</field>
             <field name="dpi">90</field>
         </record>
@@ -58,5 +81,66 @@
         <record id="report_exemption" model="ir.actions.report.xml">
             <field name="paperformat_id" ref="paperformat_iva"/>
         </record>
+
+        <!--[25/01/18] Plantilla de exención de IVA para mandar por email -->
+        <record id="email_template_vat_exemption" model="mail.template">
+            <field name="name">Certificado de exención de IVA - Enviar por e-mail</field>
+            <field name="email_from">
+                ${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}
+            </field>
+            <field name="subject">${object.company_id.name}
+                Certificado de Exención de IVA (Ref. ${object.name or 'n/a' })
+            </field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="report_exemption"/>
+            <field name="report_name">
+                ${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
+            </field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+<p>Dear ${object.partner_id.name}
+% set access_action = object.with_context(force_website=True).get_access_action()
+% set doc_name = 'quotation' if object.state in ('draft', 'sent') else 'order confirmation'
+% set is_online = access_action and access_action['type'] == 'ir.actions.act_url'
+% set access_name = is_online and object.template_id and doc_name == 'quotation' and 'Accept and pay %s online' % doc_name or 'View %s' % doc_name
+% set access_url = is_online and access_action['url'] or None
+
+% if object.partner_id.parent_id:
+    (<i>${object.partner_id.parent_id.name}</i>)
+% endif
+,</p>
+<p>
+Here is your ${doc_name} <strong>${object.name}</strong>
+% if object.origin:
+(with reference: ${object.origin} )
+% endif
+amounting in <strong>${object.amount_total} ${object.pricelist_id.currency_id.name}</strong>
+from ${object.company_id.name}.
+</p>
+
+    <br/><br/>
+% if is_online:
+    <center>
+        <a href="${access_url}" style="background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;" class="o_default_snippet_text">${access_name}</a>
+        <br/><br/>
+        <span style="color:#888888">(or view attached PDF)</span>
+    </center>
+    <br/>
+% endif
+
+<p>You can reply to this email if you have any questions.</p>
+<p>Thank you,</p>
+
+<p style="color:#eeeeee;">
+% if object.user_id and object.user_id.signature:
+    ${object.user_id.signature | safe}
+% endif
+</p>
+]]></field>
+        </record>
+
+
     </data>
 </odoo>
