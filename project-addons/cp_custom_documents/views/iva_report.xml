@@ -116,7 +116,7 @@ Here is your ${doc_name} <strong>${object.name}</strong>
 % if object.origin:
 (with reference: ${object.origin} )
 % endif
-amounting in <strong>${object.amount_total} ${object.pricelist_id.currency_id.name}</strong>
+amounting in <strong>${object.amount_total} €</strong>
 from ${object.company_id.name}.
 </p>
 
