@@ -7,6 +7,7 @@ from lxml import etree
 import logging
 from odoo import models, api
 from datetime import datetime, timedelta
+import time
 
 _logger = logging.getLogger(__name__)
 
@@ -50,6 +51,7 @@ class PortScale(models.Model):
         scales_client = Client(api_url)
         scales_data = scales_client.service[api_method]()
         xml_doc = etree.fromstring(scales_data)
+        scale_history_facade = self.env['port.scale.history']
         for scale_element in xml_doc.iter('LIS_ESCALAS'):
             status_code = scale_element.findtext('STATUS')
             if status_code != '**':
@@ -60,6 +62,7 @@ class PortScale(models.Model):
             ship_vals = {
                 'name': scale_element.findtext('BUQUE'),
             }
+            scale_history_operations = ''
             eta = etd = ''
             if scale_element.findtext('ETA'):
                 eta = self.parse_api_datetime(scale_element.findtext('ETA'))
@@ -131,8 +134,10 @@ class PortScale(models.Model):
 
             if created_ship:
                 created_ship.write(ship_vals)
+                scale_history_operations += "Buque ACTUALIZADO con valores: %s\n" % (ship_vals)
             else:
                 created_ship = self.env['ship'].create(ship_vals)
+                scale_history_operations+="Buque CREADO con valores: %s\n"%(ship_vals)
             scale_vals['ship'] = created_ship.id
 
             if scale_element.findtext('MUELLE'):
@@ -147,6 +152,7 @@ class PortScale(models.Model):
             if scale_element.findtext('DESPACHADO_SALIDA'):
                 scale_vals['departure_authorization'] = self.BOOL_API[
                     scale_element.findtext('DESPACHADO_SALIDA')]
+
             created_scales = self.env['port.scale'].search(
                 [('ship', '=', scale_vals['ship']),
                  ('name', '=', scale_vals['name']),
@@ -172,6 +178,13 @@ class PortScale(models.Model):
                         del scale_vals['dock_side']
 
                     created_scale.write(scale_vals)
+                    scale_history_operations += "Escala ACTUALIZADA con valores: %s\n" % (scale_vals)
+                    scale_history_vals = {
+                        'date_execution': datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S"),
+                        'scale_id': created_scale.id,
+                        'operations_performed': scale_history_operations
+                    }
+                    scale_history_facade.create(scale_history_vals)
             else:
                 #Buscamos si hay alguna escala como enviada para este barco
                 sendend_scales = self.env['port.scale'].search(
@@ -195,7 +208,21 @@ class PortScale(models.Model):
                             del scale_vals['dock_side']
 
                         sendend_scale.write(scale_vals)
+                        scale_history_operations += "Escala enviada ACTUALIZADA con valores: %s\n" % (scale_vals)
+                        scale_history_vals = {
+                            'date_execution': datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S"),
+                            'scale_id': sendend_scale.id,
+                            'operations_performed': scale_history_operations
+                        }
+                        scale_history_facade.create(scale_history_vals)
                 else:
                     scale_vals['eta'] = eta
                     scale_vals['etd'] = etd
-                    self.env['port.scale'].create(scale_vals)
+                    created_scale = self.env['port.scale'].create(scale_vals)
+                    scale_history_operations += "Escala CREADA con valores: %s\n" % (scale_vals)
+                    scale_history_vals = {
+                        'date_execution': datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S"),
+                        'scale_id': created_scale.id,
+                        'operations_performed': scale_history_operations
+                    }
+                    scale_history_facade.create(scale_history_vals)

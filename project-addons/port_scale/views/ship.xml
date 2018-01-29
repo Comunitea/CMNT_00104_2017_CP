@@ -80,7 +80,7 @@
             <field name="search_view_id" ref="ship_view_search"/>
         </record>
 
-        <menuitem name="Ships" parent="port_managament_submenu" action="ship_action" id="ship_menu"/>
+        <menuitem name="Ships" parent="port_management_configuration_menu" action="ship_action" id="ship_menu" sequence="8"/>
 
     </data>
 </odoo>

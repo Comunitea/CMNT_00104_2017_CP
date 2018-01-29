@@ -367,4 +367,62 @@
     </record>
 
     <menuitem id="menu_partner" name="Consignatarios" action="action_partner_form" parent="port_management_configuration_menu"/>
+
+
+    <record id="port_scale_history_view_tree" model="ir.ui.view">
+        <field name="name">port.scale.history.view.tree</field>
+        <field name="model">port.scale.history</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date_execution"/>
+                <field name="scale_id"/>
+                <field name="operations_performed"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="port_scale_history_view_form" model="ir.ui.view">
+        <field name="name">port.scale.history.form</field>
+        <field name="model">port.scale.history</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="date_execution"/>
+                        <field name="scale_id"/>
+                        <field name="operations_performed"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="port_scale_history_view_search" model="ir.ui.view">
+        <field name="name">port.scale.history.view.search</field>
+        <field name="model">port.scale.history</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+               <field name="date_execution"/>
+               <field name="scale_id"/>
+           </search>
+        </field>
+    </record>
+
+    <record id="port_scale_action_show_history" model="ir.actions.act_window">
+        <field name="name">Importaciones de Portel</field>
+        <field name="res_model">port.scale.history</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="limit">100</field>
+        <field name="view_id" ref="port_scale_history_view_tree"/>
+        <field name="search_view_id" ref="port_scale_history_view_search"/>
+    </record>
+
+    <menuitem name="Importaciones de Portel" parent="port_managament_submenu" action="port_scale_action_show_history" id="port_scale_history_show_all" sequence="7"/>
 </odoo>

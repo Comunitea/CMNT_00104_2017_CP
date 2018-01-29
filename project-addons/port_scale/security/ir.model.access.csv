@@ -7,3 +7,5 @@ access_ship,access_ship,model_ship,base.group_user,1,1,1,1
 access_port_tide,access_port_tide,model_port_tide,base.group_user,1,1,1,1
 access_port_tug,access_port_tug,model_port_tug,base.group_user,1,0,0,0
 access_port_tug_system,access_port_tug_system,model_port_tug,base.group_system,1,1,1,1
+access_port_scale_history_seaman,access_port_scale_history_seaman,model_port_scale_history,port_scale.group_seaman_administrative,1,1,1,0
+access_port_scale_history_pilot,access_port_scale_history_pilot,model_port_scale_history,port_scale.group_coast_pilot,1,1,1,1
