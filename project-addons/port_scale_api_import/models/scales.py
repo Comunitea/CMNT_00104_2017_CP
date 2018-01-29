@@ -180,7 +180,7 @@ class PortScale(models.Model):
                     created_scale.write(scale_vals)
                     scale_history_operations += "Escala ACTUALIZADA con valores: %s\n" % (scale_vals)
                     scale_history_vals = {
-                        'date_execution': datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S"),
+                        'date_execution': datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
                         'scale_id': created_scale.id,
                         'operations_performed': scale_history_operations
                     }
@@ -210,7 +210,7 @@ class PortScale(models.Model):
                         sendend_scale.write(scale_vals)
                         scale_history_operations += "Escala enviada ACTUALIZADA con valores: %s\n" % (scale_vals)
                         scale_history_vals = {
-                            'date_execution': datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S"),
+                            'date_execution': datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
                             'scale_id': sendend_scale.id,
                             'operations_performed': scale_history_operations
                         }
@@ -221,7 +221,7 @@ class PortScale(models.Model):
                     created_scale = self.env['port.scale'].create(scale_vals)
                     scale_history_operations += "Escala CREADA con valores: %s\n" % (scale_vals)
                     scale_history_vals = {
-                        'date_execution': datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S"),
+                        'date_execution': datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
                         'scale_id': created_scale.id,
                         'operations_performed': scale_history_operations
                     }
