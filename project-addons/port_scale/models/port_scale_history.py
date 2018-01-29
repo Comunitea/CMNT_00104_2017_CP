@@ -14,4 +14,5 @@ class PortScaleHistory(models.Model):
 
     date_execution = fields.Datetime(string='Fecha Ejecución', required=True)
     scale_id = fields.Many2one('port.scale', string='Escala',required=True)
+    ship_id = fields.Many2one('ship', string='Buque',required=True)
     operations_performed = fields.Text('Operaciones realizadas')

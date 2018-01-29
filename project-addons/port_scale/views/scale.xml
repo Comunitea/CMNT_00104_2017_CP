@@ -377,6 +377,7 @@
             <tree>
                 <field name="date_execution"/>
                 <field name="scale_id"/>
+                <field name="ship_id"/>
                 <field name="operations_performed"/>
             </tree>
         </field>
@@ -394,6 +395,7 @@
                     <group>
                         <field name="date_execution"/>
                         <field name="scale_id"/>
+                        <field name="ship_id"/>
                         <field name="operations_performed"/>
                     </group>
                 </sheet>
@@ -408,8 +410,10 @@
         <field name="type">search</field>
         <field name="arch" type="xml">
             <search>
-               <field name="date_execution"/>
-               <field name="scale_id"/>
+                <field name="date_execution"/>
+                <field name="scale_id"/>
+                <field name="ship_id"/>
+                <field name="operations_performed"/>
            </search>
         </field>
     </record>

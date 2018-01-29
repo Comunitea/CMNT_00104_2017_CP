@@ -182,6 +182,7 @@ class PortScale(models.Model):
                     scale_history_vals = {
                         'date_execution': datetime.now(),
                         'scale_id': created_scale.id,
+                        'ship_id': created_scale.ship and created_scale.ship.id or False,
                         'operations_performed': scale_history_operations
                     }
                     scale_history_facade.create(scale_history_vals)
@@ -212,6 +213,7 @@ class PortScale(models.Model):
                         scale_history_vals = {
                             'date_execution': datetime.now(),
                             'scale_id': sendend_scale.id,
+                            'ship_id': sendend_scale.ship and sendend_scale.ship.id or False,
                             'operations_performed': scale_history_operations
                         }
                         scale_history_facade.create(scale_history_vals)
@@ -223,6 +225,7 @@ class PortScale(models.Model):
                     scale_history_vals = {
                         'date_execution': datetime.now(),
                         'scale_id': created_scale.id,
+                        'ship_id': created_scale.ship and created_scale.ship.id or False,
                         'operations_performed': scale_history_operations
                     }
                     scale_history_facade.create(scale_history_vals)
