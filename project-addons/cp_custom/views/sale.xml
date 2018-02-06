@@ -9,8 +9,8 @@
         <field name="inherit_id" ref="sale.view_quotation_tree"/>
         <field name="arch" type="xml">
             <field name="amount_total" position="before">
-                <field name="amount_untaxed" widget="monetary"/>
-                <field name="amount_tax" widget="monetary"/>
+                <field name="amount_untaxed" widget="monetary" sum="Total Base Imponible"/>
+                <field name="amount_tax" widget="monetary" sum="Total Impuestos"/>
             </field>
         </field>
     </record>
@@ -21,8 +21,8 @@
         <field name="inherit_id" ref="sale.view_order_tree"/>
         <field name="arch" type="xml">
             <field name="amount_total" position="before">
-                <field name="amount_untaxed" widget="monetary"/>
-                <field name="amount_tax" widget="monetary"/>
+                <field name="amount_untaxed" widget="monetary" sum="Total Base Imponible"/>
+                <field name="amount_tax" widget="monetary" sum="Total Impuestos"/>
             </field>
         </field>
     </record>
