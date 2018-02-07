@@ -10,23 +10,23 @@
                 <div class="col-xs-4"><strong>Consignatario / Agent</strong></div>
                 <div class="col-xs-8"><span t-field="doc.partner_id.name" /></div>
             </div>
-            <div class="row" style="margin-top:15px;">
+            <div class="row" style="margin-top:25px;">
                 <div class="col-xs-4"><strong>Buque / Ship</strong></div>
                 <div class="col-xs-8"><span t-field="doc.scale.ship.name" /></div>
             </div>
-            <div class="row" style="margin-top:15px;">
+            <div class="row" style="margin-top:25px;">
                 <div class="col-xs-4"><strong>Bandera / Flag</strong></div>
                 <div class="col-xs-8"><span t-field="doc.scale.ship.country.name" /></div>
             </div>
-            <div class="row" style="margin-top:15px;">
+            <div class="row" style="margin-top:25px;">
                 <div class="col-xs-4"><strong>Toneladas / G.T.</strong></div>
                 <div class="col-xs-8"><span t-field="doc.scale.gt" /></div>
             </div>
-            <div class="row" style="margin-top:15px;">
+            <div class="row" style="margin-top:25px;">
                 <div class="col-xs-4"><strong>Tipo / Type</strong></div>
                 <div class="col-xs-8"><span t-field="doc.type" /></div>
             </div>
-            <div class="row" style="margin-top:15px;">
+            <div class="row" style="margin-top:25px;">
                 <div class="col-xs-4"><strong>Fecha Solicitud Servicio / Operation Request Date</strong></div>
                 <div class="col-xs-8"><span t-field="doc.request_date" /></div>
             </div>
