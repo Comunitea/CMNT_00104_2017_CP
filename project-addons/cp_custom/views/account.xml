@@ -18,7 +18,7 @@
                 <field name="paydays"/>
             </field>
             <field name="state" position="replace">
-                <field name="state" fg_color="red:state=='draft';orange:state=='open';green:state=='paid'"/>
+                <field name="state" fg_color="red:state=='draft';orange:state=='open';lightgreen:state=='paid'"/>
             </field>
         </field>
     </record>
