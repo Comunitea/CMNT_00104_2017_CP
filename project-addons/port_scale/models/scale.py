@@ -54,8 +54,6 @@ class PortScale(models.Model):
     tugs_in = fields.Many2many('port.tug', 'scale_tugs_in_relation')
     tugs_out = fields.Many2many('port.tug', 'scale_tugs_out_relation')
     tugs_move = fields.Many2many('port.tug', 'scale_tugs_move_relation')
-    reten = fields.Boolean()
-    reten_subalterno = fields.Boolean()
     load = fields.Char()
     load_qty = fields.Float()
     departure_authorization = fields.Boolean()

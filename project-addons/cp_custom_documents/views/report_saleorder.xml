@@ -7,28 +7,28 @@
     <template id="report_saleorder_custom" inherit_id="sale.report_saleorder_document">
         <xpath expr="//div[@t-field='doc.partner_id']/../.." position="replace">
             <div class="row">
-                <div class="col-xs-4"><strong>Consignatario / Agent</strong></div>
-                <div class="col-xs-8"><span t-field="doc.partner_id.name" /></div>
+                <div class="col-xs-4" style="margin-top:45px"><strong>Consignatario / Agent</strong></div>
+                <div class="col-xs-8" style="margin-top:45px"><span t-field="doc.partner_id.name"/></div>
             </div>
-            <div class="row" style="margin-top:25px;">
+            <div class="row" >
                 <div class="col-xs-4"><strong>Buque / Ship</strong></div>
-                <div class="col-xs-8"><span t-field="doc.scale.ship.name" /></div>
+                <div class="col-xs-8"><span t-field="doc.scale.ship.name"/></div>
             </div>
-            <div class="row" style="margin-top:25px;">
+            <div class="row">
                 <div class="col-xs-4"><strong>Bandera / Flag</strong></div>
-                <div class="col-xs-8"><span t-field="doc.scale.ship.country.name" /></div>
+                <div class="col-xs-8"><span t-field="doc.scale.ship.country.name"/></div>
             </div>
-            <div class="row" style="margin-top:25px;">
+            <div class="row">
                 <div class="col-xs-4"><strong>Toneladas / G.T.</strong></div>
-                <div class="col-xs-8"><span t-field="doc.scale.gt" /></div>
+                <div class="col-xs-8"><span t-field="doc.scale.gt"/></div>
             </div>
-            <div class="row" style="margin-top:25px;">
+            <div class="row">
                 <div class="col-xs-4"><strong>Tipo / Type</strong></div>
-                <div class="col-xs-8"><span t-field="doc.type" /></div>
+                <div class="col-xs-8"><span t-field="doc.type"/></div>
             </div>
-            <div class="row" style="margin-top:25px;">
+            <div class="row">
                 <div class="col-xs-4"><strong>Fecha Solicitud Servicio / Operation Request Date</strong></div>
-                <div class="col-xs-8"><span t-field="doc.request_date" /></div>
+                <div class="col-xs-8"><span t-field="doc.request_date"/></div>
             </div>
         </xpath>
         <xpath expr="//span[@t-field='doc.name']/.." position="replace">

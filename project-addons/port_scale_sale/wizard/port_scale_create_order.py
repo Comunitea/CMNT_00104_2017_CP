@@ -40,8 +40,8 @@ class PortScaleCreateOrder(models.TransientModel):
          ('salida', 'Salida'),
          ('compensacion', 'Compensación')
          ), required=True)
-    reten = fields.Boolean(related='scale.reten')
-    reten_subalterno = fields.Boolean(related='scale.reten_subalterno')
+    reten = fields.Boolean('Retén?')
+    reten_subalterno = fields.Boolean('Retén subalterno?')
 
     @api.model
     def default_get(self, fields):
@@ -77,7 +77,9 @@ operation end time'))
             'operation_start_time': self.operation_start_time,
             'operation_end_time': self.operation_end_time,
             'zone': self.zone,
-            'user_id': self.user_id.id
+            'user_id': self.user_id.id,
+            'reten': self.reten,
+            'reten_subalterno': self.reten_subalterno
         }
 
         #Rellenamos el campo 'remolcadores' en función de la operación

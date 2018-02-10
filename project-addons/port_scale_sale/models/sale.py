@@ -38,8 +38,8 @@ class SaleOrder(models.Model):
     #tugs_out = fields.Many2many('port.tug', related='scale.tugs_out')
     #tugs_move = fields.Many2many('port.tug', related='scale.tugs_move')
     tugs = fields.Many2many('port.tug', 'sale_order_tugs_relation', string='Remolcadores')
-    reten = fields.Boolean(related='scale.reten')
-    reten_subalterno = fields.Boolean(related='scale.reten_subalterno')
+    reten = fields.Boolean('Retén?')
+    reten_subalterno = fields.Boolean('Retén subalterno?')
     quality_service_satisfaction = fields.Integer(related='scale.quality_service_satisfaction', string="Satisfacción con el servicio")
 
     def _impute(self, product_id, percent):

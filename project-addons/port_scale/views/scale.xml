@@ -202,8 +202,6 @@
                                 <field name="fondeo_previo"/>
                                 <field name="observaciones"/>
                                 <field name="departure_authorization"/>
-                                <field name="reten"/>
-                                <field name="reten_subalterno"/>
                                 <field name="docking_start_time"/>
                                 <field name="docking_end_time"/>
                                 <field name="anchor_start_time"/>
