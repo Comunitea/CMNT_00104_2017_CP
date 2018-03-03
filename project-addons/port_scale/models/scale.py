@@ -32,6 +32,7 @@ class PortScale(models.Model):
     eta = fields.Datetime()
     etd = fields.Datetime()
     scale_state = fields.Char()  # selection?
+    docked_state = fields.Char()
     fondeo_previo = fields.Boolean()
     observaciones = fields.Char()
     dock = fields.Many2one('port.dock')
