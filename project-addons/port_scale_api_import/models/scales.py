@@ -42,23 +42,51 @@ class PortScale(models.Model):
 
     @api.model
     def import_api_data(self):
+        scale_history_facade = self.env['port.scale.history']
         api_url = self.env['ir.config_parameter'].get_param(
             'port.scale.api.url')
         api_method = self.env['ir.config_parameter'].get_param(
             'port.scale.api.method')
         if not api_url or not api_method:
+	    scale_history_operations = '***NO SE HA ENCONTRADO EL WEBSERVICE O LA URL EN ODOO***'
+            scale_history_vals = {
+                'date_execution': datetime.now(),
+                'scale_id': 2,
+                'ship_id': 1,
+                'operations_performed': scale_history_operations
+            }
+            scale_history_facade.create(scale_history_vals)
             return
         scales_client = Client(api_url)
-        scales_data = scales_client.service[api_method]()
+	try:
+            scales_data = scales_client.service[api_method]()
+	except:
+	    scale_history_operations = '***NO SE HAN DEVUELTO VALORES DESDE PORTEL***'
+	    scale_history_vals = {
+                'date_execution': datetime.now(),
+                'scale_id': 2,
+                'ship_id': 1,
+                'operations_performed': scale_history_operations
+            }
+            scale_history_facade.create(scale_history_vals)
+	    return
         xml_doc = etree.fromstring(scales_data)
-        scale_history_facade = self.env['port.scale.history']
         for scale_element in xml_doc.iter('LIS_ESCALAS'):
             status_code = scale_element.findtext('STATUS')
             if status_code != '**':
                 _logger.error('%s : %s' %
                               (self.ERROR_CODES[status_code],
                                scale_element.findtext('DESCRIPCION')))
-                continue
+		
+		scale_history_operations = '%s : %s' %(self.ERROR_CODES[status_code],scale_element.findtext('DESCRIPCION'))
+                scale_history_vals = {
+                    'date_execution': datetime.now(),
+                    'scale_id': 2,
+                    'ship_id': 1,
+                    'operations_performed': scale_history_operations
+                }
+                scale_history_facade.create(scale_history_vals)
+                return
             ship_vals = {
                 'name': scale_element.findtext('BUQUE'),
             }
@@ -104,7 +132,7 @@ class PortScale(models.Model):
                 ship_vals['gt'] = float(scale_element.findtext(
                     'GT'))
             if scale_element.findtext('ESTADO_ATRAQUE'):
-                scale_vals['scale_state'] = scale_element.findtext(
+                scale_vals['docked_state'] = scale_element.findtext(
                     'ESTADO_ATRAQUE')
             if scale_element.findtext('FONDEO_PREVIO'):
                 scale_vals['fondeo_previo'] = self.BOOL_API[
@@ -120,32 +148,34 @@ class PortScale(models.Model):
 
             created_ship = False
             if ship_vals.get('imo', False):
-                created_ship = self.env['ship'].search(
+                created_ships = self.env['ship'].search(
                     [('imo', '=', ship_vals['imo'])])
-            if not created_ship and ship_vals.get('mmsi', False):
-                created_ship = self.env['ship'].search(
+            if not created_ships and ship_vals.get('mmsi', False):
+                created_ships = self.env['ship'].search(
                     [('mmsi', '=', ship_vals['mmsi'])])
 
-            if not created_ship and ship_vals.get('country', False) and \
+            if not created_ships and ship_vals.get('country', False) and \
                     ship_vals.get('callsign', False):
-                created_ship = self.env['ship'].search(
+                created_ships = self.env['ship'].search(
                     [('country', '=', ship_vals['country']),
                      ('callsign', '=', ship_vals['callsign'])])
 
-            if created_ship:
-                created_ship.write(ship_vals)
-                scale_history_operations += "Buque ACTUALIZADO con valores: %s\n" % (ship_vals)
+            if created_ships:
+		created_ship = created_ships[0]
+		try:
+                    created_ship.write(ship_vals)
+                    scale_history_operations += "Buque ACTUALIZADO con valores: %s\n" % (ship_vals)
+		except:
+		    scale_history_operations += "NO SE HA PODIDO ACTUALIZAR el buque con valores: %s\n" % (ship_vals)
             else:
                 created_ship = self.env['ship'].create(ship_vals)
                 scale_history_operations+="Buque CREADO con valores: %s\n"%(ship_vals)
             scale_vals['ship'] = created_ship.id
 
             if scale_element.findtext('MUELLE'):
-                created_dock = self.env['port.dock'].search(
-                    [('name', '=', scale_element.findtext('MUELLE'))])
+                created_dock = self.env['port.dock'].search([('name', '=', scale_element.findtext('MUELLE'))])
                 if not created_dock:
-                    created_dock = self.env['port.dock'].create(
-                        {'name': scale_element.findtext('MUELLE')})
+                    created_dock = self.env['port.dock'].create({'name': scale_element.findtext('MUELLE')})
                 scale_vals['dock'] = created_dock.id
             if scale_element.findtext('NORAYS'):
                 scale_vals['norays'] = scale_element.findtext('NORAYS')
@@ -229,3 +259,4 @@ class PortScale(models.Model):
                         'operations_performed': scale_history_operations
                     }
                     scale_history_facade.create(scale_history_vals)
+        return

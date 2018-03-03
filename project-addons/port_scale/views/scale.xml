@@ -199,6 +199,7 @@
                                 <field name="eta"/>
                                 <field name="etd"/>
                                 <field name="scale_state"/>
+				<field name="docked_state" string="Estado Atraque"/>
                                 <field name="fondeo_previo"/>
                                 <field name="observaciones"/>
                                 <field name="departure_authorization"/>
