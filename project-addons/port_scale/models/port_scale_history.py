@@ -3,7 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, api, fields
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
+import os
 
 
 class PortScaleHistory(models.Model):
@@ -24,7 +25,24 @@ class PortScaleHistory(models.Model):
         yesterday_scales_history = self.search([('date_execution','>=',first_hour_yesterday),('date_execution','<=',last_hour_yesterday)])
         if yesterday_scales_history:
             yesterday_scales_history.unlink()
+        return
 
+    @api.model
+    def cron_check_portel_history(self):
+        """
+        Si detectamos que entre la fecha y hora actual y la última importacion de Portel ha pasado + de 30 minutos
+        llamamos al script de reinicio presente en /home/odoo
+        """
+        last_scale_importation = self.search([],limit=1, order='date_execution DESC')
+        right_now = fields.Datetime.now()
+        d1 = datetime.strptime(right_now, "%Y-%m-%d %H:%M:%S")
+        d2 = datetime.strptime(last_scale_importation.date_execution, "%Y-%m-%d %H:%M:%S")
+        difference = d1 - d2
+        diff_as_tuple = divmod(difference.days * 86400 + difference.seconds, 60)
+        #Esto nos da una tupla de minutos, segundos
+        if diff_as_tuple[0] >= 30:
+            os.system('/home/odoo/reinicio_odoo.sh')
+        return
 
     date_execution = fields.Datetime(string='Fecha Ejecución', required=True)
     scale_id = fields.Many2one('port.scale', string='Escala',required=True)

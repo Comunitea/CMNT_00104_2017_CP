@@ -31,5 +31,18 @@
             <field name="args" eval="'()'"/>
         </record>
 
+        <record forcecreate="True" id="ir_cron_check importations" model="ir.cron">
+            <field name="name">[CP] Comprueba las importaciones de Portel</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model" eval="'port.scale.history'"/>
+            <field name="function" eval="'cron_check_portel_history'"/>
+            <field name="args" eval="'()'"/>
+        </record>
+
     </data>
 </odoo>

@@ -13,7 +13,6 @@ _logger = logging.getLogger(__name__)
 
 
 class PortScale(models.Model):
-
     _inherit = 'port.scale'
 
     ERROR_CODES = {
@@ -67,7 +66,7 @@ class PortScale(models.Model):
                 'scale_id': 2,
                 'ship_id': 1,
                 'operations_performed': scale_history_operations
-                }
+            }
             scale_history_facade.create(scale_history_vals)
             return
         xml_doc = etree.fromstring(scales_data)
@@ -77,8 +76,9 @@ class PortScale(models.Model):
                 _logger.error('%s : %s' %
                               (self.ERROR_CODES[status_code],
                                scale_element.findtext('DESCRIPCION')))
-		
-                scale_history_operations = '%s : %s' %(self.ERROR_CODES[status_code],scale_element.findtext('DESCRIPCION'))
+
+                scale_history_operations = '%s : %s' % (
+                self.ERROR_CODES[status_code], scale_element.findtext('DESCRIPCION'))
                 scale_history_vals = {
                     'date_execution': datetime.now(),
                     'scale_id': 2,
@@ -98,7 +98,7 @@ class PortScale(models.Model):
             if scale_element.findtext('ETD'):
                 etd = self.parse_api_datetime(scale_element.findtext('ETD'))
 
-            #[05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock side)
+            # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock side)
             # se modifican por el usuario no se pueden machacar con los que nos vienen de Portel
 
             scale_vals = {
@@ -169,32 +169,41 @@ class PortScale(models.Model):
                     scale_history_operations += "NO SE HA PODIDO ACTUALIZAR el buque con valores: %s\n" % (ship_vals)
             else:
                 created_ship = self.env['ship'].create(ship_vals)
-                scale_history_operations+="Buque CREADO con valores: %s\n"%(ship_vals)
+                scale_history_operations += "Buque CREADO con valores: %s\n" % (ship_vals)
 
             scale_vals['ship'] = created_ship.id
 
             if scale_element.findtext('MUELLE'):
-                created_docks = self.env['port.dock'].search([('name', '=', scale_element.findtext('MUELLE'))])
-                if not created_docks:
-                    created_dock = self.env['port.dock'].create({'name': scale_element.findtext('MUELLE')})
-                else:
-                    created_dock = created_docks[0]
+                try:
+                    created_docks = self.env['port.dock'].search([('name', '=', scale_element.findtext('MUELLE'))])
+                    if not created_docks:
+                        created_dock = self.env['port.dock'].create({'name': scale_element.findtext('MUELLE')})
+                    else:
+                        created_dock = created_docks[0]
+                    scale_vals['dock'] = created_dock.id
+                except:
+                    scale_history_operations += "NO SE HA PODIDO ACTUALIZAR la escala con valores: %s\n" % (
+                    scale_element)
 
-                scale_vals['dock'] = created_dock.id
             if scale_element.findtext('NORAYS'):
                 scale_vals['norays'] = scale_element.findtext('NORAYS')
             if scale_element.findtext('DESPACHADO_SALIDA'):
                 scale_vals['departure_authorization'] = self.BOOL_API[
                     scale_element.findtext('DESPACHADO_SALIDA')]
 
-            created_scales = self.env['port.scale'].search(
-                [('ship', '=', scale_vals['ship']),
-                 ('name', '=', scale_vals['name']),
-                 '|', ('active', '=', True), ('active', '=', False)])
+            if scale_vals.get('ship') and scale_vals.get('name'):
+                try:
+                    created_scales = self.env['port.scale'].search(
+                        [('ship', '=', scale_vals['ship']), ('name', '=', scale_vals['name']), '|',
+                         ('active', '=', True), ('active', '=', False)])
+                except:
+                    created_scales = False
+            else:
+                created_scales = False
 
             # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock_side)
             # se modifican por el usuario no se pueden machacar con los que nos vienen de Portel
-            #[13/01/18] No puedo controlar que el cambio lo haga Portel u otro usuario, por lo que solo controlo que sean distintos
+            # [13/01/18] No puedo controlar que el cambio lo haga Portel u otro usuario, por lo que solo controlo que sean distintos
             if created_scales:
                 for created_scale in created_scales:
                     if not created_scale.eta:
@@ -221,7 +230,7 @@ class PortScale(models.Model):
                     }
                     scale_history_facade.create(scale_history_vals)
             else:
-                #Buscamos si hay alguna escala como enviada para este barco
+                # Buscamos si hay alguna escala como enviada para este barco
                 sendend_scales = self.env['port.scale'].search(
                     [('ship', '=', scale_vals['ship']),
                      ('name', '=', '****'),
@@ -263,4 +272,4 @@ class PortScale(models.Model):
                         'operations_performed': scale_history_operations
                     }
                     scale_history_facade.create(scale_history_vals)
-        return
+        return True
