@@ -34,7 +34,7 @@ class PortScaleHistory(models.Model):
         llamamos al script de reinicio presente en /home/odoo
         """
         last_scale_importation = self.search([],limit=1, order='date_execution DESC')
-        port_scale_facade = self.env['port.scale.history']
+        port_scale_facade = self.env['port.scale']
         right_now = fields.Datetime.now()
         d1 = datetime.strptime(right_now, "%Y-%m-%d %H:%M:%S")
         d2 = datetime.strptime(last_scale_importation.date_execution, "%Y-%m-%d %H:%M:%S")
