@@ -40,8 +40,10 @@ class PortScaleHistory(models.Model):
         difference = d1 - d2
         diff_as_tuple = divmod(difference.days * 86400 + difference.seconds, 60)
         #Esto nos da una tupla de minutos, segundos
-        if diff_as_tuple[0] >= 30:
+        if diff_as_tuple[0] >= 0:
+            print "ANTES DEL REINICIO"
             os.system('echo odoo2017 | sudo -S sh /home/odoo/reinicio_odoo.sh')
+            print "DESPUES DEL REINICIO"
         return
 
     date_execution = fields.Datetime(string='Fecha Ejecución', required=True)
