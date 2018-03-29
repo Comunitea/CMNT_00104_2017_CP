@@ -34,6 +34,7 @@ class PortScaleHistory(models.Model):
         llamamos al script de reinicio presente en /home/odoo
         """
         last_scale_importation = self.search([],limit=1, order='date_execution DESC')
+        port_scale_facade = self.env['port.scale.history']
         right_now = fields.Datetime.now()
         d1 = datetime.strptime(right_now, "%Y-%m-%d %H:%M:%S")
         d2 = datetime.strptime(last_scale_importation.date_execution, "%Y-%m-%d %H:%M:%S")
@@ -41,10 +42,11 @@ class PortScaleHistory(models.Model):
         diff_as_tuple = divmod(difference.days * 86400 + difference.seconds, 60)
         #Esto nos da una tupla de minutos, segundos
         if diff_as_tuple[0] >= 0:
-            print "ANTES DEL REINICIO"
+            #Fuerzo la llamada del metodo
+            port_scale_facade.import_api_data()
             #os.system('echo odoo2017 | sudo -S sh /home/odoo/reinicio_odoo.sh')
-            os.system('sh /home/odoo/reinicio_odoo.sh')
-            print "DESPUES DEL REINICIO"
+            #os.system('sh /home/odoo/reinicio_odoo.sh')
+            #print "DESPUES DEL REINICIO"
         return
 
     date_execution = fields.Datetime(string='Fecha Ejecución', required=True)
