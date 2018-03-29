@@ -42,7 +42,8 @@ class PortScaleHistory(models.Model):
         #Esto nos da una tupla de minutos, segundos
         if diff_as_tuple[0] >= 0:
             print "ANTES DEL REINICIO"
-            os.system('echo odoo2017 | sudo -S sh /home/odoo/reinicio_odoo.sh')
+            #os.system('echo odoo2017 | sudo -S sh /home/odoo/reinicio_odoo.sh')
+            os.system('sh /home/odoo/reinicio_odoo.sh')
             print "DESPUES DEL REINICIO"
         return
 
