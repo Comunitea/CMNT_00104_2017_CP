@@ -20,6 +20,12 @@ class PortScale(models.Model):
         '02': 'No hay resultados',
         '03': 'No hay conexión con la BD del DUE',
         '04': 'No se ha configurado la cadena de conexión',
+        '90': 'Error conexión BD DUE',
+        '91': 'Error subproceso anulado',
+        '92': 'Error tiempo de espera caducado',
+        '93': 'Error en el nivel de transporte',
+        '94': 'Error de bloqueo',
+        '95': 'Error en el envío de correo',
         '99': 'Error general',
     }  # ** = correcto
 
@@ -55,7 +61,7 @@ class PortScale(models.Model):
                 'operations_performed': scale_history_operations
             }
             scale_history_facade.create(scale_history_vals)
-            return
+            return True
         scales_client = Client(api_url)
         try:
             scales_data = scales_client.service[api_method]()
@@ -68,7 +74,7 @@ class PortScale(models.Model):
                 'operations_performed': scale_history_operations
             }
             scale_history_facade.create(scale_history_vals)
-            return
+            return True
         xml_doc = etree.fromstring(scales_data)
         for scale_element in xml_doc.iter('LIS_ESCALAS'):
             status_code = scale_element.findtext('STATUS')
@@ -86,7 +92,7 @@ class PortScale(models.Model):
                     'operations_performed': scale_history_operations
                 }
                 scale_history_facade.create(scale_history_vals)
-                return
+                return True
 
             ship_vals = {
                 'name': scale_element.findtext('BUQUE'),
