@@ -210,16 +210,16 @@ class PortScale(models.Model):
                 # [13/01/18] No puedo controlar que el cambio lo haga Portel u otro usuario, por lo que solo controlo que sean distintos
                 if created_scales:
                     for created_scale in created_scales:
-			print "*** ME METO EN created_scales"
-			print "*** SCALE_VALS_KEYS: %s" %(scale_vals.keys())
-			print "*** SCALE_VALS: %s" %(scale_vals)
-			print "*** CREATED_SCALE.do_not_update_eta: %s"%(created_scale.do_not_update_eta)
-			print "*** CREATED_SCALE.do_not_update_etd: %s"%(created_scale.do_not_update_etd)
-			print "*** CREATED_SCALE.do_not_update_draft: %s"%(created_scale.do_not_update_draft)
-			print "*** CREATED_SCALE.do_not_update_dock: %s"%(created_scale.do_not_update_dock)
-			print "*** CREATED_SCALE.do_not_update_norays: %s"%(created_scale.do_not_update_norays)
-			print "*** CREATED_SCALE.do_not_update_dock_side: %s"%(created_scale.do_not_update_dock_side)
-			print "*** CREATED_SCALE.do_not_update_gt: %s"%(created_scale.do_not_update_gt)
+                        print "*** ME METO EN created_scales"
+                        print "*** SCALE_VALS_KEYS: %s" %(scale_vals.keys())
+                        print "*** SCALE_VALS: %s" %(scale_vals)
+                        print "*** CREATED_SCALE.do_not_update_eta: %s"%(created_scale.do_not_update_eta)
+                        print "*** CREATED_SCALE.do_not_update_etd: %s"%(created_scale.do_not_update_etd)
+                        print "*** CREATED_SCALE.do_not_update_draft: %s"%(created_scale.do_not_update_draft)
+                        print "*** CREATED_SCALE.do_not_update_dock: %s"%(created_scale.do_not_update_dock)
+                        print "*** CREATED_SCALE.do_not_update_norays: %s"%(created_scale.do_not_update_norays)
+                        print "*** CREATED_SCALE.do_not_update_dock_side: %s"%(created_scale.do_not_update_dock_side)
+                        print "*** CREATED_SCALE.do_not_update_gt: %s"%(created_scale.do_not_update_gt)
                         if 'eta' in scale_vals.keys() and created_scale.do_not_update_eta:
                             del scale_vals['eta']
                         if 'etd' in scale_vals.keys() and created_scale.dot_not_update_etd:
@@ -234,9 +234,9 @@ class PortScale(models.Model):
                             del scale_vals['dock_side']
                         if 'gt' in scale_vals.keys() and created_scale.do_not_update_gt:
                             del scale_vals['gt']
-			print "*** ACABO DE COMPROBAR EN created_scales"
+                        print "*** ACABO DE COMPROBAR EN created_scales"
                         created_scale.write(scale_vals)
-			print "*** ESCRIBO EN LA ESCALA EN created_scales"
+                        print "*** ESCRIBO EN LA ESCALA EN created_scales"
                         scale_history_operations += "Escala ACTUALIZADA con valores: %s\n" % (scale_vals)
                         scale_history_vals = {
                             'date_execution': datetime.now(),
@@ -245,15 +245,12 @@ class PortScale(models.Model):
                             'operations_performed': scale_history_operations
                         }
                         scale_history_facade.create(scale_history_vals)
-			print "*** CREO EL HISTORICO EN created_scales"
+                        print "*** CREO EL HISTORICO EN created_scales"
                 else:
                     # Buscamos si hay alguna escala como enviada para este barco
                     sendend_scales = self.env['port.scale'].search([('ship', '=', scale_vals['ship']),('name', '=', '****'),'|', ('active', '=', True), ('active', '=', False)])
                     if sendend_scales:
                         for sendend_scale in sendend_scales:
-			    print "*** ME METO EN sendend_scales"
-			    print "*** SCALE_VALS_KEYS: %s" %(scale_vals.keys())
-			    print "*** SCALE_VALS: %s" %(scale_vals)
                             if 'eta' in scale_vals.keys() and sendend_scale.do_not_update_eta:
                                 del scale_vals['eta']
                             if 'etd' in scale_vals.keys() and sendend_scale.dot_not_update_etd:

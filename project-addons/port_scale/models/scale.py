@@ -69,6 +69,7 @@ class PortScale(models.Model):
     modified_info = fields.Text('Modificaciones')
     do_not_update_eta = fields.Boolean('Obviar ETA Portel?')
     do_not_update_etd = fields.Boolean('Obviar ETD Portel?')
+    do_not_update_draft = fields.Boolean('Obviar Calado Portel?')
     do_not_update_dock = fields.Boolean('Obviar Muelle Portel?')
     do_not_update_norays = fields.Boolean('Obviar Norays Portel?')
     do_not_update_dock_side = fields.Boolean('Obviar Costado de Atraque Portel?')
