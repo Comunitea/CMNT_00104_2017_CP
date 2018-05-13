@@ -251,7 +251,7 @@ class PortScale(models.Model):
                                 del scale_vals['norays']
                             if 'dock_side' in scale_vals.keys() and sendend_scale.do_not_update_dock_side:
                                 del scale_vals['dock_side']
-                            if 'gt' in scale_vals.keys() and created_scale.do_not_update_gt:
+                            if 'gt' in scale_vals.keys() and sendend_scale.do_not_update_gt:
                                 del scale_vals['gt']
 
                             sendend_scale.write(scale_vals)
