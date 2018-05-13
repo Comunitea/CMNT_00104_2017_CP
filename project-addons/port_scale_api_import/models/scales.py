@@ -205,7 +205,7 @@ class PortScale(models.Model):
                 else:
                     created_scales = False
 
-                # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock_side)
+                # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock_side), GT
                 # se modifican por el usuario no se pueden machacar con los que nos vienen de Portel
                 # [13/01/18] No puedo controlar que el cambio lo haga Portel u otro usuario, por lo que solo controlo que sean distintos
                 if created_scales:
@@ -222,6 +222,8 @@ class PortScale(models.Model):
                             del scale_vals['norays']
                         if 'dock_side' in scale_vals.keys() and created_scale.do_not_update_dock_side:
                             del scale_vals['dock_side']
+                        if 'gt' in scale_vals.keys() and created_scale.do_not_update_gt:
+                            del scale_vals['gt']
 
                         created_scale.write(scale_vals)
                         scale_history_operations += "Escala ACTUALIZADA con valores: %s\n" % (scale_vals)
@@ -249,6 +251,8 @@ class PortScale(models.Model):
                                 del scale_vals['norays']
                             if 'dock_side' in scale_vals.keys() and sendend_scale.do_not_update_dock_side:
                                 del scale_vals['dock_side']
+                            if 'gt' in scale_vals.keys() and created_scale.do_not_update_gt:
+                                del scale_vals['gt']
 
                             sendend_scale.write(scale_vals)
                             scale_history_operations += "Escala enviada ACTUALIZADA con valores: %s\n" % (scale_vals)

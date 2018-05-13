@@ -72,6 +72,7 @@ class PortScale(models.Model):
     do_not_update_dock = fields.Boolean('Obviar Muelle Portel?')
     do_not_update_norays = fields.Boolean('Obviar Norays Portel?')
     do_not_update_dock_side = fields.Boolean('Obviar Costado de Atraque Portel?')
+    do_not_update_gt = fields.Boolean('Obviar GT Portel?')
 
     @api.multi
     def set_input_request_date(self):
@@ -126,7 +127,7 @@ class PortScale(models.Model):
     @api.multi
     def write(self, values):
         """
-        # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock_side)
+        # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock_side), GT
         # se modifican por el usuario no se pueden machacar con los que nos vienen de Portel
         # [13/01/18] Si el cambio lo realiza un usuario distinto de 1 (Administrador, el que lanza el cron), registro los cambios
         :param values:
@@ -146,6 +147,8 @@ class PortScale(models.Model):
                 values.update({'do_not_update_norays': True})
             if 'dock_side' in values.keys():
                 values.update({'do_not_update_dock_side': True})
+            if 'gt' in values.keys():
+                values.update({'do_not_update_gt': True})
 
             modified_text = 'La ultima vez que se ha modificado la escala ha sido el %s por %s y se han cambiado los campos: %s'%(fields.Datetime.now(), self.env.user.name, values)
             values.update({'has_been_modified':True,'modified_info': modified_text})
