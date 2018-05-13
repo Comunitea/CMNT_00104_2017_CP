@@ -65,6 +65,13 @@ class PortScale(models.Model):
     anchoring_request_date = fields.Datetime()
     departure_request_date = fields.Datetime()
     request_date = fields.Datetime(string="Fecha Solicitud Operación")
+    has_been_modified = fields.Boolean('Modificada?')
+    modified_info = fields.Text('Modificaciones')
+    do_not_update_eta = fields.Boolean('Obviar ETA Portel?')
+    do_not_update_etd = fields.Boolean('Obviar ETD Portel?')
+    do_not_update_dock = fields.Boolean('Obviar Muelle Portel?')
+    do_not_update_norays = fields.Boolean('Obviar Norays Portel?')
+    do_not_update_dock_side = fields.Boolean('Obviar Costado de Atraque Portel?')
 
     @api.multi
     def set_input_request_date(self):
@@ -115,3 +122,32 @@ class PortScale(models.Model):
     @api.multi
     def unlink(self):
         return self.write({'active': False})
+
+    @api.multi
+    def write(self, values):
+        """
+        # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock_side)
+        # se modifican por el usuario no se pueden machacar con los que nos vienen de Portel
+        # [13/01/18] Si el cambio lo realiza un usuario distinto de 1 (Administrador, el que lanza el cron), registro los cambios
+        :param values:
+        :return:
+        """
+        if self.env.user.id != 1:
+            scale_fields = ['eta','etd','draft','dock','norays','dock_side']
+            if 'eta' in values.keys():
+                values.update({'do_not_update_eta': True})
+            if 'etd' in values.keys():
+                values.update({'do_not_update_etd': True})
+            if 'draft' in values.keys():
+                values.update({'do_not_update_draft': True})
+            if 'dock' in values.keys():
+                values.update({'do_not_update_dock': True})
+            if 'norays' in values.keys():
+                values.update({'do_not_update_norays': True})
+            if 'dock_side' in values.keys():
+                values.update({'do_not_update_dock_side': True})
+
+            modified_text = 'La ultima vez que se ha modificado la escala ha sido el %s por %s y se han cambiado los campos: %s'%(fields.Datetime.now(), self.env.user.name, values)
+            values.update({'has_been_modified':True,'modified_info': modified_text})
+
+        return super(PortScale, self).write(values)

@@ -21,6 +21,7 @@
                 <field name="scale_state"/>
                 <field name="fondeo_previo"/>
                 <field name="observaciones"/>
+                <field name="has_been_modified"/>
             </tree>
         </field>
     </record>
@@ -43,6 +44,7 @@
                 <field name="scale_state"/>
                 <field name="fondeo_previo"/>
                 <field name="observaciones"/>
+                <field name="has_been_modified"/>
             </tree>
         </field>
     </record>
@@ -64,6 +66,7 @@
                 <field name="departure_authorization"/>
                 <field name="fondeo_previo"/>
                 <field name="observaciones"/>
+                <field name="has_been_modified"/>
             </tree>
         </field>
     </record>
@@ -88,6 +91,7 @@
                 <field name="scale_state"/>
                 <field name="fondeo_previo"/>
                 <field name="observaciones"/>
+                <field name="has_been_modified"/>
             </tree>
         </field>
     </record>
@@ -113,6 +117,7 @@
                 <field name="fondeo_previo"/>
                 <field name="observaciones"/>
                 <field name="state"/>
+                <field name="has_been_modified"/>
             </tree>
         </field>
     </record>
@@ -131,6 +136,7 @@
                 <field name="norays"/>
                 <field name="gt"/>
                 <field name="departure_authorization"/>
+                <field name="has_been_modified"/>
                 <field name="observaciones"/>
                 <field name="docking_start_time" invisible="1"/>
                 <field name="docking_end_time" invisible="1"/>
@@ -184,6 +190,8 @@
                             <field name="tugs_move" widget="many2many_tags" options="{'no_create_edit': True}"/>
                             <field name="load"/>
                             <field name="load_qty"/>
+                            <field name="has_been_modified" readonly="1"/>
+                            <field name="modified_info" readonly="1"/>
                         </group>
                         <group>
                             <group col="3" colspan="3">
@@ -234,6 +242,7 @@
                <field name="partner_id"/>
                <field name="name"/>
                <field name="dock"/>
+                <field name="has_been_modified"/>
            </search>
         </field>
     </record>

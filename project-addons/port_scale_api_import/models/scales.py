@@ -105,9 +105,6 @@ class PortScale(models.Model):
                 if scale_element.findtext('ETD'):
                     etd = self.parse_api_datetime(scale_element.findtext('ETD'))
 
-                # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock side)
-                # se modifican por el usuario no se pueden machacar con los que nos vienen de Portel
-
                 scale_vals = {
                     'name': scale_element.findtext('NUM_ESCALA'),
                     'scale_state': scale_element.findtext('ESTADO'),
@@ -213,18 +210,17 @@ class PortScale(models.Model):
                 # [13/01/18] No puedo controlar que el cambio lo haga Portel u otro usuario, por lo que solo controlo que sean distintos
                 if created_scales:
                     for created_scale in created_scales:
-                        if not created_scale.eta:
-                            scale_vals['eta'] = eta
-                        if not created_scale.etd:
-                            scale_vals['etd'] = etd
-
-                        if 'draft' in scale_vals and created_scale.draft and created_scale.draft != scale_vals['draft']:
+                        if 'eta' in scale_vals.keys() and created_scale.do_not_update_eta:
+                            del scale_vals['eta']
+                        if 'etd' in scale_vals.keys() and created_scale.dot_not_update_etd:
+                            del scale_vals['etd']
+                        if 'draft' in scale_vals.keys() and created_scale.do_not_update_draft:
                             del scale_vals['draft']
-                        if 'dock' in scale_vals and created_scale.dock and created_scale.dock.id != scale_vals['dock']:
+                        if 'dock' in scale_vals.keys() and created_scale.do_not_update_dock:
                             del scale_vals['dock']
-                        if 'norays' in scale_vals and created_scale.norays and created_scale.norays != scale_vals['norays']:
+                        if 'norays' in scale_vals.keys() and created_scale.do_not_update_norays:
                             del scale_vals['norays']
-                        if 'dock_side' in scale_vals and created_scale.dock_side and created_scale.dock_side != scale_vals['dock_side']:
+                        if 'dock_side' in scale_vals.keys() and created_scale.do_not_update_dock_side:
                             del scale_vals['dock_side']
 
                         created_scale.write(scale_vals)
@@ -241,18 +237,17 @@ class PortScale(models.Model):
                     sendend_scales = self.env['port.scale'].search([('ship', '=', scale_vals['ship']),('name', '=', '****'),'|', ('active', '=', True), ('active', '=', False)])
                     if sendend_scales:
                         for sendend_scale in sendend_scales:
-                            if not sendend_scale.eta:
-                                scale_vals['eta'] = eta
-                            if not sendend_scale.etd:
-                                scale_vals['etd'] = etd
-
-                            if 'draft' in scale_vals and sendend_scale.draft and sendend_scale.draft != scale_vals['draft']:
+                            if 'eta' in scale_vals.keys() and sendend_scale.do_not_update_eta:
+                                del scale_vals['eta']
+                            if 'etd' in scale_vals.keys() and sendend_scale.dot_not_update_etd:
+                                del scale_vals['etd']
+                            if 'draft' in scale_vals.keys() and sendend_scale.do_not_update_draft:
                                 del scale_vals['draft']
-                            if 'dock' in scale_vals and sendend_scale.dock and sendend_scale.dock.id != scale_vals['dock']:
+                            if 'dock' in scale_vals.keys() and sendend_scale.do_not_update_dock:
                                 del scale_vals['dock']
-                            if 'norays' in scale_vals and sendend_scale.norays and sendend_scale.norays != scale_vals['norays']:
+                            if 'norays' in scale_vals.keys() and sendend_scale.do_not_update_norays:
                                 del scale_vals['norays']
-                            if 'dock_side' in scale_vals and sendend_scale.dock_side and sendend_scale.dock_side != scale_vals['dock_side']:
+                            if 'dock_side' in scale_vals.keys() and sendend_scale.do_not_update_dock_side:
                                 del scale_vals['dock_side']
 
                             sendend_scale.write(scale_vals)
