@@ -197,9 +197,7 @@ class PortScale(models.Model):
 
                 if scale_vals.get('ship') and scale_vals.get('name'):
                     try:
-                        created_scales = self.env['port.scale'].search(
-                            [('ship', '=', scale_vals['ship']), ('name', '=', scale_vals['name']), '|',
-                             ('active', '=', True), ('active', '=', False)])
+                        created_scales = self.env['port.scale'].search([('ship', '=', scale_vals['ship']),('name', '=', scale_vals['name']),'|',('active', '=', True), ('active', '=', False)])
                     except:
                         created_scales = False
                 else:
@@ -297,6 +295,5 @@ class PortScale(models.Model):
                 'operations_performed': scale_history_operations
             }
             scale_history_facade.create(scale_history_vals)
-            return True
         finally:
             return True
