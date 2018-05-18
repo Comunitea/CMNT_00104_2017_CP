@@ -2,8 +2,9 @@
 # © 2017 Comunitea
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields, api
+from odoo import models, fields, api, tools
 from datetime import datetime
+from pytz import timezone
 
 
 class PortTug(models.Model):
@@ -151,7 +152,11 @@ class PortScale(models.Model):
             if 'gt' in values.keys():
                 values.update({'do_not_update_gt': True})
 
-            modified_text = 'La ultima vez que se ha modificado la escala ha sido el %s por %s y se han cambiado los campos: %s'%(fields.Datetime.now(), self.env.user.name, values)
+            fmt ="%d-%m-%Y %H:%M:%S"
+            # Convert to Europe/Berlin time zone
+            now_berlin = datetime.now(timezone('UTC')).astimezone(timezone('Europe/Berlin'))
+
+            modified_text = 'La ultima vez que se ha modificado la escala ha sido el %s por %s y se han cambiado los campos: %s'%(now_berlin.strftime(fmt), self.env.user.name, values)
             values.update({'has_been_modified':True,'modified_info': modified_text})
 
         return super(PortScale, self).write(values)

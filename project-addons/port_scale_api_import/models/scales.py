@@ -5,7 +5,7 @@
 from zeep import Client
 from lxml import etree
 import logging
-from odoo import models, api
+from odoo import models, api, tools
 from datetime import datetime, timedelta
 import time
 
@@ -237,7 +237,7 @@ class PortScale(models.Model):
                         #print "*** ACABO DE COMPROBAR EN created_scales"
                         created_scale.write(scale_vals)
                         #print "*** ESCRIBO EN LA ESCALA EN created_scales"
-                        scale_history_operations += "Escala ACTUALIZADA con valores: %s\n" % (scale_vals)
+                        scale_history_operations += "Escala creada ACTUALIZADA con valores: %s\n" % (scale_vals)
                         scale_history_vals = {
                             'date_execution': datetime.now(),
                             'scale_id': created_scale.id,
@@ -287,7 +287,16 @@ class PortScale(models.Model):
                             'operations_performed': scale_history_operations
                         }
                         scale_history_facade.create(scale_history_vals)
-        except:
+        except Exception as e:
+            failure_reason = tools.ustr(e)
+            scale_history_operations = '***SE HA PRODUCIDO UN ERROR EN LA IMPORTACION: %s***'%(failure_reason)
+            scale_history_vals = {
+                'date_execution': datetime.now(),
+                'scale_id': 2,
+                'ship_id': 1,
+                'operations_performed': scale_history_operations
+            }
+            scale_history_facade.create(scale_history_vals)
             return True
         finally:
             return True
