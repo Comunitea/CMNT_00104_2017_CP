@@ -54,7 +54,7 @@ class PortScale(models.Model):
             api_method = self.env['ir.config_parameter'].get_param(
                 'port.scale.api.method')
             if not api_url or not api_method:
-                scale_history_operations = '***NO SE HA ENCONTRADO EL WEBSERVICE O LA URL EN ODOO***'
+                scale_history_operations = '***[ERROR] NO SE HA ENCONTRADO EL WEBSERVICE O LA URL EN ODOO***'
                 scale_history_vals = {
                     'date_execution': datetime.now(),
                     'scale_id': 2,
@@ -71,7 +71,7 @@ class PortScale(models.Model):
                 scales_data = scales_client.service[api_method]()
             except Exception as e:
                 failure_reason = tools.ustr(e)
-                scale_history_operations = '***NO SE HAN DEVUELTO VALORES DESDE PORTEL: %s***' % (failure_reason)
+                scale_history_operations = '***[ERROR] NO SE HAN DEVUELTO VALORES DESDE PORTEL: %s***' % (failure_reason)
                 scale_history_vals = {
                     'date_execution': datetime.now(),
                     'scale_id': 2,
@@ -84,7 +84,7 @@ class PortScale(models.Model):
             for scale_element in xml_doc.iter('LIS_ESCALAS'):
                 status_code = scale_element.findtext('STATUS')
                 if status_code != '**':
-                    _logger.error('%s : %s' %
+                    _logger.error('[ERROR] %s : %s' %
                                   (self.ERROR_CODES[status_code],
                                    scale_element.findtext('DESCRIPCION')))
 
@@ -190,8 +190,7 @@ class PortScale(models.Model):
                             created_dock = created_docks[0]
                         scale_vals['dock'] = created_dock.id
                     except:
-                        scale_history_operations += "NO SE HA PODIDO ACTUALIZAR la escala con valores: %s\n" % (
-                        scale_element)
+                        scale_history_operations += "[ERROR] NO SE HA PODIDO ACTUALIZAR la escala con valores: %s\n" % (scale_element)
 
                 if scale_element.findtext('NORAYS'):
                     scale_vals['norays'] = scale_element.findtext('NORAYS')
@@ -291,7 +290,7 @@ class PortScale(models.Model):
                         scale_history_facade.create(scale_history_vals)
         except Exception as e:
             failure_reason = tools.ustr(e)
-            scale_history_operations = '***SE HA PRODUCIDO UN ERROR EN LA IMPORTACION: %s***'%(failure_reason)
+            scale_history_operations = '***[ERROR] SE HA PRODUCIDO UN ERROR EN LA IMPORTACION: %s***'%(failure_reason)
             scale_history_vals = {
                 'date_execution': datetime.now(),
                 'scale_id': 2,
