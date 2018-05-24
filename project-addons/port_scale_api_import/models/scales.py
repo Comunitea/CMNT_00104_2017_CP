@@ -63,11 +63,15 @@ class PortScale(models.Model):
                 }
                 scale_history_facade.create(scale_history_vals)
                 return True
-            scales_client = Client(api_url)
+            #Hacemos la llamada
+            #http://docs.python-zeep.org/en/master/client.html#configuring-the-client
+            scales_client = Client(api_url, strict=False)
             try:
+                #To set a transport timeout use the timeout option.The default timeout is 300 seconds
                 scales_data = scales_client.service[api_method]()
-            except:
-                scale_history_operations = '***NO SE HAN DEVUELTO VALORES DESDE PORTEL***'
+            except Exception as e:
+                failure_reason = tools.ustr(e)
+                scale_history_operations = '***NO SE HAN DEVUELTO VALORES DESDE PORTEL: %s***' % (failure_reason)
                 scale_history_vals = {
                     'date_execution': datetime.now(),
                     'scale_id': 2,
@@ -295,5 +299,6 @@ class PortScale(models.Model):
                 'operations_performed': scale_history_operations
             }
             scale_history_facade.create(scale_history_vals)
+            return True
         finally:
             return True
