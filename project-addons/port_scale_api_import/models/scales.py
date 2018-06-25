@@ -62,7 +62,7 @@ class PortScale(models.Model):
                     'operations_performed': scale_history_operations
                 }
                 scale_history_facade.create(scale_history_vals)
-		print "**** %s" %(scale_history_vals)
+                print "**** %s" %(scale_history_vals)
                 return True
             #Hacemos la llamada
             #http://docs.python-zeep.org/en/master/client.html#configuring-the-client
@@ -80,25 +80,20 @@ class PortScale(models.Model):
                     'operations_performed': scale_history_operations
                 }
                 scale_history_facade.create(scale_history_vals)
-		print "**** %s" %(scale_history_vals)
+                print "**** %s" %(scale_history_vals)
                 return True
             xml_doc = etree.fromstring(scales_data)
             for scale_element in xml_doc.iter('LIS_ESCALAS'):
                 status_code = scale_element.findtext('STATUS')
                 if status_code != '**':
-                    _logger.error('[ERROR] %s : %s' %
-                                  (self.ERROR_CODES[status_code],
-                                   scale_element.findtext('DESCRIPCION')))
-
-                    scale_history_operations = '%s : %s' % (
-                    self.ERROR_CODES[status_code], scale_element.findtext('DESCRIPCION'))
+                    scale_history_operations = '%s: %s' % (self.ERROR_CODES[str(status_code)], scale_element.findtext('DESCRIPCION'))
                     scale_history_vals = {
                         'date_execution': datetime.now(),
                         'scale_id': 2,
                         'ship_id': 1,
                         'operations_performed': scale_history_operations
                     }
-		    print "**** %s" %(scale_history_vals)
+                    print "**** %s" %(scale_history_vals)
                     scale_history_facade.create(scale_history_vals)
                     return True
 
@@ -278,7 +273,7 @@ class PortScale(models.Model):
                                 'ship_id': sendend_scale.ship and sendend_scale.ship.id or False,
                                 'operations_performed': scale_history_operations
                             }
-			    print "**** %s" %(scale_history_vals)
+                            print "**** %s" %(scale_history_vals)
                             scale_history_facade.create(scale_history_vals)
                     else:
                         scale_vals['eta'] = eta
@@ -291,7 +286,7 @@ class PortScale(models.Model):
                             'ship_id': created_scale.ship and created_scale.ship.id or False,
                             'operations_performed': scale_history_operations
                         }
-			print "**** %s" %(scale_history_vals)
+                        print "**** %s" %(scale_history_vals)
                         scale_history_facade.create(scale_history_vals)
         except Exception as e:
             failure_reason = tools.ustr(e)
@@ -302,9 +297,9 @@ class PortScale(models.Model):
                 'ship_id': 1,
                 'operations_performed': scale_history_operations
             }
-	    print "**** %s" %(scale_history_vals)
+            print "**** %s" %(scale_history_vals)
             scale_history_facade.create(scale_history_vals)
-	    print "**** ACABO EL CRON POR EL EXCEPT"
+            print "**** ACABO EL CRON POR EL EXCEPT"
         finally:
-	    print "*** ACABO EL CRON POR EL FINALLY"
+            print "*** ACABO EL CRON POR EL FINALLY"
             return True
