@@ -75,7 +75,7 @@ class PortScale(models.Model):
                 difference = current_time_after - current_time_before
                 seconds_tuple = divmod(difference.days * 86400 + difference.seconds, 60)
                 if seconds_tuple[0] > 3:
-                    return
+                    return True
             except Exception as e:
                 failure_reason = tools.ustr(e)
                 scale_history_operations = '***[ERROR] NO SE HAN DEVUELTO VALORES DESDE PORTEL: %s***' % (failure_reason)
