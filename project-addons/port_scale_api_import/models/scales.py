@@ -120,8 +120,7 @@ class PortScale(models.Model):
                     'origin': scale_element.findtext('PUERTO_ANTERIOR'),
                     'partner_name': scale_element.findtext('CONSIGNATARIO')
                 }
-                partner = self.env['res.partner'].search(
-                    [('name', '=', scale_element.findtext('CONSIGNATARIO'))])
+                partner = self.env['res.partner'].search([('name', '=', scale_element.findtext('CONSIGNATARIO'))])
                 if partner:
                     scale_vals['partner_id'] = partner.id
 
@@ -132,8 +131,7 @@ class PortScale(models.Model):
                     ship_vals['mmsi'] = scale_element.findtext('MMSI')
 
                 if scale_element.findtext('BANDERA'):
-                    country = self.env['res.country'].search(
-                        [('code', '=', scale_element.findtext('BANDERA'))])
+                    country = self.env['res.country'].search([('code', '=', scale_element.findtext('BANDERA'))])
                     if country:
                         ship_vals['country'] = country.id
                 if scale_element.findtext('CALLSIGN'):
@@ -162,17 +160,13 @@ class PortScale(models.Model):
 
                 created_ships = False
                 if ship_vals.get('imo', False):
-                    created_ships = self.env['ship'].search(
-                        [('imo', '=', ship_vals['imo'])])
+                    created_ships = self.env['ship'].search([('imo', '=', ship_vals['imo'])])
                 if not created_ships and ship_vals.get('mmsi', False):
-                    created_ships = self.env['ship'].search(
-                        [('mmsi', '=', ship_vals['mmsi'])])
+                    created_ships = self.env['ship'].search([('mmsi', '=', ship_vals['mmsi'])])
 
                 if not created_ships and ship_vals.get('country', False) and \
                         ship_vals.get('callsign', False):
-                    created_ships = self.env['ship'].search(
-                        [('country', '=', ship_vals['country']),
-                         ('callsign', '=', ship_vals['callsign'])])
+                    created_ships = self.env['ship'].search([('country', '=', ship_vals['country']),('callsign', '=', ship_vals['callsign'])])
 
                 if created_ships:
                     created_ship = created_ships[0]
