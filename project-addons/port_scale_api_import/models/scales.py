@@ -69,7 +69,13 @@ class PortScale(models.Model):
             scales_client = Client(api_url, strict=False)
             try:
                 #To set a transport timeout use the timeout option.The default timeout is 300 seconds
+                current_time_before = datetime.now()
                 scales_data = scales_client.service[api_method]()
+                current_time_after = datetime.now()
+                difference = current_time_after - current_time_before
+                seconds_tuple = divmod(difference.days * 86400 + difference.seconds, 60)
+                if seconds_tuple[0] > 3:
+                    return
             except Exception as e:
                 failure_reason = tools.ustr(e)
                 scale_history_operations = '***[ERROR] NO SE HAN DEVUELTO VALORES DESDE PORTEL: %s***' % (failure_reason)
@@ -302,7 +308,12 @@ class PortScale(models.Model):
             }
             print "**** %s" %(scale_history_vals)
             scale_history_facade.create(scale_history_vals)
+<<<<<<< HEAD
             #print "**** ACABO EL CRON POR EL EXCEPT"
+=======
+            print "**** ACABO EL CRON POR EL EXCEPT"
+            return True
+>>>>>>> 684362d64ec7fe1147d263498fd94e765b426827
         finally:
             #print "*** ACABO EL CRON POR EL FINALLY"
             return True
