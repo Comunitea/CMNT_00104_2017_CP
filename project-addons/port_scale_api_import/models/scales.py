@@ -86,16 +86,19 @@ class PortScale(models.Model):
             for scale_element in xml_doc.iter('LIS_ESCALAS'):
                 status_code = scale_element.findtext('STATUS')
                 if status_code != '**':
-                    scale_history_operations = '%s: %s' % (self.ERROR_CODES[str(status_code)], scale_element.findtext('DESCRIPCION'))
-                    scale_history_vals = {
-                        'date_execution': datetime.now(),
-                        'scale_id': 2,
-                        'ship_id': 1,
-                        'operations_performed': scale_history_operations
-                    }
-                    print "**** %s" %(scale_history_vals)
-                    scale_history_facade.create(scale_history_vals)
-                    return True
+		    try:
+                        scale_history_operations = '%s: %s' % (status_code, scale_element.findtext('DESCRIPCION'))
+                        scale_history_vals = {
+                            'date_execution': datetime.now(),
+                            'scale_id': 2,
+                            'ship_id': 1,
+                            'operations_performed': scale_history_operations
+                        }
+                        scale_history_facade.create(scale_history_vals)
+		        print "**** %s" %(scale_history_vals)
+                        return
+		    except:
+		        return
 
                 ship_vals = {
                     'name': scale_element.findtext('BUQUE'),
@@ -299,7 +302,7 @@ class PortScale(models.Model):
             }
             print "**** %s" %(scale_history_vals)
             scale_history_facade.create(scale_history_vals)
-            print "**** ACABO EL CRON POR EL EXCEPT"
+            #print "**** ACABO EL CRON POR EL EXCEPT"
         finally:
-            print "*** ACABO EL CRON POR EL FINALLY"
+            #print "*** ACABO EL CRON POR EL FINALLY"
             return True
