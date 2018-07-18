@@ -47,8 +47,8 @@ class PortScale(models.Model):
 
     @api.model
     def import_api_data(self):
+        scale_history_facade = self.env['port.scale.history']
         try:
-            scale_history_facade = self.env['port.scale.history']
             api_url = self.env['ir.config_parameter'].get_param(
                 'port.scale.api.url')
             api_method = self.env['ir.config_parameter'].get_param(
@@ -92,7 +92,7 @@ class PortScale(models.Model):
             for scale_element in xml_doc.iter('LIS_ESCALAS'):
                 status_code = scale_element.findtext('STATUS')
                 if status_code != '**':
-		    try:
+                    try:
                         scale_history_operations = '%s: %s' % (status_code, scale_element.findtext('DESCRIPCION'))
                         scale_history_vals = {
                             'date_execution': datetime.now(),
@@ -101,14 +101,12 @@ class PortScale(models.Model):
                             'operations_performed': scale_history_operations
                         }
                         scale_history_facade.create(scale_history_vals)
-		        print "**** %s" %(scale_history_vals)
-                        return
-		    except:
-		        return
+                        print "**** %s" %(scale_history_vals)
+                        return True
+                    except:
+                        return True
 
-                ship_vals = {
-                    'name': scale_element.findtext('BUQUE'),
-                }
+                ship_vals = { 'name': scale_element.findtext('BUQUE')}
                 scale_history_operations = ''
                 eta = etd = ''
                 if scale_element.findtext('ETA'):
@@ -162,6 +160,7 @@ class PortScale(models.Model):
                 if scale_element.findtext('COSTADO_ATRAQUE'):
                     scale_vals['dock_side'] = scale_element.findtext('COSTADO_ATRAQUE')
 
+                created_ships = False
                 if ship_vals.get('imo', False):
                     created_ships = self.env['ship'].search(
                         [('imo', '=', ship_vals['imo'])])
@@ -205,13 +204,14 @@ class PortScale(models.Model):
                     scale_vals['departure_authorization'] = self.BOOL_API[
                         scale_element.findtext('DESPACHADO_SALIDA')]
 
+                created_scales = []
                 if scale_vals.get('ship') and scale_vals.get('name'):
                     try:
                         created_scales = self.env['port.scale'].search([('ship', '=', scale_vals['ship']),('name', '=', scale_vals['name']),'|',('active', '=', True), ('active', '=', False)])
                     except:
-                        created_scales = False
+                        created_scales = []
                 else:
-                    created_scales = False
+                    created_scales = []
 
                 # [05/12/17] Si los campos ETA, ETD, Calado (draft), Muelle (dock), Norais (norays), Costado de atraque (dock_side), GT
                 # se modifican por el usuario no se pueden machacar con los que nos vienen de Portel
@@ -244,7 +244,7 @@ class PortScale(models.Model):
                             del scale_vals['gt']
                         #print "*** ACABO DE COMPROBAR EN created_scales"
                         created_scale.write(scale_vals)
-                        print "*** ESCRIBO EN LA ESCALA EN created_scales"
+                        #print "*** ESCRIBO EN LA ESCALA EN created_scales"
                         scale_history_operations += "Escala creada ACTUALIZADA con valores: %s\n" % (scale_vals)
                         scale_history_vals = {
                             'date_execution': datetime.now(),
@@ -253,7 +253,7 @@ class PortScale(models.Model):
                             'operations_performed': scale_history_operations
                         }
                         scale_history_facade.create(scale_history_vals)
-                        print "*** CREO EL HISTORICO EN created_scales"
+                        #print "*** CREO EL HISTORICO EN created_scales"
                 else:
                     # Buscamos si hay alguna escala como enviada para este barco
                     sendend_scales = self.env['port.scale'].search([('ship', '=', scale_vals['ship']),('name', '=', '****'),'|', ('active', '=', True), ('active', '=', False)])
@@ -282,7 +282,7 @@ class PortScale(models.Model):
                                 'ship_id': sendend_scale.ship and sendend_scale.ship.id or False,
                                 'operations_performed': scale_history_operations
                             }
-                            print "**** %s" %(scale_history_vals)
+                            #print "**** %s" %(scale_history_vals)
                             scale_history_facade.create(scale_history_vals)
                     else:
                         scale_vals['eta'] = eta
@@ -295,7 +295,7 @@ class PortScale(models.Model):
                             'ship_id': created_scale.ship and created_scale.ship.id or False,
                             'operations_performed': scale_history_operations
                         }
-                        print "**** %s" %(scale_history_vals)
+                        #print "**** %s" %(scale_history_vals)
                         scale_history_facade.create(scale_history_vals)
         except Exception as e:
             failure_reason = tools.ustr(e)
@@ -306,14 +306,10 @@ class PortScale(models.Model):
                 'ship_id': 1,
                 'operations_performed': scale_history_operations
             }
-            print "**** %s" %(scale_history_vals)
+            #print "**** %s" %(scale_history_vals)
             scale_history_facade.create(scale_history_vals)
-<<<<<<< HEAD
             #print "**** ACABO EL CRON POR EL EXCEPT"
-=======
-            print "**** ACABO EL CRON POR EL EXCEPT"
             return True
->>>>>>> 684362d64ec7fe1147d263498fd94e765b426827
         finally:
             #print "*** ACABO EL CRON POR EL FINALLY"
             return True
