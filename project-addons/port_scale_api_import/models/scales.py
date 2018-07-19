@@ -49,10 +49,8 @@ class PortScale(models.Model):
     def import_api_data(self):
         scale_history_facade = self.env['port.scale.history']
         try:
-            api_url = self.env['ir.config_parameter'].get_param(
-                'port.scale.api.url')
-            api_method = self.env['ir.config_parameter'].get_param(
-                'port.scale.api.method')
+            api_url = self.env['ir.config_parameter'].get_param('port.scale.api.url')
+            api_method = self.env['ir.config_parameter'].get_param('port.scale.api.method')
             if not api_url or not api_method:
                 scale_history_operations = '***[ERROR] NO SE HA ENCONTRADO EL WEBSERVICE O LA URL EN ODOO***'
                 scale_history_vals = {
@@ -66,8 +64,8 @@ class PortScale(models.Model):
                 return True
             #Hacemos la llamada
             #http://docs.python-zeep.org/en/master/client.html#configuring-the-client
-            scales_client = Client(api_url, strict=False)
             try:
+                scales_client = Client(api_url, strict=False)
                 #To set a transport timeout use the timeout option.The default timeout is 300 seconds
                 current_time_before = datetime.now()
                 scales_data = scales_client.service[api_method]()
