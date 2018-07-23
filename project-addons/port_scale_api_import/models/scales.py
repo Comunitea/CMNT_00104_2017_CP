@@ -15,7 +15,7 @@ _logger = logging.getLogger(__name__)
 class PortScale(models.Model):
     _inherit = 'port.scale'
 
-    v = {
+    ERROR_CODES = {
         '01': 'IP no autorizada',
         '02': 'No hay resultados',
         '03': 'No hay conexión con la BD del DUE',
