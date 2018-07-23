@@ -69,6 +69,8 @@ class PortScale(models.Model):
                 #To set a transport timeout use the timeout option.The default timeout is 300 seconds
                 current_time_before = datetime.now()
                 scales_data = scales_client.service[api_method]()
+                xml_doc = etree.fromstring(scales_data)
+                print "**** XML DOC ES: %s"%(xml_doc)
                 current_time_after = datetime.now()
                 difference = current_time_after - current_time_before
                 seconds_tuple = divmod(difference.days * 86400 + difference.seconds, 60)
@@ -86,7 +88,7 @@ class PortScale(models.Model):
                 scale_history_facade.create(scale_history_vals)
                 print "**** %s" %(scale_history_vals)
                 return True
-            xml_doc = etree.fromstring(scales_data)
+
             for scale_element in xml_doc.iter('LIS_ESCALAS'):
                 status_code = scale_element.findtext('STATUS')
                 if status_code != '**':
