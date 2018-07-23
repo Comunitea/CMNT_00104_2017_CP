@@ -15,7 +15,7 @@ _logger = logging.getLogger(__name__)
 class PortScale(models.Model):
     _inherit = 'port.scale'
 
-    ERROR_CODES = {
+    v = {
         '01': 'IP no autorizada',
         '02': 'No hay resultados',
         '03': 'No hay conexión con la BD del DUE',
@@ -70,7 +70,7 @@ class PortScale(models.Model):
                 current_time_before = datetime.now()
                 scales_data = scales_client.service[api_method]()
                 xml_doc = etree.fromstring(scales_data)
-                print "**** XML DOC ES: %s"%(xml_doc)
+                print "************ XML DOC ES: %s *************"%(xml_doc)
                 current_time_after = datetime.now()
                 difference = current_time_after - current_time_before
                 seconds_tuple = divmod(difference.days * 86400 + difference.seconds, 60)
@@ -93,7 +93,7 @@ class PortScale(models.Model):
                 status_code = scale_element.findtext('STATUS')
                 if status_code != '**':
                     try:
-                        scale_history_operations = '%s: %s' % (status_code, scale_element.findtext('DESCRIPCION'))
+                        scale_history_operations = '%s->%s: %s' % (status_code, ERROR_CODES[status_code], scale_element.findtext('DESCRIPCION'))
                         scale_history_vals = {
                             'date_execution': datetime.now(),
                             'scale_id': 2,
@@ -102,9 +102,9 @@ class PortScale(models.Model):
                         }
                         scale_history_facade.create(scale_history_vals)
                         print "**** %s" %(scale_history_vals)
-                        return True
+                        return
                     except:
-                        return True
+                        return
 
                 ship_vals = { 'name': scale_element.findtext('BUQUE')}
                 scale_history_operations = ''
