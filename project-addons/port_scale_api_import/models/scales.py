@@ -65,6 +65,7 @@ class PortScale(models.Model):
             #Hacemos la llamada
             #http://docs.python-zeep.org/en/master/client.html#configuring-the-client
             try:
+                print "************ ANTES DE LLAMAR AL SERVICE *************"
                 scales_client = Client(api_url, strict=False)
                 #To set a transport timeout use the timeout option.The default timeout is 300 seconds
                 current_time_before = datetime.now()
