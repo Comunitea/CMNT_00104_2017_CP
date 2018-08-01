@@ -165,8 +165,7 @@ class PortScale(models.Model):
                 if not created_ships and ship_vals.get('mmsi', False):
                     created_ships = self.env['ship'].search([('mmsi', '=', ship_vals['mmsi'])])
 
-                if not created_ships and ship_vals.get('country', False) and \
-                        ship_vals.get('callsign', False):
+                if not created_ships and ship_vals.get('country', False) and ship_vals.get('callsign', False):
                     created_ships = self.env['ship'].search([('country', '=', ship_vals['country']),('callsign', '=', ship_vals['callsign'])])
 
                 if created_ships:
