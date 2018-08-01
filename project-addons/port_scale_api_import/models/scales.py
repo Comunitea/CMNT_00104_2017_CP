@@ -94,7 +94,7 @@ class PortScale(models.Model):
                 status_code = scale_element.findtext('STATUS')
                 if status_code != '**':
                     try:
-                        scale_history_operations = '%s->%s: %s' % (status_code, ERROR_CODES[status_code], scale_element.findtext('DESCRIPCION'))
+                        scale_history_operations = '%s->%s: %s' % (status_code, self.ERROR_CODES[status_code], scale_element.findtext('DESCRIPCION'))
                         scale_history_vals = {
                             'date_execution': datetime.now(),
                             'scale_id': 2,
