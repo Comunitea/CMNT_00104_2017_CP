@@ -62,7 +62,7 @@ class PortScale(models.Model):
                 scale_history_facade.create(scale_history_vals)
                 print "**** %s" %(scale_history_vals)
                 return True
-            example_xml_error = "<Res_CORUNA_PILOTS><LIS_ESCALAS><STATUS>91</STATUS><DESCRIPCION>Error subproceso anulado</DESCRIPCION><NUM_ESCALA/><CONSIGNATARIO/><IMO/><MMSI/><CALLSIGN/><BANDERA/><BUQUE/><GT/><ESTADO/><ETA/><ETD/><DESPACHADO_SALIDA/><PUERTO_ANTERIOR/><MUELLE/><CALADO_LLEGADA/><NORAYS/><ESTADO_ATRAQUE/><FONDEO_PREVIO/><COSTADO_ATRAQUE/><OPERACION/><CARGA/><CANTIDAD/></LIS_ESCALAS></Res_CORUNA_PILOTS>"
+            #example_xml_error = "<Res_CORUNA_PILOTS><LIS_ESCALAS><STATUS>91</STATUS><DESCRIPCION>Error subproceso anulado</DESCRIPCION><NUM_ESCALA/><CONSIGNATARIO/><IMO/><MMSI/><CALLSIGN/><BANDERA/><BUQUE/><GT/><ESTADO/><ETA/><ETD/><DESPACHADO_SALIDA/><PUERTO_ANTERIOR/><MUELLE/><CALADO_LLEGADA/><NORAYS/><ESTADO_ATRAQUE/><FONDEO_PREVIO/><COSTADO_ATRAQUE/><OPERACION/><CARGA/><CANTIDAD/></LIS_ESCALAS></Res_CORUNA_PILOTS>"
             #Hacemos la llamada
             #http://docs.python-zeep.org/en/master/client.html#configuring-the-client
             try:
