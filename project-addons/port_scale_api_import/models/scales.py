@@ -62,21 +62,25 @@ class PortScale(models.Model):
                 scale_history_facade.create(scale_history_vals)
                 print "**** %s" %(scale_history_vals)
                 return True
+            example_xml_error = "<Res_CORUNA_PILOTS><LIS_ESCALAS><STATUS>91</STATUS><DESCRIPCION>Error subproceso anulado</DESCRIPCION><NUM_ESCALA/><CONSIGNATARIO/><IMO/><MMSI/><CALLSIGN/><BANDERA/><BUQUE/><GT/><ESTADO/><ETA/><ETD/><DESPACHADO_SALIDA/><PUERTO_ANTERIOR/><MUELLE/><CALADO_LLEGADA/><NORAYS/><ESTADO_ATRAQUE/><FONDEO_PREVIO/><COSTADO_ATRAQUE/><OPERACION/><CARGA/><CANTIDAD/></LIS_ESCALAS></Res_CORUNA_PILOTS>"
             #Hacemos la llamada
             #http://docs.python-zeep.org/en/master/client.html#configuring-the-client
             try:
-                print "************ ANTES DE LLAMAR AL SERVICE *************"
-                scales_client = Client(api_url, strict=False)
+                print "************ ANTES DE INSTANCIAR EL CLIENTE *************"
+                scales_client = Client(api_url)
                 #To set a transport timeout use the timeout option.The default timeout is 300 seconds
                 current_time_before = datetime.now()
+                print "************ ANTES DE LLAMAR AL SERVICE *************"
                 scales_data = scales_client.service[api_method]()
                 print "************ DESPUES DE LLAMAR AL SERVICE *************"
-                xml_doc = etree.fromstring(scales_data)
+                scales_data_forced = scales_data[scales_data.find("<"):]
+                xml_doc = etree.fromstring(scales_data_forced)
                 print "************ DESPUES DE OBTENER XML DOC *************"
                 current_time_after = datetime.now()
                 difference = current_time_after - current_time_before
                 seconds_tuple = divmod(difference.days * 86400 + difference.seconds, 60)
                 if seconds_tuple[0] > 5:
+                    print "************ OBTENGO TIMEOUT Y SALGO*************"
                     return True
             except Exception as e:
                 failure_reason = tools.ustr(e)
@@ -103,10 +107,10 @@ class PortScale(models.Model):
                             'operations_performed': scale_history_operations
                         }
                         scale_history_facade.create(scale_history_vals)
-                        print "**** %s" %(scale_history_vals)
-                        return
+                        print "[ERROR] DEVUELVO CODIGO DE ERROR Y ACABO: **** %s" %(scale_history_vals)
+                        return True
                     except:
-                        return
+                        return True
 
                 ship_vals = { 'name': scale_element.findtext('BUQUE')}
                 scale_history_operations = ''
