@@ -113,7 +113,7 @@ class PortScale(models.Model):
                 #[06/08/18] No importamos ninguna escala que no sea del año actual
                 scale_name = scale_element.findtext('NUM_ESCALA')
                 current_year = datetime.today().year
-                if int(scale_name[0:4]) == current_year:
+                if scale_name[0:4] =='****' or scale_name[0:4]!='****' and int(scale_name[0:4]) == current_year:
                     ship_vals = {'name': scale_element.findtext('BUQUE')}
                     scale_history_operations = ''
                     eta = etd = ''
