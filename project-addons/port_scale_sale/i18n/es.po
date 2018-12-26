@@ -105,7 +105,7 @@ msgstr "Creado el"
 #: model:ir.model.fields,field_description:port_scale_sale.field_port_scale_create_order_departure_request_date
 #: model:ir.model.fields,field_description:port_scale_sale.field_sale_order_departure_request_date
 msgid "Departure request date"
-msgstr "Fecha solicitud desatraque"
+msgstr "Fecha solicitud operación"
 
 #. module: port_scale_sale
 #: model:ir.ui.view,arch_db:port_scale_sale.view_order_form_port_scale
