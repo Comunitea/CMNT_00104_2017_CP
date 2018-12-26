@@ -40,7 +40,6 @@ class PortScale(models.Model):
     state = fields.Selection(
         (('input', 'Input'), ('anchoring', 'Anchoring'),
          ('departure', 'Departure'), ('done', 'Done')), default='input')
-
     docking_start_time = fields.Datetime(copy=False)
     docking_end_time = fields.Datetime(copy=False)
     anchor_start_time = fields.Datetime(copy=False)

@@ -33,5 +33,6 @@
 
     'qweb': [
         "static/src/xml/tide_menu.xml",
+        "static/src/xml/portel_menu.xml",
     ],
 }

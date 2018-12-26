@@ -198,7 +198,7 @@ msgstr "Salida autorizada"
 #. module: port_scale
 #: model:ir.model.fields,field_description:port_scale.field_port_scale_departure_request_date
 msgid "Departure request date"
-msgstr "Fecha solicitud desatraque"
+msgstr "Fecha solicitud operación"
 
 #. module: port_scale
 #: model:ir.ui.menu,name:port_scale.port_scale_departure

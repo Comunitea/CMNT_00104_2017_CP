@@ -437,4 +437,5 @@
     </record>
 
     <menuitem name="Importaciones de Portel" parent="port_managament_submenu" action="port_scale_action_show_history" id="port_scale_history_show_all" sequence="7"/>
+    <!--<menuitem name="Llamar a Portel" parent="port_management_configuration_menu" action="tide_action" id="portel_menu"/>-->
 </odoo>

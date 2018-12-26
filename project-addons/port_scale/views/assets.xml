@@ -6,8 +6,9 @@
     <data>
 
         <template id="assets_backend" name="tide_menu assets" inherit_id="web.assets_backend">
-            <xpath expr="." position="inside">
+            <xpath expr="script[last()]" position="after">
                 <script type="text/javascript" src="/port_scale/static/src/js/widgets/tide_menu.js"></script>
+                <script type="text/javascript" src="/port_scale/static/src/js/widgets/portel_menu.js"></script>
             </xpath>
         </template>
 

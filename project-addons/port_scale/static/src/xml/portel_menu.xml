@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2018 Alberto Luengo
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+
+<templates id="templateportel">
+    <t t-name="PortelMenu">
+        <li class="o_tide_menu">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">
+            <span class="oe_topbar_name">Llamar a Portel</span>
+            </a>
+        </li>
+    </t>
+</templates>
