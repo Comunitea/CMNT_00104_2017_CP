@@ -20,8 +20,8 @@
                         <field name="scale"/>
                         <field name="operation"/>
                         <field name="scale_state" invisible="1"/>
-                        <field name="input_request_date" attrs="{'invisible': [('scale_state', '!=', 'input')]}"/>
-                        <field name="anchoring_request_date" attrs="{'invisible': [('scale_state', '!=', 'anchoring')]}"/>
+                        <field name="input_request_date"/>
+                        <field name="anchoring_request_date"/>
                         <field name="departure_request_date"/>
                         <field name="coast_pilot"/>
                         <field name="operation_start_time"/>
