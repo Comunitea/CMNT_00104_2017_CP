@@ -114,12 +114,13 @@ class PortScale(models.Model):
                 # [26/12/18] No importamos ninguna escala con una ETA de más de 3 meses de antigüedad
                 scale_name = scale_element.findtext('NUM_ESCALA')
                 # current_year = datetime.today().year
-                eta = etd = ''
+                eta = etd = '2099-12-31'
                 if scale_element.findtext('ETA'):
                     eta = self.parse_api_datetime(scale_element.findtext('ETA'))
                 today_three_months_ago = datetime.today()- timedelta(3*365/12)
                 # if scale_name[0:4] =='****' or (scale_name[0:4]!='****' and int(scale_name[0:4]) == current_year):
-                if scale_name[0:4] == '****' or (scale_name[0:4] != '****' and eta>=today_three_months_ago):
+                #if scale_name[0:4] == '****' or (scale_name[0:4] != '****' and eta>=today_three_months_ago):
+                if eta>=today_three_months_ago:
                     ship_vals = {'name': scale_element.findtext('BUQUE')}
                     scale_history_operations = ''
                     if scale_element.findtext('ETD'):
